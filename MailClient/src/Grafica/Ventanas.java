@@ -27,10 +27,12 @@ public class Ventanas {
 		present.getContentPane().add(txtpnIniciando);
 		present.setVisible(true);
 		Thread.sleep (5000); // espera 5 segundos antes de cerrar la ventana de inicio...
-		principal pri = new principal();
+		Login log = new Login();
+		log.setLocationRelativeTo(null); 			
+		log.setVisible(true);
+		
 		present.dispose();
-		pri.setLocationRelativeTo(null); 			
-		pri.setVisible(true);
+		
 		
 	}
 }
