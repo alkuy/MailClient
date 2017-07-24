@@ -146,9 +146,8 @@ public class FachadaPers {
 		correoper.setTexto(correo.getTexto());
 		correoper.setId_conversacion(correo.getId_conversacion());
 		
-		
 		arch.guarda(directorio, correoper);
-		System.out.println("Guardando "+directorio);
+		//System.out.println("Guardando "+directorio);
 	}
 	
 	public String CarpetaEnviados(){

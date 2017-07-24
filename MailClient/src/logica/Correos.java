@@ -60,6 +60,14 @@ public class Correos {
 		}
 		
 	}
-
+	
+	public void Insertar(String directorio, Correo correo){
+		if(directorio == FachPer.CarpetaEnviados()){
+			setCorreosEnviados.add(correo);
+		}
+		if(directorio == FachPer.CarpetaRecibidos()){
+			setCorreosRecibidos.add(correo);
+		}
+	}
 	
 }
