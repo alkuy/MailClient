@@ -9,12 +9,33 @@ import java.awt.Font;
 import javax.swing.DropMode;
 import javax.swing.UIManager;
 
-//import Logica.Fachada;
-//import Persistencia.FachadaBD;
+import logica.FachadaLog;
+
+import persistencia.Configuracion;
 
 public class Ventanas {
 
 	public static void main(String[] args) throws InterruptedException {
+		
+		
+		Configuracion conf = new Configuracion();
+		conf.crearDirectorios();
+		
+		/*A modo de prueba*/
+		FachadaLog FL = new FachadaLog();
+		String asunto = "vamos que vamos";
+		String emisor = "adrian";
+		String e_dom = "inet";
+		String receptor = "minos";
+		String r_dom = "se la come";
+		String texto = "Nacional, nadie gano mas";
+		String fecha = "20170727";
+		String carpeta = conf.getCarpetaEnviados();
+		
+		FL.Guarda_Correo(carpeta, 3, asunto, emisor, e_dom, receptor, r_dom, texto, fecha);
+		/*FIN D DEMOSTRACION*/
+		
+		
 		// TODO Auto-generated method stub
 		Presentacion present = new Presentacion();
 		present.setLocationRelativeTo(null);  
@@ -34,5 +55,6 @@ public class Ventanas {
 		present.dispose();
 		
 		
+	
 	}
 }
