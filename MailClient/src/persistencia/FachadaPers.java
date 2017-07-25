@@ -97,6 +97,12 @@ public class FachadaPers {
 		return correo.getEmisor_nombre();
 	}
 	
+	/**
+	 * Metodo para traer Dominio del emisor del correo en Archivo
+	 * @param directorio
+	 * @param archivo
+	 * @return nombre emisor
+	 */
 	public String getEmisorDom(String directorio, String archivo){
 		Archivos arch = new Archivos();
 		Correo correo = new Correo();
@@ -104,6 +110,12 @@ public class FachadaPers {
 		return correo.getEmisor_dominio();
 	}
 	
+	/**
+	 * Metodo para traer Nombre del receptor del correo en Archivo
+	 * @param directorio
+	 * @param archivo
+	 * @return (String) nombre de receptor
+	 */
 	public String getReceptorNom(String directorio, String archivo){
 		Archivos arch = new Archivos();
 		Correo correo = new Correo();
@@ -111,12 +123,19 @@ public class FachadaPers {
 		return correo.getDestinatario();
 	}
 	
+	/**
+	 * Metodo para traer Dominio del receptor del correo en Archivo
+	 * @param directorio
+	 * @param archivo
+	 * @return (String) Dominio del receptor
+	 */
 	public String getReceptorDom(String directorio, String archivo){
 		Archivos arch = new Archivos();
 		Correo correo = new Correo();
 		correo = arch.leer(directorio, archivo);
 		return correo.getDestinatario_dominio();
 	}
+	
 	
 	public String getFecha(String directorio, String archivo){
 		Archivos arch = new Archivos();

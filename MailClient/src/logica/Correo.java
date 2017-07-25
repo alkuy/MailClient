@@ -84,7 +84,10 @@ public class Correo  {
 		this.texto = texto;
 	}
 	
-	
+	/**
+	 * Carga los correos en memoria desde el disco
+	 * @param directorio
+	 */
 	public void CargaCorreo(String directorio){
 		//System.out.println(this.getDestinatario());
 		try {

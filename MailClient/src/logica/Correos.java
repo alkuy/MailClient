@@ -1,6 +1,7 @@
 package logica;
 import java.util.ArrayList;
 
+import javax.swing.table.DefaultTableModel;
 import persistencia.FachadaPers;
 
 public class Correos {
@@ -10,7 +11,7 @@ public class Correos {
 	
 	private static Correos instancia;
 	
-	private static ArrayList<Correo> setCorreosEnviados;
+	private ArrayList<Correo> setCorreosEnviados;
 	private ArrayList<Correo> setCorreosRecibidos;
 	
 	public static Correos getInstancia(){
@@ -61,6 +62,11 @@ public class Correos {
 		
 	}
 	
+	/**
+	 * Inserta en la collecccio de correos
+	 * @param directorio (String): Indica si es enviados, recibidos, etc.
+	 * @param correo: Pasa el correo a insertar
+	 */
 	public void Insertar(String directorio, Correo correo){
 		if(directorio == FachPer.CarpetaEnviados()){
 			setCorreosEnviados.add(correo);
@@ -69,5 +75,25 @@ public class Correos {
 			setCorreosRecibidos.add(correo);
 		}
 	}
+	
+	
+	public DefaultTableModel DevTablaCorreosEnviados(){
+		
+		String col[] = {"Destinatario","Asunto"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+		
+		
+		for (int i=0; i < setCorreosEnviados.size(); i++){
+			String destino = setCorreosEnviados.get(i).getDestinatario()+setCorreosEnviados.get(i).getDestinatario_dominio();
+			String asunto = setCorreosEnviados.get(i).getAsunto();
+			
+			String carga [] = {destino, asunto};	   
+		   	modelo.addRow(carga);
+			}
+		
+		return modelo;
+		
+	}	
+
 	
 }

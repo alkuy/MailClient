@@ -1,6 +1,9 @@
 package logica;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
+import javax.swing.table.DefaultTableModel;
 
 public class FachadaLog {
 	
@@ -54,6 +57,12 @@ public class FachadaLog {
 		for (int i=0; i<correos.getSetCorreos().size(); i++){
 			System.out.println(correos.getSetCorreos().get(i).getAsunto());
 		}
+	}
+	
+	public DefaultTableModel DevCorreosEnviados() throws SQLException{
+		DefaultTableModel modelo;
+		modelo = correos.DevTablaCorreosEnviados();
+		return modelo;
 	}
 	
 }
