@@ -65,4 +65,18 @@ public class FachadaLog {
 		return modelo;
 	}
 	
+	
+	public void Nueva_cuenta(String Nom_us, String Dom, String Pas){
+		
+		Cuenta cuenta = new Cuenta();
+		
+		/*cuenta.setNom_us(Nom_us);
+		cuenta.setDominio(Dom);
+		cuenta.setContraseña_cuenta(Pas);*/
+		
+		cuenta.carga_cuenta(Nom_us, Dom, Pas);
+		
+		
+	}
+	
 }

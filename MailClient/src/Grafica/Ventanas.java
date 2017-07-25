@@ -18,11 +18,11 @@ public class Ventanas {
 	public static void main(String[] args) throws InterruptedException {
 		
 		
-		Configuracion conf = new Configuracion();
+/*		Configuracion conf = new Configuracion();
 		conf.crearDirectorios();
 		
 		/*A modo de prueba*/
-		FachadaLog FL = new FachadaLog();
+/*		FachadaLog FL = new FachadaLog();
 		String asunto = "vamos que vamos";
 		String emisor = "adrian";
 		String e_dom = "inet";
@@ -32,7 +32,7 @@ public class Ventanas {
 		String fecha = "20170727";
 		String carpeta = conf.getCarpetaEnviados();
 		
-		FL.Guarda_Correo(carpeta, 3, asunto, emisor, e_dom, receptor, r_dom, texto, fecha);
+		FL.Guarda_Correo(carpeta, 3, asunto, emisor, e_dom, receptor, r_dom, texto, fecha);*/
 		/*FIN D DEMOSTRACION*/
 		
 		

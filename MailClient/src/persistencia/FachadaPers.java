@@ -1,6 +1,9 @@
 package persistencia;
 
 import java.util.ArrayList;
+
+
+
 import java.io.*;
 
 public class FachadaPers {
@@ -30,6 +33,16 @@ public class FachadaPers {
 		correo.setDestinatario_dominio(r_dom);
 		correo.setFecha(fecha);
 		correo.setTexto(texto);
+		
+	}
+	
+	
+	public void carga_Cuenta(String nom, String dom, String pas){
+		
+		Cuenta cuenta = new Cuenta();
+		cuenta.setNom_us(nom);
+		cuenta.setDom(dom);
+		cuenta.setPasswd(pas);
 		
 	}
 	
@@ -169,12 +182,49 @@ public class FachadaPers {
 		//System.out.println("Guardando "+directorio);
 	}
 	
+	public void creaDirectorioConfig(String dir){
+		
+		Configuracion conf = new Configuracion();
+		conf.crearDirectorioConfig(dir);
+	}
+	
+	
+        public void crearDirectorioCuenta(){
+		
+		Configuracion conf = new Configuracion();
+		conf.crearDirectorioCuenta();
+	}
+	
+        public void crearDirectorios(String dir){
+    		
+    		Configuracion conf = new Configuracion();
+    		conf.crearDirectorios(dir);
+    	}
+	
+	public void GuardaConfiguracion (String directorio, logica.Cuenta cuenta) throws IOException{
+		
+		
+	    Archivos arch = new Archivos();
+		Cuenta cuentaper = new Cuenta();
+		
+		cuentaper.setNom_us(cuenta.getNom_us());
+		cuentaper.setDom(cuenta.getDominio());
+		cuentaper.setPasswd(cuenta.getContraseña_cuenta());
+		
+		arch.guardaConfiguracion(directorio, cuentaper);
+		//System.out.println("Guardando "+directorio);
+	}
+	
 	public String CarpetaEnviados(){
 		return conf.getCarpetaEnviados();
 	}
 	
 	public String CarpetaRecibidos(){
 		return conf.getCarpetaRecibidos();
+	}
+	
+	public String CarpetaCuentas(){
+		return conf.getCarpetaCuentas();
 	}
 	
 }

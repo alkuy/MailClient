@@ -16,13 +16,17 @@ import javax.swing.JButton;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+
+import logica.FachadaLog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 	private JTextField usuario;
 	private JTextField textPasswd;
-
+	boolean verifica_servidor = true; // por ahora queda forzado hasta que se conecte y compruebe la cuenta en el servidor
+	FachadaLog FL = new FachadaLog();
 	/**
 	 * Create the panel.
 	 */
@@ -37,7 +41,6 @@ public class Login extends JFrame {
 		setBounds(100, 100, 408, 300);
 		
 		usuario = new JTextField();
-		usuario.setText("Nombre de Usuario");
 		usuario.setBounds(44, 89, 200, 25);
 		getContentPane().add(usuario);
 		usuario.setColumns(10);
@@ -52,7 +55,6 @@ public class Login extends JFrame {
 		getContentPane().add(comboDominio);
 		
 		textPasswd = new JTextField();
-		textPasswd.setText("Contrase\u00F1a");
 		textPasswd.setBounds(44, 140, 342, 25);
 		getContentPane().add(textPasswd);
 		textPasswd.setColumns(10);
@@ -61,9 +63,16 @@ public class Login extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				
+				if ( verifica_servidor){
+					
+					
+				FL.Nueva_cuenta(usuario.getText(),"inet",textPasswd.getText());	
 				principal pri = new principal();
 				pri.setLocationRelativeTo(null); 			
 				pri.setVisible(true);
+				
+				}
 				
 			}
 		});

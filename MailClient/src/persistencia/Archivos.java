@@ -45,5 +45,22 @@ public class Archivos {
 		File[]ficheros = dir.listFiles();			
 		return ficheros;	 	
 	}
+	
+	
+	public void guardaConfiguracion(String carpeta, Cuenta cuenta) throws IOException{
+		String nombre = cuenta.getNom_us()+"@"+cuenta.getDom();
+				
+		try{
+			FileOutputStream f = new FileOutputStream(carpeta+nombre, true);
+			ObjectOutputStream escribiendo = new ObjectOutputStream(f);
+			escribiendo.writeObject(cuenta);
+			escribiendo.close();
+	
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 }
