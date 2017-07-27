@@ -7,6 +7,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
+import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,7 +20,11 @@ import java.awt.SystemColor;
 
 public class Nuevo_Correo extends JFrame {
 	
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	FachadaLog FL = new FachadaLog();
 	
 	
 	/**
@@ -81,6 +86,8 @@ public class Nuevo_Correo extends JFrame {
 		JButton btnEnviar = new JButton();
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),textpara.getText(), "dominio", textcorreo.getText(), "20170505");
 			}
 		});
 		btnEnviar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
@@ -97,6 +104,11 @@ public class Nuevo_Correo extends JFrame {
 		JButton btnguardar = new JButton();
 		btnguardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+			  	
+			  FL.Guarda_Correo(FL.Devuelve_Ruta_Borradores(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),textpara.getText(), "dominio", textcorreo.getText(), "20170505");
+	          
+				
 			}
 		});
 		btnguardar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
@@ -112,7 +124,7 @@ public class Nuevo_Correo extends JFrame {
 		
 		public void cerrar(){
 			Object [] opciones ={"Cerrar","Cancelar"};
-			int eleccion = JOptionPane.showOptionDialog(rootPane,"Al cerrar se perderan ls cambios no guardados","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+			int eleccion = JOptionPane.showOptionDialog(rootPane,"Al cerrar se perderan los cambios no guardados","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 			if (eleccion == JOptionPane.YES_OPTION){
 			dispose();	
 			//System.exit(0);

@@ -17,6 +17,8 @@ public class FachadaLog {
 		return instancia;
 	}
 
+	Configuracion configuracion = new Configuracion();
+	Cuenta cuenta = Cuenta.getInstancia();
 	Correos correos = Correos.getInstancia();
 
 	/**
@@ -65,18 +67,77 @@ public class FachadaLog {
 		return modelo;
 	}
 	
-	
+	/** Metodo para pasar los datos de la cuenta a persistencia y dejar el ojeto cuenta instanciado para usar
+	 * 
+	 * @param Nom_us nombre de usuario de la cuenta
+	 * @param Dom dominio del usuario de la cuenta
+	 * @param Pas clave de la cuenta
+	 */
 	public void Nueva_cuenta(String Nom_us, String Dom, String Pas){
 		
-		Cuenta cuenta = new Cuenta();
-		
-		/*cuenta.setNom_us(Nom_us);
+		Cuenta cuenta = Cuenta.getInstancia();	
+		cuenta.setNom_us(Nom_us);
 		cuenta.setDominio(Dom);
-		cuenta.setContraseña_cuenta(Pas);*/
-		
-		cuenta.carga_cuenta(Nom_us, Dom, Pas);
+		cuenta.setContraseña_cuenta(Pas);		
+		cuenta.carga_cuenta(cuenta);
 		
 		
 	}
+	
+   public String Devuelve_us_cuenta(){
+		
+		Cuenta cuenta = Cuenta.getInstancia();	
+		
+		return cuenta.getNom_us();
+		
+		
+	}
+   
+   public String Devuelve_dom_cuenta(){
+		
+		Cuenta cuenta = Cuenta.getInstancia();	
+		
+		return cuenta.getDominio();
+		
+		
+	}
+   
+   public String Devuelve_pas_cuenta(){
+		
+		Cuenta cuenta = Cuenta.getInstancia();	
+		
+		return cuenta.getContraseña_cuenta();
+		
+		
+	}
+   
+   
+   public String Devuelve_Ruta_Borradores(){
+	   
+	   return configuracion.devRutaBorradores();
+   }
+   
+   
+   public String Devuelve_Ruta_Recibidos(){
+		
+ 		return configuracion.devRutaRecibidos();
+ 	}
+
+    public String Devuelve_Ruta_Enviados(){
+ 		
+ 		return configuracion.devRutaEnviados();
+ 	}
+    
+    public String Devuelve_Ruta_BuzonSalida(){
+ 		
+ 		return configuracion.devRutaBuzonSalida();
+ 	}
+    
+    public String Devuelve_Ruta_Configuracion(){
+ 		
+ 		return configuracion.devRutaConfiguracion();
+ 	}
+	
+	
 	
 }

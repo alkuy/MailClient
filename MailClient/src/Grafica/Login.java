@@ -71,6 +71,7 @@ public class Login extends JFrame {
 				principal pri = new principal();
 				pri.setLocationRelativeTo(null); 			
 				pri.setVisible(true);
+				dispose();
 				
 				}
 				

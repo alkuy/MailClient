@@ -4,38 +4,43 @@
 package logica;
 
 
+
 import persistencia.FachadaPers;
 
-/**
+/**Clase cuenta Singleton
  * @author 
  *
  */
 public class Cuenta {
 	
 	
-FachadaPers BD = FachadaPers.getInstancia();
+  private static Cuenta instancia;
+  private String nom_us; 
+  private String contraseña_cuenta;
+  private String dominio;
+  
+  
+  private Cuenta(){};
 	
-	
-	private String nom_us; 
-	private String contraseña_cuenta;
-	private String dominio;
-	
-	
-    
-	/**
-	 * Constructor de la clase vacio
-	 * */
-	public Cuenta(){
-		
+  public static Cuenta getInstancia() {
+	if(instancia == null){
+		instancia = new Cuenta();
 	}
+	return instancia;
+}
+
+  FachadaPers BD = FachadaPers.getInstancia();
 	
-     public Cuenta(String nom, String dom, String pas){
+	
+	
+		
+  /*   public Cuenta(String nom, String dom, String pas){
     	 
     	nom_us = nom;
     	contraseña_cuenta= pas;
         dominio=dom;
 		
-	}
+	}*/
 	
 		/**
 	 * @return the nom_us
@@ -80,20 +85,18 @@ FachadaPers BD = FachadaPers.getInstancia();
 	}
 	
 	
-	public void carga_cuenta(String nom, String dom, String pas){
+	public void carga_cuenta(Cuenta cuenta){
 		
 		try{
 			
-	    BD.crearDirectorioCuenta();	
-		String directorio;		 
-		directorio ="c:\\Cuentas\\"+nom+"-"+dom+"\\";
-		String directorio_cuenta = directorio+"\\";
-		Cuenta cuenta = new Cuenta(nom,dom,pas);
-		BD.creaDirectorioConfig(directorio);
-		BD.crearDirectorios(directorio);
-		String directorio2 ="c:\\Cuentas\\"+nom+"-"+dom+"\\Configuracion\\";
-		BD.GuardaConfiguracion(directorio2, cuenta); // aca guardo el objeto cuento con los datos de la cuenta que se esta usando
-	}catch (Exception e){}
+	        BD.crearDirectorioCuenta();
+	        BD.creaDirectorioUsuario(cuenta.getNom_us(), cuenta.getDominio());
+		    BD.crearDirectorios(cuenta.getNom_us(), cuenta.getDominio());
+		    BD.creaRutaArchivos();// aca guardo la ruta absoluta de cada cuenta para poder usar despues
+		    BD.GuardaConfiguracion(cuenta);// aca guardo el objeto cuenta con los datos de la cuenta que se esta usando
+		    
+		
+	    }catch (Exception e){}
 	
 
 }

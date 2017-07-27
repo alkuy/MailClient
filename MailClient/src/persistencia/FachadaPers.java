@@ -11,7 +11,8 @@ public class FachadaPers {
 	
 	private static FachadaPers instancia;
 	private String correos[];
-	Configuracion conf = new Configuracion();
+	Configuracion conf = Configuracion.getInstancia();
+	
 	
 	public static FachadaPers getInstancia() {
 		if(instancia == null){
@@ -182,26 +183,62 @@ public class FachadaPers {
 		//System.out.println("Guardando "+directorio);
 	}
 	
-	public void creaDirectorioConfig(String dir){
+	public void creaDirectorioUsuario(String nom, String dom){
 		
-		Configuracion conf = new Configuracion();
-		conf.crearDirectorioConfig(dir);
+		conf.crearDirectorioUsuario(nom, dom);
 	}
 	
 	
         public void crearDirectorioCuenta(){
 		
-		Configuracion conf = new Configuracion();
 		conf.crearDirectorioCuenta();
 	}
 	
-        public void crearDirectorios(String dir){
+        public void crearDirectorios(String nom, String dom){
     		
-    		Configuracion conf = new Configuracion();
-    		conf.crearDirectorios(dir);
+    		conf.crearDirectorios(nom, dom);
     	}
+        
+        
+        public void creaRutaArchivos(){
+        	
+        	conf.cargarRutasAbsolutas();
+        }
+        
+        
+        public String devRutaBorradores(){
 	
-	public void GuardaConfiguracion (String directorio, logica.Cuenta cuenta) throws IOException{
+        	return conf.getCarpetaBorradores();
+        	
+        }
+        
+        public String devRutaEnviados(){
+        	
+        	return conf.getCarpetaEnviados();
+        	
+        }
+        
+        
+        public String devRutaBuzonSalida(){
+        	
+        	return conf.getCarpetaBozonSalida();
+        	
+        }
+        
+        
+        public String devRutaRecibidos(){
+        	
+        	return conf.getCarpetaRecibidos();
+        	
+        }
+        
+        public String devRutaConfiguracion(){
+        	
+        	return conf.getCarpetaConfiguracion();
+        	
+        }
+        	
+	public void GuardaConfiguracion (logica.Cuenta cuenta) throws IOException{
 		
 		
 	    Archivos arch = new Archivos();
@@ -211,7 +248,7 @@ public class FachadaPers {
 		cuentaper.setDom(cuenta.getDominio());
 		cuentaper.setPasswd(cuenta.getContraseña_cuenta());
 		
-		arch.guardaConfiguracion(directorio, cuentaper);
+		arch.guardaConfiguracion(cuentaper);
 		//System.out.println("Guardando "+directorio);
 	}
 	

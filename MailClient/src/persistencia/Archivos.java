@@ -40,6 +40,31 @@ public class Archivos {
 		
 	}
 	
+	
+	
+
+
+    public Cuenta leerCuenta(String carpeta, String archivo){
+	   Cuenta cuenta = new Cuenta();
+	   ObjectInputStream leyendo = null;
+	try {
+		leyendo = new ObjectInputStream(new FileInputStream(carpeta+archivo));
+	    } catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	 }
+	  try {
+		cuenta = (Cuenta) leyendo.readObject();
+	  } catch (ClassNotFoundException | IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	  }
+	  return cuenta;
+	
+}
+	
+	
+	
 	public File[] listadoDirectorio (String directorio){
 		File dir = new File(directorio);
 		File[]ficheros = dir.listFiles();			
@@ -47,11 +72,12 @@ public class Archivos {
 	}
 	
 	
-	public void guardaConfiguracion(String carpeta, Cuenta cuenta) throws IOException{
+	public void guardaConfiguracion(Cuenta cuenta) throws IOException{
 		String nombre = cuenta.getNom_us()+"@"+cuenta.getDom();
-				
+		Configuracion conf = Configuracion.getInstancia();		
 		try{
-			FileOutputStream f = new FileOutputStream(carpeta+nombre, true);
+		
+			FileOutputStream f = new FileOutputStream(conf.getCarpetaConfiguracion()+nombre, true);
 			ObjectOutputStream escribiendo = new ObjectOutputStream(f);
 			escribiendo.writeObject(cuenta);
 			escribiendo.close();
