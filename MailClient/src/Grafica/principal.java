@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+import logica.FachadaLog;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
@@ -78,11 +80,17 @@ public class principal extends JFrame {
 		
 		return VentPrincipal;
 	}
+	
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public principal() {
+		
+		FachadaLog FL = new FachadaLog();  		
+  		FL.cargaTodoenMemoria();
+  		
      	setResizable(false);
 		/**
 		 * Panel Principal*/

@@ -56,14 +56,28 @@ public class FachadaLog {
 	 */
 	public void Muestra_Correos(String directorio){
 		correos.cargaCorreos(directorio);
-		for (int i=0; i<correos.getSetCorreos().size(); i++){
-			System.out.println(correos.getSetCorreos().get(i).getAsunto());
+		for (int i=0; i<correos.getSetCorreosEnviados().size(); i++){
+			System.out.println(correos.getSetCorreosEnviados().get(i).getAsunto());
 		}
 	}
+	
+	
+	public void cargaTodoenMemoria(){					
+		correos.cargaCorreos(this.Devuelve_Ruta_Enviados());			
+		correos.cargaCorreos(this.Devuelve_Ruta_BuzonSalida());
+		correos.cargaCorreos(this.Devuelve_Ruta_Recibidos());
+		
+		}
 	
 	public DefaultTableModel DevCorreosEnviados() throws SQLException{
 		DefaultTableModel modelo;
 		modelo = correos.DevTablaCorreosEnviados();
+		return modelo;
+	}
+	
+	public DefaultTableModel DevBandejaSalida() throws SQLException{
+		DefaultTableModel modelo;
+		modelo = correos.DevTablaBandejaSalida();
 		return modelo;
 	}
 	

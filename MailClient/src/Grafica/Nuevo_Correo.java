@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -25,6 +26,7 @@ public class Nuevo_Correo extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	FachadaLog FL = new FachadaLog();
+	
 	
 	
 	/**
@@ -86,8 +88,14 @@ public class Nuevo_Correo extends JFrame {
 		JButton btnEnviar = new JButton();
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
-				FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),textpara.getText(), "dominio", textcorreo.getText(), "20170505");
+				String fecha = timestamp.toString();
+				fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
+				fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
+				fecha = fecha.replace(":","-");
+				/*Guardamos correo en archivo y memoria*/
+				FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),textpara.getText(), "dominio", textcorreo.getText(), fecha);
 			}
 		});
 		btnEnviar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));

@@ -13,6 +13,7 @@ public class Correos {
 	
 	private ArrayList<Correo> setCorreosEnviados;
 	private ArrayList<Correo> setCorreosRecibidos;
+	private ArrayList<Correo> setBandejaSalida;
 	
 	public static Correos getInstancia(){
 		if(instancia == null)
@@ -24,12 +25,29 @@ public class Correos {
 	/** Método constructor de la colección Correos. */
 	public Correos() {
 		this.setCorreosEnviados = new ArrayList<Correo>();
+		this.setCorreosRecibidos = new ArrayList<Correo>();
+		this.setBandejaSalida = new ArrayList<Correo>();
+		
 	}
 		
+	/** Método que retorna la coleccion Set de Correos Recibidos.
+	 * <BR><b>Precondición</b>: la colección no debe ser vacía.</BR>
+	 * @return Retorna el set de Correos. */
+	public ArrayList<Correo> getSetCorreosRecibidos() {
+		return setCorreosRecibidos;
+	}
+	
+	/** Método que retorna la coleccion Set de la Bandeja de salida.
+	 * <BR><b>Precondición</b>: la colección no debe ser vacía.</BR>
+	 * @return Retorna el set de Correos. */
+	public ArrayList<Correo> getSetBandejaSalida() {
+		return setBandejaSalida;
+	}
+	
 	/** Método que retorna la coleccion Set de Correos Enviados.
 	 * <BR><b>Precondición</b>: la colección no debe ser vacía.</BR>
 	 * @return Retorna el set de Correos. */
-	public ArrayList<Correo> getSetCorreos() {
+	public ArrayList<Correo> getSetCorreosEnviados() {
 		return setCorreosEnviados;
 	}
 	
@@ -50,12 +68,16 @@ public class Correos {
 			correo.setDestinatario_dominio(FachPer.getReceptorDom(directorio, archivo));
 			correo.setFecha(FachPer.getFecha(directorio, archivo));
 			correo.setTexto(FachPer.getTexto(directorio, archivo));
-			
-			if(directorio == FachPer.CarpetaEnviados()){
+				
+			if(directorio == FachPer.CarpetaEnviados()){		
 				setCorreosEnviados.add(correo);
 			}
 			if(directorio == FachPer.CarpetaRecibidos()){
 				setCorreosRecibidos.add(correo);
+			}
+			
+			if(directorio == FachPer.CarpetaBuzonSalida()){
+				setBandejaSalida.add(correo);
 			}
 			 
 		}
@@ -74,9 +96,15 @@ public class Correos {
 		if(directorio == FachPer.CarpetaRecibidos()){
 			setCorreosRecibidos.add(correo);
 		}
+		if(directorio == FachPer.CarpetaBuzonSalida()){
+			setBandejaSalida.add(correo);
+		}
 	}
 	
-	
+	/**
+	 * ModelTable para los Correos Enviados
+	 * @return modelTable Carpeta Enviados
+	 */
 	public DefaultTableModel DevTablaCorreosEnviados(){
 		
 		String col[] = {"Destinatario","Asunto"};
@@ -86,6 +114,28 @@ public class Correos {
 		for (int i=0; i < setCorreosEnviados.size(); i++){
 			String destino = setCorreosEnviados.get(i).getDestinatario()+setCorreosEnviados.get(i).getDestinatario_dominio();
 			String asunto = setCorreosEnviados.get(i).getAsunto();
+			
+			String carga [] = {destino, asunto};	   
+		   	modelo.addRow(carga);
+			}
+		
+		return modelo;
+		
+	}	
+	
+	/**
+	 * ModelTable para Bandeja de salida
+	 * @return modelTable Bandeja de Salida
+	 */
+public DefaultTableModel DevTablaBandejaSalida(){
+		
+		String col[] = {"Destinatario","Asunto"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+		
+		for (int i=0; i < setBandejaSalida.size(); i++){
+			String destino = setBandejaSalida.get(i).getDestinatario()+setBandejaSalida.get(i).getDestinatario_dominio();
+			String asunto = setBandejaSalida.get(i).getAsunto();
 			
 			String carga [] = {destino, asunto};	   
 		   	modelo.addRow(carga);

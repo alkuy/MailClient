@@ -23,7 +23,7 @@ public class FachadaPers {
 	
 	
 	public void carga_Correo(int conversacion, String asunto, String emisor, String e_dom,
-			String receptor, String r_dom, String texto, String fecha){
+		String receptor, String r_dom, String texto, String fecha){
 		
 		Correo correo = new Correo();
 		correo.setId_conversacion(conversacion);
@@ -52,16 +52,18 @@ public class FachadaPers {
 	 * @param directorio que queremos leer
 	 * @return Array de String con los nombres de los archivos
 	 */
-	public String[] traeCorreos (String directorio){
-		int dir_largo = directorio.length();
+	public String[] traeCorreos (String directorio){	
+		int dir_largo = directorio.length()-2; //El primer slash y el ultimo no los toma
+		/*Esto de restarle dos se debe a que el nombre original viene con una carga de mas de slashes, y algunos termiana
+		 * finalmente imprmiendose mas de una vez*/
 		Archivos arch = new Archivos();
 		File[]ficheros = arch.listadoDirectorio(directorio);
 		String correos[] = new String[ficheros.length];
 		String correo;
 		int i = 0;
 		for(File item: ficheros){
-			correo = item.toString();
-			correo = correo.substring(dir_largo);
+			correo = item.toString();     //Convierte ls ruta a string
+			correo = correo.substring(dir_largo); //Deja a un lado el los directorios para quedarse solo con el nombre del archivo
 			correos[i] = correo;
 			i++;
 			}
@@ -180,7 +182,6 @@ public class FachadaPers {
 		correoper.setId_conversacion(correo.getId_conversacion());
 		
 		arch.guarda(directorio, correoper);
-		//System.out.println("Guardando "+directorio);
 	}
 	
 	public void creaDirectorioUsuario(String nom, String dom){
@@ -258,6 +259,10 @@ public class FachadaPers {
 	
 	public String CarpetaRecibidos(){
 		return conf.getCarpetaRecibidos();
+	}
+	
+	public String CarpetaBuzonSalida(){
+		return conf.getCarpetaBozonSalida();
 	}
 	
 	public String CarpetaCuentas(){
