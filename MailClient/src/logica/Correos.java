@@ -112,7 +112,7 @@ public class Correos {
 		
 		
 		for (int i=0; i < setCorreosEnviados.size(); i++){
-			String destino = setCorreosEnviados.get(i).getDestinatario()+setCorreosEnviados.get(i).getDestinatario_dominio();
+			String destino = setCorreosEnviados.get(i).getDestinatario()+"@"+setCorreosEnviados.get(i).getDestinatario_dominio();
 			String asunto = setCorreosEnviados.get(i).getAsunto();
 			
 			String carga [] = {destino, asunto};	   
@@ -134,7 +134,7 @@ public DefaultTableModel DevTablaBandejaSalida(){
 
 		
 		for (int i=0; i < setBandejaSalida.size(); i++){
-			String destino = setBandejaSalida.get(i).getDestinatario()+setBandejaSalida.get(i).getDestinatario_dominio();
+			String destino = setBandejaSalida.get(i).getDestinatario()+"@"+setBandejaSalida.get(i).getDestinatario_dominio();
 			String asunto = setBandejaSalida.get(i).getAsunto();
 			
 			String carga [] = {destino, asunto};	   
