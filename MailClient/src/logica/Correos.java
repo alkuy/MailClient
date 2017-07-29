@@ -14,6 +14,7 @@ public class Correos {
 	private ArrayList<Correo> setCorreosEnviados;
 	private ArrayList<Correo> setCorreosRecibidos;
 	private ArrayList<Correo> setBandejaSalida;
+	private ArrayList<Correo> setBorradores;
 	
 	public static Correos getInstancia(){
 		if(instancia == null)
@@ -27,6 +28,7 @@ public class Correos {
 		this.setCorreosEnviados = new ArrayList<Correo>();
 		this.setCorreosRecibidos = new ArrayList<Correo>();
 		this.setBandejaSalida = new ArrayList<Correo>();
+		this.setBorradores = new ArrayList<Correo>();
 		
 	}
 		
@@ -49,6 +51,11 @@ public class Correos {
 	 * @return Retorna el set de Correos. */
 	public ArrayList<Correo> getSetCorreosEnviados() {
 		return setCorreosEnviados;
+	}
+	
+	
+	public ArrayList<Correo> getSetBorradores() {
+		return setBorradores;
 	}
 	
 	/**
@@ -79,6 +86,10 @@ public class Correos {
 			if(directorio == FachPer.CarpetaBuzonSalida()){
 				setBandejaSalida.add(correo);
 			}
+			
+			if(directorio == FachPer.CarpetaBorradores()){
+				setBorradores.add(correo);
+			}
 			 
 		}
 		
@@ -98,6 +109,10 @@ public class Correos {
 		}
 		if(directorio == FachPer.CarpetaBuzonSalida()){
 			setBandejaSalida.add(correo);
+		}
+		
+		if(directorio == FachPer.CarpetaBorradores()){
+			setBorradores.add(correo);
 		}
 	}
 	
@@ -145,5 +160,24 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		
 	}	
 
+
+
+public DefaultTableModel DevTablaBorradores(){
+	
+	String col[] = {"Destinatario","Asunto"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+	
+	for (int i=0; i < setBorradores.size(); i++){
+		String destino = setBorradores.get(i).getDestinatario()+"@"+setBorradores.get(i).getDestinatario_dominio();
+		String asunto = setBorradores.get(i).getAsunto();
+		
+		String carga [] = {destino, asunto};	   
+	   	modelo.addRow(carga);
+		}
+	
+	return modelo;
+	
+}
 	
 }

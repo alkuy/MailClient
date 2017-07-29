@@ -66,6 +66,7 @@ public class FachadaLog {
 		correos.cargaCorreos(this.Devuelve_Ruta_Enviados());			
 		correos.cargaCorreos(this.Devuelve_Ruta_BuzonSalida());
 		correos.cargaCorreos(this.Devuelve_Ruta_Recibidos());
+		correos.cargaCorreos(this.Devuelve_Ruta_Borradores());
 		
 		}
 	
@@ -78,6 +79,13 @@ public class FachadaLog {
 	public DefaultTableModel DevBandejaSalida() throws SQLException{
 		DefaultTableModel modelo;
 		modelo = correos.DevTablaBandejaSalida();
+		return modelo;
+	}
+	
+	
+	public DefaultTableModel DevBorradores() throws SQLException{
+		DefaultTableModel modelo;
+		modelo = correos.DevTablaBorradores();
 		return modelo;
 	}
 	

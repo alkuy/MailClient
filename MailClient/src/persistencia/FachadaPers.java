@@ -269,4 +269,8 @@ public class FachadaPers {
 		return conf.getCarpetaCuentas();
 	}
 	
+	
+	public String CarpetaBorradores(){
+		return conf.getCarpetaBorradores();
+	}
 }

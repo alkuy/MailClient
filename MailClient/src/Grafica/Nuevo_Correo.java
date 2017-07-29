@@ -118,16 +118,20 @@ public class Nuevo_Correo extends JFrame {
 		JButton btnguardar = new JButton();
 		btnguardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
+			String fecha = timestamp.toString();
+			fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
+			fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
+			fecha = fecha.replace(":","-");	
 			  	
 			String cuenta = textpara.getText();
 			int index = cuenta.indexOf("@");
 			String nom_receptor = cuenta.substring(0,index);//Para separar de la cuenta que ingreso el nombre de usuario del dominio
 			String dom_receptor = cuenta.substring(index+1,cuenta.length());		
 				
-			  FL.Guarda_Correo(FL.Devuelve_Ruta_Borradores(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, textcorreo.getText(), "20170505");
-	          
-				
+			  FL.Guarda_Correo(FL.Devuelve_Ruta_Borradores(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, textcorreo.getText(), fecha);
+	         
 			}
 		});
 		btnguardar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
