@@ -2,8 +2,14 @@ package persistencia;
 
 import java.io.Serializable;
 
+// clase correo implementando la interfaz serializable para poder guardar cada correo como un objeto.
+
 public class Correo implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id_conversacion;
 	private String fecha;
 	private String asunto;

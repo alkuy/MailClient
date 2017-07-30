@@ -2,9 +2,15 @@ package persistencia;
 
 import java.io.Serializable;
 
+//clase cuenta implementando la interfaz serializable para poder guardar cada cuenta como un objeto.
+
 public class Cuenta implements Serializable {
 
 	  
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		private String Nom_us;
 		private String Dom;
 		private String Passwd;

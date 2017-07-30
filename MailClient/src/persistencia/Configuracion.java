@@ -8,7 +8,7 @@ import java.io.File;
  *
  */
 
-
+// Esta clase tiene los datos de la direccion de cada carpeta. es singleton ya que una vez que se cargan a ella los dtos y es instanciada no se necesita modificar ni insertar nada mas en ella
 public class Configuracion {
 	
 	
@@ -34,7 +34,7 @@ public class Configuracion {
 	  }
 	
 	
-	
+	// devuelve carpeta cuentas (ruta absoluta)
 	public static String getCarpetaCuentas() {
 		
 		return carpetaCuentas;
@@ -135,6 +135,8 @@ public class Configuracion {
 		Configuracion.carpetaUsuario = carpetaUsuario;
 	}
 
+	
+	// crea la carpeta cuenta en el disco ubicada en C:\\Cuentas
 	public static void crearDirectorioCuenta(){
 				
 		File cuentas = new File(getCarpetaCuentas()); 
@@ -142,7 +144,7 @@ public class Configuracion {
 				
 	}
 	
-	
+	//Crea el directorio del usuario segun la cuenta con la que se logeo si es que no ingreso antes con la misma
 	public static void crearDirectorioUsuario(String nom, String dom){
 		
 	File configuracion = new File(Configuracion.getCarpetaCuentas()+nom+"-"+dom+"\\"); 
@@ -165,7 +167,7 @@ public class Configuracion {
 		Configuracion.setCarpetaConfiguracion(Configuracion.getCarpetaUsuario()+"\\Configuracion\\");
 	}
 	
-	
+	// Crea los directorios dentro de la carpeta del usuario si es que es la primera vez que ingresa desde esa pc
 	
 	public static void crearDirectorios(String nom, String dom){
 		

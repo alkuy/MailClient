@@ -85,15 +85,16 @@ public class Correo  {
 	}
 	
 	/**
-	 * Carga los correos en memoria desde el disco
+	 * Guarda los correos en el disco
 	 * @param directorio
 	 */
-	public void CargaCorreo(String directorio){
-		//System.out.println(this.getDestinatario());
+		
+	public void GuardaCorreo(String directorio){
+		
 		try {
-			FachPer.GuardaCorreo(directorio, this);
+			FachPer.GuardaCorreo(directorio, this); // llama al metodo de fahcada de persistencia para guardar el correo en el directorio indicado
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}

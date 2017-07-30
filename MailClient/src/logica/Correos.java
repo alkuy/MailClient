@@ -53,7 +53,7 @@ public class Correos {
 		return setCorreosEnviados;
 	}
 	
-	
+	// Metodo que retorna la coleccion Set de Borradores
 	public ArrayList<Correo> getSetBorradores() {
 		return setBorradores;
 	}
@@ -96,10 +96,12 @@ public class Correos {
 	}
 	
 	/**
-	 * Inserta en la collecccio de correos
+	 * Inserta en la collecccion de correos
 	 * @param directorio (String): Indica si es enviados, recibidos, etc.
 	 * @param correo: Pasa el correo a insertar
 	 */
+	
+	//Para insertar los correos en cada secuencia (Enviados, Borradores, etc)
 	public void Insertar(String directorio, Correo correo){
 		if(directorio == FachPer.CarpetaEnviados()){
 			setCorreosEnviados.add(correo);
@@ -120,6 +122,9 @@ public class Correos {
 	 * ModelTable para los Correos Enviados
 	 * @return modelTable Carpeta Enviados
 	 */
+	
+	// Devuelve una tabla con destintario y asunto de cada correo Enviado que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
+	
 	public DefaultTableModel DevTablaCorreosEnviados(){
 		
 		String col[] = {"Destinatario","Asunto"};
@@ -142,6 +147,9 @@ public class Correos {
 	 * ModelTable para Bandeja de salida
 	 * @return modelTable Bandeja de Salida
 	 */
+	
+	
+	// Devuelve una tabla con destintario y asunto de cada correo del buzon de salida que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
 public DefaultTableModel DevTablaBandejaSalida(){
 		
 		String col[] = {"Destinatario","Asunto"};
@@ -161,7 +169,7 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	}	
 
 
-
+//Devuelve una tabla con destintario y asunto de cada correo de Boradores que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
 public DefaultTableModel DevTablaBorradores(){
 	
 	String col[] = {"Destinatario","Asunto"};

@@ -11,6 +11,9 @@ import persistencia.FachadaPers;
  * @author 
  *
  */
+
+
+// Esta clase tiene los datos de la cuenta con la que ingresa el usuario al iniciar el programa. es singleton ya que no se instancia nunca mas y se usan esos datos siempre desde memoria
 public class Cuenta {
 	
 	
@@ -33,15 +36,7 @@ public class Cuenta {
 	
 	
 	
-		
-  /*   public Cuenta(String nom, String dom, String pas){
-    	 
-    	nom_us = nom;
-    	contraseña_cuenta= pas;
-        dominio=dom;
-		
-	}*/
-	
+
 		/**
 	 * @return the nom_us
 	 */
@@ -85,6 +80,10 @@ public class Cuenta {
 	}
 	
 	
+	
+	/* Metodo que se ejecuta luego de la validacion del usuario al ingresar al progrma
+	 * Lo que hace es crear la carpeta cuentas si no existe y luego los directorios segun el usuario ingresado si antes no habia ingresado
+	 */
 	public void carga_cuenta(Cuenta cuenta){
 		
 		try{
@@ -92,7 +91,7 @@ public class Cuenta {
 	        BD.crearDirectorioCuenta();
 	        BD.creaDirectorioUsuario(cuenta.getNom_us(), cuenta.getDominio());
 		    BD.crearDirectorios(cuenta.getNom_us(), cuenta.getDominio());
-		    BD.creaRutaArchivos();// aca guardo la ruta absoluta de cada cuenta para poder usar despues
+		    BD.creaRutaArchivos();// aca guardo la ruta absoluta de cada carpeta para poder usar despues
 		    BD.GuardaConfiguracion(cuenta);// aca guardo el objeto cuenta con los datos de la cuenta que se esta usando
 		    
 		

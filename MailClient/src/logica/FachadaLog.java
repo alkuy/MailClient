@@ -46,8 +46,8 @@ public class FachadaLog {
 		correo.setFecha(fecha);
 		correo.setTexto(texto);
 		
-		correo.CargaCorreo(directorio);
-		correos.Insertar(directorio, correo);
+		correo.GuardaCorreo(directorio); // carga los correso desde el disco segun la ruta que se le indique
+		correos.Insertar(directorio, correo); //crea el set correspondiente en memoria
 
 	}
 	/**
@@ -62,6 +62,8 @@ public class FachadaLog {
 	}
 	
 	
+	// Este metodo carga los correos de todas las carpetas en memoria
+	
 	public void cargaTodoenMemoria(){					
 		correos.cargaCorreos(this.Devuelve_Ruta_Enviados());			
 		correos.cargaCorreos(this.Devuelve_Ruta_BuzonSalida());
@@ -70,19 +72,23 @@ public class FachadaLog {
 		
 		}
 	
+	
+	// metoo que devuelve una tabla para mostrar correos enviados
 	public DefaultTableModel DevCorreosEnviados() throws SQLException{
 		DefaultTableModel modelo;
 		modelo = correos.DevTablaCorreosEnviados();
 		return modelo;
 	}
 	
+	
+	// metoo que devuelve una tabla para mostrar Bandeja de Salida
 	public DefaultTableModel DevBandejaSalida() throws SQLException{
 		DefaultTableModel modelo;
 		modelo = correos.DevTablaBandejaSalida();
 		return modelo;
 	}
 	
-	
+	// metoo que devuelve una tabla para mostrar Borradores
 	public DefaultTableModel DevBorradores() throws SQLException{
 		DefaultTableModel modelo;
 		modelo = correos.DevTablaBorradores();
@@ -97,15 +103,17 @@ public class FachadaLog {
 	 */
 	public void Nueva_cuenta(String Nom_us, String Dom, String Pas){
 		
-		Cuenta cuenta = Cuenta.getInstancia();	
-		cuenta.setNom_us(Nom_us);
+		Cuenta cuenta = Cuenta.getInstancia();	// se crea la instancia de la cuenta que se usara en adelante
+		cuenta.setNom_us(Nom_us); // se cargan a cuenta los datos de ingreso de usuario
 		cuenta.setDominio(Dom);
 		cuenta.setContraseña_cuenta(Pas);		
-		cuenta.carga_cuenta(cuenta);
+		cuenta.carga_cuenta(cuenta); 
 		
 		
 	}
 	
+	
+	   // devuelve el nombre de usuario actual logeado
    public String Devuelve_us_cuenta(){
 		
 		Cuenta cuenta = Cuenta.getInstancia();	
@@ -114,6 +122,8 @@ public class FachadaLog {
 		
 		
 	}
+   
+   // Devuelve el dominio de la cuneta de usuario actual
    
    public String Devuelve_dom_cuenta(){
 		
@@ -124,6 +134,8 @@ public class FachadaLog {
 		
 	}
    
+   //Devuelve el passwd de la cuenta de usuario actual
+   
    public String Devuelve_pas_cuenta(){
 		
 		Cuenta cuenta = Cuenta.getInstancia();	
@@ -133,28 +145,31 @@ public class FachadaLog {
 		
 	}
    
-   
+   // devuelve la ruta absoluta de Borradores
    public String Devuelve_Ruta_Borradores(){
 	   
 	   return configuracion.devRutaBorradores();
    }
    
-   
+   // devuelve la ruta absoluta de Recibidos
    public String Devuelve_Ruta_Recibidos(){
 		
  		return configuracion.devRutaRecibidos();
  	}
 
+   // devuelve la ruta absoluta de Enviados
     public String Devuelve_Ruta_Enviados(){
  		
  		return configuracion.devRutaEnviados();
  	}
-    
+   
+    // devuelve la ruta absoluta de Buzon de Salida
     public String Devuelve_Ruta_BuzonSalida(){
  		
  		return configuracion.devRutaBuzonSalida();
  	}
     
+    // devuelve la ruta absoluta de Configuarcion
     public String Devuelve_Ruta_Configuracion(){
  		
  		return configuracion.devRutaConfiguracion();

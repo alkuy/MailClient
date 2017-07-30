@@ -1,16 +1,12 @@
 package persistencia;
 
-import java.util.ArrayList;
-
-
-
 import java.io.*;
 
 public class FachadaPers {
 	
 	
 	private static FachadaPers instancia;
-	private String correos[];
+	
 	Configuracion conf = Configuracion.getInstancia();
 	
 	
@@ -21,6 +17,7 @@ public class FachadaPers {
 		return instancia;
 	}
 	
+	// Metodo para invocar el metodo constructor de la clase correo y cargar todos los datos
 	
 	public void carga_Correo(int conversacion, String asunto, String emisor, String e_dom,
 		String receptor, String r_dom, String texto, String fecha){
@@ -37,6 +34,7 @@ public class FachadaPers {
 		
 	}
 	
+	// Metodo para invocar el metodo constructor de la clase en persistencia y cargar los datos
 	
 	public void carga_Cuenta(String nom, String dom, String pas){
 		
@@ -167,12 +165,12 @@ public class FachadaPers {
 		return correo.getTexto();
 	}
 	
-	
+	//Metodo que gurda un correo en disco (tomando los datos del correo instanciado en la capa logica) en el directorio indicado
 	public void GuardaCorreo (String directorio, logica.Correo correo) throws IOException{
 		Archivos arch = new Archivos();
 		Correo correoper = new Correo();
-		
-		correoper.setAsunto(correo.getAsunto());
+		// cargo todos los dtos del correo de la capa logica a correo de la capa de persistencia.
+		correoper.setAsunto(correo.getAsunto()); 
 		correoper.setDestinatario(correo.getDestinatario());
 		correoper.setDestinatario_dominio(correo.getDestinatario_dominio());
 		correoper.setEmisor_nombre(correo.getEmisor_nombre());
@@ -181,7 +179,7 @@ public class FachadaPers {
 		correoper.setTexto(correo.getTexto());
 		correoper.setId_conversacion(correo.getId_conversacion());
 		
-		arch.guarda(directorio, correoper);
+		arch.guarda(directorio, correoper);// aca o guarda en el disco por medio de la clase archivo
 	}
 	
 	public void creaDirectorioUsuario(String nom, String dom){
@@ -238,19 +236,20 @@ public class FachadaPers {
         	return conf.getCarpetaConfiguracion();
         	
         }
-        	
+    
+      //Metodo que gurda una cuenta en disco (tomando los datos de la cuenta instanciada en la capa logica) en el directorio indicado
 	public void GuardaConfiguracion (logica.Cuenta cuenta) throws IOException{
 		
 		
 	    Archivos arch = new Archivos();
 		Cuenta cuentaper = new Cuenta();
-		
+		// cargo todos los datos de la cuenta de la capa logica a la clase cuenta de la capa de persistencia.
 		cuentaper.setNom_us(cuenta.getNom_us());
 		cuentaper.setDom(cuenta.getDominio());
 		cuentaper.setPasswd(cuenta.getContraseña_cuenta());
 		
-		arch.guardaConfiguracion(cuentaper);
-		//System.out.println("Guardando "+directorio);
+		arch.guardaConfiguracion(cuentaper);// guarado los datos de la cuenta en persistencia por medio de la clase archivo
+		
 	}
 	
 	public String CarpetaEnviados(){
