@@ -111,11 +111,26 @@ public class Verificaciones {
 	  }
   }
 
- 
+ // Metodo que verifica que la cuenta tenga un y solo un @
   
-  
-  public boolean existe_cuenta(String nUser, String dominio){
-	  return false;
-  }
+  public boolean verificaCuentaReceptor(String texto){
+	    char caracter = '@';
+	  	int veces=0;
+		char []caracteres=texto.toCharArray();
+		for(int i=0;i<=caracteres.length-1;i++){
+			if(caracter == caracteres[i]){
+				veces++;
+			}
+	     }
+		
+		if (veces == 1){
+		 return true;
+		}else {
+			
+			JOptionPane.showMessageDialog(null, "El destinatario no es una cuenta valida", null, JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+  }		
   
 }  

@@ -26,6 +26,7 @@ public class Nuevo_Correo extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	FachadaLog FL = new FachadaLog();
+	Verificaciones verifica = new Verificaciones();
 	
 	
 	
@@ -37,7 +38,7 @@ public class Nuevo_Correo extends JFrame {
 		 setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 		 
 	        addWindowListener(new java.awt.event.WindowAdapter() {
-	            @Override
+	            @Override // sobrescribimos el metodo para preguntar antes de cerrar y que no cierre automticamente
 	            public void windowClosing(java.awt.event.WindowEvent evt) {
 	                cerrar();
 	            }
@@ -88,12 +89,16 @@ public class Nuevo_Correo extends JFrame {
 		JButton btnEnviar = new JButton();
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if (verifica.verificaCuentaReceptor(textpara.getText())){// aca verificamos si puso un y solo un @ en la cuenta de envio
 				Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
 				String fecha = timestamp.toString();
 				fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
 				fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
 				fecha = fecha.replace(":","-");
+				String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
+				String asunto = verifica.remplazoCaracteres(textasunto.getText());
 				
 				String cuenta = textpara.getText();
 				int index = cuenta.indexOf("@");
@@ -101,7 +106,9 @@ public class Nuevo_Correo extends JFrame {
 				String dom_receptor = cuenta.substring(index+1,cuenta.length());				
 				
 				/*Guardamos correo en archivo y memoria*/
-				FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, textcorreo.getText(), fecha);
+				FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
+				dispose();
+				}
 			}
 		});
 		btnEnviar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
@@ -113,11 +120,13 @@ public class Nuevo_Correo extends JFrame {
 		getContentPane().add(btnEnviar);
 		
 		
-		/* Boton guardr correo */
+		/* Boton guardar correo */
 		
 		JButton btnguardar = new JButton();
 		btnguardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+			if (verifica.verificaCuentaReceptor(textpara.getText())){// aca verificamos si puso un y solo un @ en la cuenta de envio	
             Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
 			String fecha = timestamp.toString();
@@ -128,11 +137,15 @@ public class Nuevo_Correo extends JFrame {
 			String cuenta = textpara.getText();
 			int index = cuenta.indexOf("@");
 			String nom_receptor = cuenta.substring(0,index);//Para separar de la cuenta que ingreso el nombre de usuario del dominio
-			String dom_receptor = cuenta.substring(index+1,cuenta.length());		
+			String dom_receptor = cuenta.substring(index+1,cuenta.length());
+			String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
+			String asunto = verifica.remplazoCaracteres(textasunto.getText());
 				
-			  FL.Guarda_Correo(FL.Devuelve_Ruta_Borradores(),0,textasunto.getText(),FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, textcorreo.getText(), fecha);
-	         
+			  FL.Guarda_Correo(FL.Devuelve_Ruta_Borradores(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
+	          guardado();
 			}
+			
+		  }
 		});
 		btnguardar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
 		btnguardar.setBounds(10, 511, 63, 39);
@@ -150,7 +163,17 @@ public class Nuevo_Correo extends JFrame {
 			int eleccion = JOptionPane.showOptionDialog(rootPane,"Al cerrar se perderan los cambios no guardados","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 			if (eleccion == JOptionPane.YES_OPTION){
 			dispose();	
-			//System.exit(0);
+			}else{}
+						
+		}
+		
+        /* Metodo de aviso luego de guardar un correo*/
+		
+		public void guardado(){
+			Object [] opciones ={"Continuar","Salir"};
+			int eleccion = JOptionPane.showOptionDialog(rootPane,"¿Desea continuar editando el correo?","Se guardo en la carpeta Borradores",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+			if (eleccion == JOptionPane.NO_OPTION){
+			 dispose();	
 			}else{}
 						
 		}

@@ -23,6 +23,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 
@@ -47,6 +49,7 @@ public class FrmMuestraBorradores extends JInternalFrame {
       	getContentPane().setLayout(null);
       	
       	JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+      
       	scrlMCMostrarCorreos.setEnabled(false);
       	scrlMCMostrarCorreos.setSize(793, 301);
       	scrlMCMostrarCorreos.setLocation(10, 57);
