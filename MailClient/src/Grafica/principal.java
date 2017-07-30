@@ -1,58 +1,37 @@
 package Grafica;
 
+import logica.FachadaLog;
+
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRootPane;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
-
-import logica.FachadaLog;
-
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
-
 import javax.swing.SwingConstants;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import java.awt.Dimension;
-import java.awt.Component;
-import javax.swing.UIManager;
-import java.awt.SystemColor;
-import java.awt.Insets;
-import java.awt.Panel;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.JScrollBar;
+
 
 public class principal extends JFrame {
 
 	/**
 	 * 
 	 */
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+
 	private static JPanel VentPrincipal;
 	private static JLabel ImagenLogo = null;
-	private static JMenuBar menuBar;
 	private static JLabel lblCorreoPintituciones;
 	private static JLabel lblVersion;
 	private static JLabel lblCreadoEnInet;
@@ -110,11 +89,9 @@ public class principal extends JFrame {
 		/*······························*/
 		
 				
-		/* Boton Enviar / Recibir */
+		/* Boton Enviar - Recibir */
 		JButton btnEnv_Rec = new JButton();
-		btnEnv_Rec.setBounds(0, 0, 52, 47);
-		
-		
+		btnEnv_Rec.setBounds(0, 0, 52, 47);		
 		ImageIcon imagen = new ImageIcon(principal.class.getResource("/imagenes/enviar-recibir.png"));		
 		Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(btnEnv_Rec.getWidth(),btnEnv_Rec.getHeight(),Image.SCALE_DEFAULT));		
 		btnEnv_Rec.setIcon(icono);
@@ -141,6 +118,12 @@ public class principal extends JFrame {
 				Nuevo_Correo correo = new Nuevo_Correo();
 				correo.setLocationRelativeTo(null);
 				correo.setVisible(true);
+				cierraVentana(frmenviados);
+				cierraVentana(frmborradores);
+				cierraVentana(frmbuzon);
+				cierraVentana(frmspam);
+				cierraVentana(frmeliminados);
+				cierraVentana(frmbandejaentrada);
 			}
 		});
 		
@@ -164,8 +147,9 @@ public class principal extends JFrame {
 		btnRecibidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				desapareceLogo();				
-				frmbandejaentrada = new FrmMuestraBandejaEntrada();
+				desapareceLogo();
+				cierraVentana(frmbandejaentrada); // por si se cliquea dos veces seguidas o para refrescar
+				frmbandejaentrada = new FrmMuestraBandejaEntrada();				
 				cierraVentana(frmenviados);
 				cierraVentana(frmborradores);
 				cierraVentana(frmbuzon);
@@ -192,8 +176,9 @@ public class principal extends JFrame {
 		btnBorrador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				desapareceLogo();				
-				frmborradores = new FrmMuestraBorradores();
+				desapareceLogo();
+				cierraVentana(frmborradores);
+				frmborradores = new FrmMuestraBorradores();				
 				cierraVentana(frmenviados);
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(frmbuzon);
@@ -217,7 +202,8 @@ public class principal extends JFrame {
 		
 		btnEnviados.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				desapareceLogo();				
+				desapareceLogo();	
+				cierraVentana(frmenviados);
 				frmenviados = new FrmMuestraEnviados();
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(frmborradores);
@@ -244,8 +230,9 @@ public class principal extends JFrame {
 		btnsalida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				desapareceLogo();				
-				frmbuzon = new FrmMuestraBuzonSalida();
+				desapareceLogo();	
+				cierraVentana(frmbuzon);
+				frmbuzon = new FrmMuestraBuzonSalida();				
 				cierraVentana(frmenviados);
 				cierraVentana(frmborradores);
 				cierraVentana(frmbandejaentrada);
@@ -271,8 +258,9 @@ public class principal extends JFrame {
 		btnspam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				desapareceLogo();				
-				frmspam = new FrmMuestraSpam();
+				desapareceLogo();	
+				cierraVentana(frmspam);
+				frmspam = new FrmMuestraSpam();				
 				cierraVentana(frmenviados);
 				cierraVentana(frmborradores);
 				cierraVentana(frmbuzon);
@@ -296,8 +284,9 @@ public class principal extends JFrame {
 		btnpapelera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				desapareceLogo();				
-				frmeliminados = new FrmMuestraEliminados();
+				desapareceLogo();	
+				cierraVentana(frmeliminados);
+				frmeliminados = new FrmMuestraEliminados();				
 				cierraVentana(frmenviados);
 				cierraVentana(frmborradores);
 				cierraVentana(frmbuzon);
