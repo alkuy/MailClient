@@ -47,7 +47,7 @@ public class FachadaLog {
 		correo.setTexto(texto);
 		
 		correo.GuardaCorreo(directorio); // carga los correso desde el disco segun la ruta que se le indique
-		correos.Insertar(directorio, correo); //crea el set correspondiente en memoria
+		correos.Insertar(directorio, fecha, correo); //crea el set correspondiente en memoria
 
 	}
 	/**

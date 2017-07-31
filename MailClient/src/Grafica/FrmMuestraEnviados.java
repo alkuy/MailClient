@@ -76,7 +76,7 @@ public class FrmMuestraEnviados extends JInternalFrame {
 	}
 	
 	public void SetTable(){
-		String col[] = {"id-usuario","Cuenta"};
+		String col[] = {"Destinatario","Asunto", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 		try{
 			modelo = FL.DevCorreosEnviados();
@@ -86,6 +86,10 @@ public class FrmMuestraEnviados extends JInternalFrame {
 		
 		tblMuestraCorreos = new JTable(modelo);
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		/*Oculto columnas con Timestamp usada como clave del diccionario */
+		TableColumn myTableColumn1 = tblMuestraCorreos.getColumnModel().getColumn(2);
+		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn1);
 		
 		
 	}

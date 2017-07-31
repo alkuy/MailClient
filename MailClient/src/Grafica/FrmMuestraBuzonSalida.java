@@ -11,6 +11,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import logica.FachadaLog;
 
@@ -55,7 +56,7 @@ public class FrmMuestraBuzonSalida extends JInternalFrame {
 	}
 	
 	public void SetTable(){
-		String col[] = {"id-usuario","Cuenta"};
+		String col[] = {"Destinatario","Asunto", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 		try{
 			modelo = FL.DevBandejaSalida();
@@ -65,6 +66,10 @@ public class FrmMuestraBuzonSalida extends JInternalFrame {
 		
 		tblMuestraCorreos = new JTable(modelo);
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		/*Oculto columnas con Timestamp usada como clave del diccionario */
+		TableColumn myTableColumn2 = tblMuestraCorreos.getColumnModel().getColumn(2);
+		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn2);
 		
 		
 	}

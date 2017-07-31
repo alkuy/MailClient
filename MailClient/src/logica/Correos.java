@@ -1,7 +1,10 @@
 package logica;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
 import javax.swing.table.DefaultTableModel;
+
 import persistencia.FachadaPers;
 
 public class Correos {
@@ -11,10 +14,10 @@ public class Correos {
 	
 	private static Correos instancia;
 	
-	private ArrayList<Correo> setCorreosEnviados;
-	private ArrayList<Correo> setCorreosRecibidos;
-	private ArrayList<Correo> setBandejaSalida;
-	private ArrayList<Correo> setBorradores;
+	private Hashtable<String, Correo> setCorreosEnviados;
+	private Hashtable<String, Correo> setCorreosRecibidos;
+	private Hashtable<String, Correo> setBandejaSalida;
+	private Hashtable<String, Correo> setBorradores;
 	
 	public static Correos getInstancia(){
 		if(instancia == null)
@@ -25,36 +28,36 @@ public class Correos {
 	
 	/** Método constructor de la colección Correos. */
 	public Correos() {
-		this.setCorreosEnviados = new ArrayList<Correo>();
-		this.setCorreosRecibidos = new ArrayList<Correo>();
-		this.setBandejaSalida = new ArrayList<Correo>();
-		this.setBorradores = new ArrayList<Correo>();
+		this.setCorreosEnviados = new Hashtable<String, Correo>();
+		this.setCorreosRecibidos = new Hashtable<String, Correo>();
+		this.setBandejaSalida = new Hashtable<String, Correo>();
+		this.setBorradores = new Hashtable<String, Correo>();
 		
 	}
 		
 	/** Método que retorna la coleccion Set de Correos Recibidos.
 	 * <BR><b>Precondición</b>: la colección no debe ser vacía.</BR>
 	 * @return Retorna el set de Correos. */
-	public ArrayList<Correo> getSetCorreosRecibidos() {
+	public Hashtable<String, Correo> getSetCorreosRecibidos() {
 		return setCorreosRecibidos;
 	}
 	
 	/** Método que retorna la coleccion Set de la Bandeja de salida.
 	 * <BR><b>Precondición</b>: la colección no debe ser vacía.</BR>
 	 * @return Retorna el set de Correos. */
-	public ArrayList<Correo> getSetBandejaSalida() {
+	public Hashtable<String, Correo> getSetBandejaSalida() {
 		return setBandejaSalida;
 	}
 	
 	/** Método que retorna la coleccion Set de Correos Enviados.
 	 * <BR><b>Precondición</b>: la colección no debe ser vacía.</BR>
 	 * @return Retorna el set de Correos. */
-	public ArrayList<Correo> getSetCorreosEnviados() {
+	public Hashtable<String, Correo> getSetCorreosEnviados() {
 		return setCorreosEnviados;
 	}
 	
 	// Metodo que retorna la coleccion Set de Borradores
-	public ArrayList<Correo> getSetBorradores() {
+	public Hashtable<String, Correo> getSetBorradores() {
 		return setBorradores;
 	}
 	
@@ -75,20 +78,22 @@ public class Correos {
 			correo.setDestinatario_dominio(FachPer.getReceptorDom(directorio, archivo));
 			correo.setFecha(FachPer.getFecha(directorio, archivo));
 			correo.setTexto(FachPer.getTexto(directorio, archivo));
+			
+			String fecha = FachPer.getFecha(directorio, archivo);
 				
 			if(directorio == FachPer.CarpetaEnviados()){		
-				setCorreosEnviados.add(correo);
+				setCorreosEnviados.put(fecha, correo);
 			}
 			if(directorio == FachPer.CarpetaRecibidos()){
-				setCorreosRecibidos.add(correo);
+				setCorreosRecibidos.put(fecha, correo);
 			}
 			
 			if(directorio == FachPer.CarpetaBuzonSalida()){
-				setBandejaSalida.add(correo);
+				setBandejaSalida.put(fecha, correo);
 			}
 			
 			if(directorio == FachPer.CarpetaBorradores()){
-				setBorradores.add(correo);
+				setBorradores.put(fecha, correo);
 			}
 			 
 		}
@@ -102,19 +107,19 @@ public class Correos {
 	 */
 	
 	//Para insertar los correos en cada secuencia (Enviados, Borradores, etc)
-	public void Insertar(String directorio, Correo correo){
+	public void Insertar(String directorio, String clave, Correo correo){
 		if(directorio == FachPer.CarpetaEnviados()){
-			setCorreosEnviados.add(correo);
+			setCorreosEnviados.put(clave, correo);
 		}
 		if(directorio == FachPer.CarpetaRecibidos()){
-			setCorreosRecibidos.add(correo);
+			setCorreosRecibidos.put(clave, correo);
 		}
 		if(directorio == FachPer.CarpetaBuzonSalida()){
-			setBandejaSalida.add(correo);
+			setBandejaSalida.put(clave, correo);
 		}
 		
 		if(directorio == FachPer.CarpetaBorradores()){
-			setBorradores.add(correo);
+			setBorradores.put(clave, correo);
 		}
 	}
 	
@@ -127,15 +132,19 @@ public class Correos {
 	
 	public DefaultTableModel DevTablaCorreosEnviados(){
 		
-		String col[] = {"Destinatario","Asunto"};
+		String col[] = {"Destinatario","Asunto", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 		
-		
-		for (int i=0; i < setCorreosEnviados.size(); i++){
-			String destino = setCorreosEnviados.get(i).getDestinatario()+"@"+setCorreosEnviados.get(i).getDestinatario_dominio();
-			String asunto = setCorreosEnviados.get(i).getAsunto();
+		Enumeration<Correo> cor = setCorreosEnviados.elements();
+		Correo correo;
 			
-			String carga [] = {destino, asunto};	   
+			while(cor.hasMoreElements()){
+				correo = cor.nextElement();
+				String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+				String asunto = correo.getAsunto();
+				String fecha = correo.getFecha();
+				
+				String carga [] = {destino, asunto, fecha};		   
 		   	modelo.addRow(carga);
 			}
 		
@@ -152,15 +161,19 @@ public class Correos {
 	// Devuelve una tabla con destintario y asunto de cada correo del buzon de salida que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
 public DefaultTableModel DevTablaBandejaSalida(){
 		
-		String col[] = {"Destinatario","Asunto"};
+		String col[] = {"Destinatario","Asunto", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
+		Enumeration<Correo> cor = setBandejaSalida.elements();
+		Correo correo;
 		
-		for (int i=0; i < setBandejaSalida.size(); i++){
-			String destino = setBandejaSalida.get(i).getDestinatario()+"@"+setBandejaSalida.get(i).getDestinatario_dominio();
-			String asunto = setBandejaSalida.get(i).getAsunto();
+		while(cor.hasMoreElements()){
+			correo = cor.nextElement();
+			String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+			String asunto = correo.getAsunto();
+			String fecha = correo.getFecha();
 			
-			String carga [] = {destino, asunto};	   
+			String carga [] = {destino, asunto, fecha};		   
 		   	modelo.addRow(carga);
 			}
 		
@@ -172,15 +185,19 @@ public DefaultTableModel DevTablaBandejaSalida(){
 //Devuelve una tabla con destintario y asunto de cada correo de Boradores que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
 public DefaultTableModel DevTablaBorradores(){
 	
-	String col[] = {"Destinatario","Asunto"};
+	String col[] = {"Destinatario","Asunto", "Fecha"};
 	DefaultTableModel modelo = new DefaultTableModel(col,0);
 
+	Enumeration<Correo> cor = setBorradores.elements();
+	Correo correo;
 	
-	for (int i=0; i < setBorradores.size(); i++){
-		String destino = setBorradores.get(i).getDestinatario()+"@"+setBorradores.get(i).getDestinatario_dominio();
-		String asunto = setBorradores.get(i).getAsunto();
+	while(cor.hasMoreElements()){
+		correo = cor.nextElement();
+		String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+		String asunto = correo.getAsunto();
+		String fecha = correo.getFecha();
 		
-		String carga [] = {destino, asunto};	   
+		String carga [] = {destino, asunto, fecha};	   
 	   	modelo.addRow(carga);
 		}
 	
