@@ -215,6 +215,11 @@ public class FachadaLog {
     	return correos.DevolverCorreoRecibido(Fecha);
     	
     }
+    
+    public void crearDirectorioCuenta(){
+		
+		cuenta.crearDirectorioCuenta();
+	}
 	
 	
 }

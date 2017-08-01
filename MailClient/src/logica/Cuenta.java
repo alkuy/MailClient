@@ -80,6 +80,12 @@ public class Cuenta {
 	}
 	
 	
+	 public void crearDirectorioCuenta(){
+			
+			BD.crearDirectorioCuenta();
+		}
+	
+	
 	
 	/* Metodo que se ejecuta luego de la validacion del usuario al ingresar al progrma
 	 * Lo que hace es crear la carpeta cuentas si no existe y luego los directorios segun el usuario ingresado si antes no habia ingresado
@@ -88,7 +94,7 @@ public class Cuenta {
 		
 		try{
 			
-	        BD.crearDirectorioCuenta();
+	       // BD.crearDirectorioCuenta();
 	        BD.creaDirectorioUsuario(cuenta.getNom_us(), cuenta.getDominio());
 		    BD.crearDirectorios(cuenta.getNom_us(), cuenta.getDominio());
 		    BD.creaRutaArchivos();// aca guardo la ruta absoluta de cada carpeta para poder usar despues

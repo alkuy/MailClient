@@ -20,6 +20,7 @@ import javax.swing.border.LineBorder;
 import logica.FachadaLog;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
@@ -32,6 +33,8 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		
+		
+		FL.crearDirectorioCuenta(); // se crea el direccorio cuent si es el primer ingreso
 		setTitle("Login");
      	setIconImage(Toolkit.getDefaultToolkit().getImage(principal.class.getResource("/imagenes/icon1.jpg")));
 		getContentPane().setLayout(null);
