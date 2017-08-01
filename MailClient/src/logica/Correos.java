@@ -4,7 +4,6 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 
 import javax.swing.table.DefaultTableModel;
-
 import persistencia.FachadaPers;
 
 public class Correos {
@@ -106,7 +105,7 @@ public class Correos {
 	 * @param correo: Pasa el correo a insertar
 	 */
 	
-	//Para insertar los correos en cada secuencia (Enviados, Borradores, etc)
+	//Para insertar los correos en cada diccionario (Enviados, Borradores, etc)
 	public void Insertar(String directorio, String clave, Correo correo){
 		if(directorio == FachPer.CarpetaEnviados()){
 			setCorreosEnviados.put(clave, correo);
@@ -128,7 +127,7 @@ public class Correos {
 	 * @return modelTable Carpeta Enviados
 	 */
 	
-	// Devuelve una tabla con destintario y asunto de cada correo Enviado que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
+	// Devuelve una tabla con destintario, asunto y fecha de cada correo Enviado que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
 	
 	public DefaultTableModel DevTablaCorreosEnviados(){
 		
@@ -182,8 +181,8 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	}	
 
 
-//Devuelve una tabla con destintario y asunto de cada correo de Boradores que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
-public DefaultTableModel DevTablaBorradores(){
+   //Devuelve una tabla con destintario y asunto de cada correo de Boradores que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
+   public DefaultTableModel DevTablaBorradores(){
 	
 	String col[] = {"Destinatario","Asunto", "Fecha"};
 	DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -203,6 +202,15 @@ public DefaultTableModel DevTablaBorradores(){
 	
 	return modelo;
 	
-}
+   }
+   
+   
+   // Metodo que devuelve el objeto correo seleccionado segun fecha de a coleccion Borradores
+   
+   public Correo DevolverCorreoBorrador(String Fecha){
+	   
+	   System.out.println("entre");
+		return this.setBorradores.get(Fecha);
+	}
 	
 }

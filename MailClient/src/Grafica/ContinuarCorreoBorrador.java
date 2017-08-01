@@ -1,12 +1,14 @@
 package Grafica;
 
 
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
+import logica.Correo;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -19,22 +21,28 @@ import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
-public class Nuevo_Correo extends JFrame {
+public class ContinuarCorreoBorrador extends JFrame {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private FrmMuestraBorradores muestra;
 	FachadaLog FL = new FachadaLog();
 	Verificaciones verifica = new Verificaciones();
+	
 	
 	
 	
 	/**
 	 * Create the frame.
 	 */
-	public Nuevo_Correo() {
+	public ContinuarCorreoBorrador() {
 		
+		
+		Correo correo = FL.DevuelveBorrador(String.valueOf(muestra.fecha));
+				//findUsu(Integer.valueOf(id));
+		System.out.println(muestra.fecha);
 		 setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 		 
 	        addWindowListener(new java.awt.event.WindowAdapter() {
@@ -55,6 +63,7 @@ public class Nuevo_Correo extends JFrame {
 		JTextArea textpara = new JTextArea();
 		textpara.setBounds(245, 29, 679, 22);
 		getContentPane().add(textpara);
+		textpara.setText(muestra.cuenta);
 		
 		JLabel lblPara = new JLabel("Para:");
 		lblPara.setFont(new Font("Verdana", Font.BOLD, 13));
@@ -64,6 +73,8 @@ public class Nuevo_Correo extends JFrame {
 		JTextArea textasunto = new JTextArea();
 		textasunto.setBounds(245, 62, 679, 22);
 		getContentPane().add(textasunto);
+		textasunto.setText(correo.getAsunto());
+	
 		
 		JLabel lblAsunto = new JLabel("Asunto:");
 		lblAsunto.setFont(new Font("Verdana", Font.BOLD, 13));
@@ -74,6 +85,7 @@ public class Nuevo_Correo extends JFrame {
 		textcorreo.setBounds(10, 95, 914, 405);
 		textcorreo.setLineWrap(true);
 		getContentPane().add(textcorreo);
+		textcorreo.setText(correo.getTexto());
 		
 		
 		/* Logo en Nuevo correo*/

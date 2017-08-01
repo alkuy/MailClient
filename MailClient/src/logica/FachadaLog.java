@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableModel;
 public class FachadaLog {
 	
 	private static FachadaLog instancia;
+	//private Correos hcorreo;
 
 	
 	public static FachadaLog getInstancia() {
@@ -175,6 +176,13 @@ public class FachadaLog {
  		return configuracion.devRutaConfiguracion();
  	}
 	
+    // devuelve el correo borrador seleccionado a partir de la fecha de creacion
+    
+    public Correo DevuelveBorrador(String Fecha){
+    	  System.out.println("entre1");
+    	return correos.DevolverCorreoBorrador(Fecha);
+    	
+    }
 	
 	
 }
