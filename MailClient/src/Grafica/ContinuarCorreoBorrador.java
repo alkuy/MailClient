@@ -41,11 +41,10 @@ public class ContinuarCorreoBorrador extends JFrame {
 		
 		
 		Correo correo = FL.DevuelveBorrador(String.valueOf(muestra.fecha));
-				//findUsu(Integer.valueOf(id));
-		System.out.println(muestra.fecha);
-		 setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+						
+	    setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 		 
-	        addWindowListener(new java.awt.event.WindowAdapter() {
+	    addWindowListener(new java.awt.event.WindowAdapter() {
 	            @Override // sobrescribimos el metodo para preguntar antes de cerrar y que no cierre automticamente
 	            public void windowClosing(java.awt.event.WindowEvent evt) {
 	                cerrar();

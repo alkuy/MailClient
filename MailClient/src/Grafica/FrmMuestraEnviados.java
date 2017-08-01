@@ -6,6 +6,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
@@ -33,13 +35,17 @@ public class FrmMuestraEnviados extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtBuscar;
 	private JTable tblMuestraCorreos;
-
+	public static String fecha = new String(); // variable estatica para poder mantener utilizar en otras clases como la clave del hash
+	public static String cuenta = new String(); // la usamos para no tener que traerla desde el diccionari correos y juntar los campos usuario y dominio
+	public static String aprete = new String(); // la usamos para no tener que traerla desde el diccionari correos y juntar los campos usuario y dominio
+	public MuestraCorreo mostrar;
 	FachadaLog FL = new FachadaLog();
+	
 	 
 	public FrmMuestraEnviados() {
 		
 		SetTable();
-		
+		aprete = "no";
 		setTitle("Enviados");
 	 	//setFrameIcon(new ImageIcon(FrmMuestraBandejaEntrada.class.getResource("/Imagenes/icon1.jpg")));
 	 	setBorder(new EmptyBorder(0, 0, 0, 0));
@@ -73,7 +79,46 @@ public class FrmMuestraEnviados extends JInternalFrame {
 		btnBuscar.setIcon(iconobuscar);
       	getContentPane().add(btnBuscar);
 		
-	}
+	
+	
+	/* BOTON PARA ACCEDER AL CORREO SELECCIONADO */
+	
+	JButton btnVer = new JButton("VER");
+	btnVer.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			aprete = "si"; // variable que utilizaremos globalmente para saber de que formulario se apreto acceder a Muestra correo
+			int pos = tblMuestraCorreos.getSelectedRow();
+			if (pos == -1){
+				JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere editar");
+			}else{
+			fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
+			cuenta = (String) tblMuestraCorreos.getValueAt(pos, 0);
+			mostrar = new MuestraCorreo();
+			mostrar.setLocationRelativeTo(null);
+			mostrar.setVisible(true);
+			principal.apareceLogo();
+		    dispose();				
+
+			}	
+		}
+	});
+	btnVer.setBounds(714, 363, 89, 23);
+	getContentPane().add(btnVer);
+	
+	
+	/* BOTON PARA ELIMINAR EL CORREO SELECCIONADO*/
+	
+	JButton btnEliminar = new JButton("ELIMINAR");
+	btnEliminar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent arg0) {
+		}
+	});
+	btnEliminar.setBounds(10, 363, 89, 23);
+	getContentPane().add(btnEliminar);
+  	
+  
+	
+}
 	
 	public void SetTable(){
 		String col[] = {"Destinatario","Asunto", "Fecha"};
@@ -88,9 +133,9 @@ public class FrmMuestraEnviados extends JInternalFrame {
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		/*Oculto columnas con Timestamp usada como clave del diccionario */
-		TableColumn myTableColumn1 = tblMuestraCorreos.getColumnModel().getColumn(2);
+	/*	TableColumn myTableColumn1 = tblMuestraCorreos.getColumnModel().getColumn(2);
 		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn1);
-		
+		*/
 		
 	}
 }

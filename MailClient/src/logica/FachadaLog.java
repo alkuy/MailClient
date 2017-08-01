@@ -96,6 +96,14 @@ public class FachadaLog {
 		return modelo;
 	}
 	
+	
+	// metoo que devuelve una tabla para mostrar Recibidos
+		public DefaultTableModel DevRecibidos() throws SQLException{
+			DefaultTableModel modelo;
+			modelo = correos.DevTablaRecibidos();
+			return modelo;
+		}
+	
 	/** Metodo para pasar los datos de la cuenta a persistencia y dejar el ojeto cuenta instanciado para usar
 	 * 
 	 * @param Nom_us nombre de usuario de la cuenta
@@ -179,8 +187,32 @@ public class FachadaLog {
     // devuelve el correo borrador seleccionado a partir de la fecha de creacion
     
     public Correo DevuelveBorrador(String Fecha){
-    	  System.out.println("entre1");
+    	 
     	return correos.DevolverCorreoBorrador(Fecha);
+    	
+    }
+    
+ // devuelve el correo de bandeja de salida seleccionado a partir de la fecha de creacion
+    
+    public Correo DevuelveBandejaSalida(String Fecha){
+    	  
+    	return correos.DevolverCorreoBandejaSalida(Fecha);
+    	
+    }
+    
+ // devuelve el correo Enviado seleccionado a partir de la fecha de creacion
+    
+    public Correo DevuelveEnviado(String Fecha){
+    	  
+    	return correos.DevolverCorreoEnviado(Fecha);
+    	
+    }
+    
+// devuelve el correo Enviado seleccionado a partir de la fecha de creacion
+    
+    public Correo DevuelveRecibido(String Fecha){
+    	  
+    	return correos.DevolverCorreoRecibido(Fecha);
     	
     }
 	

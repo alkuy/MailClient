@@ -205,12 +205,58 @@ public DefaultTableModel DevTablaBandejaSalida(){
    }
    
    
-   // Metodo que devuelve el objeto correo seleccionado segun fecha de a coleccion Borradores
+   //Devuelve una tabla con remitente, asunto y fecha de cada correo recibido que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de entrada
+   public DefaultTableModel DevTablaRecibidos(){
+	
+	String col[] = {"Remitente","Asunto", "Fecha"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+	Enumeration<Correo> cor = setCorreosRecibidos.elements();
+	Correo correo;
+	
+	while(cor.hasMoreElements()){
+		correo = cor.nextElement();
+		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
+		String asunto = correo.getAsunto();
+		String fecha = correo.getFecha();
+		
+		String carga [] = {remitente, asunto, fecha};	   
+	   	modelo.addRow(carga);
+		}
+	
+	return modelo;
+	
+   }
+   
+   // Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Borradores
    
    public Correo DevolverCorreoBorrador(String Fecha){
 	   
-	   System.out.println("entre");
-		return this.setBorradores.get(Fecha);
+	   	return this.setBorradores.get(Fecha);
+	}
+   
+   
+   // Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Bandeja de Salida
+   
+   public Correo DevolverCorreoBandejaSalida(String Fecha){
+	   
+	   	return this.setBandejaSalida.get(Fecha);
+	}
+   
+// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Enviados
+   
+   public Correo DevolverCorreoEnviado(String Fecha){
+	   
+	   	return this.setCorreosEnviados.get(Fecha);
 	}
 	
+   
+// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Recibidos
+   
+   public Correo DevolverCorreoRecibido(String Fecha){
+	   
+	   	return this.setCorreosRecibidos.get(Fecha);
+	}
+	
+   
 }

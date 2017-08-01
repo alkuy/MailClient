@@ -71,7 +71,7 @@ public class FrmMuestraBorradores extends JInternalFrame {
 				
 				int pos = tblMuestraCorreos.getSelectedRow();
 				if (pos == -1){
-					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el coorreo que quiere editar");
+					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere editar");
 				}else{
 				fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
 				cuenta = (String) tblMuestraCorreos.getValueAt(pos, 0);
@@ -80,8 +80,6 @@ public class FrmMuestraBorradores extends JInternalFrame {
 				borrador.setVisible(true);
 			    dispose();				
 
-				//menuDesHabilitado(); //No funciona aún
-				//dispose();
 				}
 			
 				
@@ -90,13 +88,10 @@ public class FrmMuestraBorradores extends JInternalFrame {
 		btnEditar.setBounds(714, 369, 89, 23);
 		getContentPane().add(btnEditar);
 		
-		
-      
-		
+				
 	}
 	
-	
-	
+		
 	public void SetTable(){
 		String col[] = {"Destinatario","Asunto"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
