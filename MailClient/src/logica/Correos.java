@@ -123,6 +123,38 @@ public class Correos {
 	}
 	
 	/**
+	 * Eliminar de hashtable.
+	 * @param directorio
+	 * @param clave
+	 */
+	public void Eliminar(String directorio, String clave){
+		if(directorio == FachPer.CarpetaEnviados()){
+			setCorreosEnviados.remove(clave);
+		}
+		if(directorio == FachPer.CarpetaRecibidos()){
+			setCorreosRecibidos.remove(clave);
+		}
+		if(directorio == FachPer.CarpetaBuzonSalida()){
+			setBandejaSalida.remove(clave);
+		}
+		
+		if(directorio == FachPer.CarpetaBorradores()){
+			setBorradores.remove(clave);
+		}
+	} 
+	
+	/**
+	 * Eliminar un determinado correo del hashtable y eliminar archivo
+	 * @param directorio
+	 * @param clave
+	 */
+	public void Eliminar_Correo(String directorio, String clave){
+		Eliminar(directorio, clave);
+		FachPer.eliminar(directorio, clave);
+		
+	}
+	
+	/**
 	 * ModelTable para los Correos Enviados
 	 * @return modelTable Carpeta Enviados
 	 */

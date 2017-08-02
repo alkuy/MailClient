@@ -17,7 +17,17 @@ public class FachadaPers {
 		return instancia;
 	}
 	
-	// Metodo para invocar el metodo constructor de la clase correo y cargar todos los datos
+	/**
+	 * Metodo para invocar el metodo constructor de la clase correo y cargar todos los datos
+	 * @param conversacion
+	 * @param asunto
+	 * @param emisor
+	 * @param e_dom
+	 * @param receptor
+	 * @param r_dom
+	 * @param texto
+	 * @param fecha
+	 */
 	
 	public void carga_Correo(int conversacion, String asunto, String emisor, String e_dom,
 		String receptor, String r_dom, String texto, String fecha){
@@ -34,7 +44,12 @@ public class FachadaPers {
 		
 	}
 	
-	// Metodo para invocar el metodo constructor de la clase en persistencia y cargar los datos
+	/**
+	 * Metodo para invocar el metodo constructor de la clase en persistencia y cargar los datos
+	 * @param nom
+	 * @param dom
+	 * @param pas
+	 */
 	
 	public void carga_Cuenta(String nom, String dom, String pas){
 		
@@ -165,7 +180,12 @@ public class FachadaPers {
 		return correo.getTexto();
 	}
 	
-	//Metodo que gurda un correo en disco (tomando los datos del correo instanciado en la capa logica) en el directorio indicado
+	/**
+	 * Metodo que gurda un correo en disco (tomando los datos del correo instanciado en la capa logica) en el directorio indicado
+	 * @param directorio
+	 * @param correo
+	 * @throws IOException
+	 */
 	public void GuardaCorreo (String directorio, logica.Correo correo) throws IOException{
 		Archivos arch = new Archivos();
 		Correo correoper = new Correo();
@@ -249,7 +269,11 @@ public class FachadaPers {
         	
         }
     
-      //Metodo que gurda una cuenta en disco (tomando los datos de la cuenta instanciada en la capa logica) en el directorio indicado
+    /**
+     * Metodo que gurda una cuenta en disco (tomando los datos de la cuenta instanciada en la capa logica) en el directorio indicado
+     * @param cuenta
+     * @throws IOException
+     */
 	public void GuardaConfiguracion (logica.Cuenta cuenta) throws IOException{
 		
 		
@@ -285,17 +309,34 @@ public class FachadaPers {
 		return conf.getCarpetaBorradores();
 	}
 	
+	/**
+	 * Carga los dominios en un archivo
+	 * @param Dom
+	 * @param P
+	 */
 	public void GuardaDominios(String Dom, int P){
 		Dominio D = new Dominio(Dom, P);
 		Archivos Arch = new Archivos();
 		String CarpetaDom = conf.getCarpetaDominios();
 		Arch.guardaDominio(CarpetaDom, D);
 	}
-	
+	/**
+	 * Trae los dominios
+	 * @return String[]
+	 */
 	public String[] GetDominio(){
 		String[] Dom;
 		Archivos Arch = new Archivos();
 		Dom = Arch.LeerDom(conf.getCarpetaDominios());
 		return Dom;
+	}
+	/**
+	 * Metodo que instancia la eliminacion de un archivo dado
+	 * @param directorio
+	 * @param archivo
+	 */
+	public void eliminar(String directorio, String archivo){
+		Archivos arch = new Archivos();
+		arch.Eliminar(directorio, archivo);
 	}
 }

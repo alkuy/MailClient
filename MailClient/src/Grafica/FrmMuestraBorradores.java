@@ -88,6 +88,41 @@ public class FrmMuestraBorradores extends JInternalFrame {
 		btnEditar.setBounds(714, 369, 89, 23);
 		getContentPane().add(btnEditar);
 		
+		
+		JButton btnEliminar = new JButton("ELIMINAR");
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int pos = tblMuestraCorreos.getSelectedRow();
+				if (pos == -1){
+					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere eliminar");
+				}else{
+					Object [] opciones ={"Eliminar","Cancelar"};
+					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+					if (eleccion == JOptionPane.YES_OPTION){
+						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
+						FL.EliminarCorreo(FL.Devuelve_Ruta_Borradores(), fecha);
+						
+						/*Quito todo para tener un refresh all instante*/
+						getContentPane().remove(scrlMCMostrarCorreos);
+						getContentPane().revalidate();
+						getContentPane().repaint();
+						
+						SetTable();
+						JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+				      	scrlMCMostrarCorreos.setEnabled(false);
+				      	scrlMCMostrarCorreos.setSize(793, 301);
+				      	scrlMCMostrarCorreos.setLocation(10, 57);
+						//Agregamos el JScrollPane al contenedor
+						getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);
+						
+						
+					}
+				}
+			}
+		});
+		btnEliminar.setBounds(10, 363, 89, 23);
+		getContentPane().add(btnEliminar);
+      
 				
 	}
 	

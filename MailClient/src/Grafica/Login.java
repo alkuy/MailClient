@@ -70,8 +70,7 @@ public class Login extends JFrame {
 				
 				if ( verifica_servidor){
 					
-					
-				FL.Nueva_cuenta(usuario.getText(),"inet",textPasswd.getText());	
+				FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());	
 				principal pri = new principal();
 				pri.setLocationRelativeTo(null); 			
 				pri.setVisible(true);

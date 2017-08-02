@@ -83,14 +83,22 @@ public class FachadaLog {
 	}
 	
 	
-	// metoo que devuelve una tabla para mostrar Bandeja de Salida
+	/**
+	 * metodo que devuelve una tabla para mostrar Bandeja de Salida
+	 * @return TableModel
+	 * @throws SQLException
+	 */
 	public DefaultTableModel DevBandejaSalida() throws SQLException{
 		DefaultTableModel modelo;
 		modelo = correos.DevTablaBandejaSalida();
 		return modelo;
 	}
 	
-	// metoo que devuelve una tabla para mostrar Borradores
+	/**
+	 * metodo que devuelve una tabla para mostrar Borradores
+	 * @return TableModel
+	 * @throws SQLException
+	 */
 	public DefaultTableModel DevBorradores() throws SQLException{
 		DefaultTableModel modelo;
 		modelo = correos.DevTablaBorradores();
@@ -98,7 +106,11 @@ public class FachadaLog {
 	}
 	
 	
-	// metoo que devuelve una tabla para mostrar Recibidos
+	/**
+	 *  metodo que devuelve una tabla para mostrar Recibidos
+	 * @return TableModel
+	 * @throws SQLException
+	 */
 		public DefaultTableModel DevRecibidos() throws SQLException{
 			DefaultTableModel modelo;
 			modelo = correos.DevTablaRecibidos();
@@ -123,17 +135,19 @@ public class FachadaLog {
 	}
 	
 	
-	   // devuelve el nombre de usuario actual logeado
+	/**
+	 * devuelve el nombre de usuario actual logeado
+	 * @return String (Nombre de usuario)
+	 */
    public String Devuelve_us_cuenta(){
-		
 		Cuenta cuenta = Cuenta.getInstancia();	
-		
 		return cuenta.getNom_us();
-		
-		
 	}
    
-   // Devuelve el dominio de la cuneta de usuario actual
+   /**
+    *  Devuelve el dominio de la cuneta de usuario actual
+    * @return String (dominio de cuenta)
+    */
    
    public String Devuelve_dom_cuenta(){
 		
@@ -193,7 +207,11 @@ public class FachadaLog {
     	
     }
     
- // devuelve el correo de bandeja de salida seleccionado a partir de la fecha de creacion
+ /**
+  *  devuelve el correo de bandeja de salida seleccionado a partir de la fecha de creacion
+  * @param Fecha
+  * @return Objeto Correo
+  */
     
     public Correo DevuelveBandejaSalida(String Fecha){
     	  
@@ -201,7 +219,11 @@ public class FachadaLog {
     	
     }
     
- // devuelve el correo Enviado seleccionado a partir de la fecha de creacion
+ /**
+  * devuelve el correo Enviado seleccionado a partir de la fecha de creacion
+  * @param Fecha
+  * @return Objeto Correo
+  */
     
     public Correo DevuelveEnviado(String Fecha){
     	  
@@ -209,7 +231,11 @@ public class FachadaLog {
     	
     }
     
-// devuelve el correo Enviado seleccionado a partir de la fecha de creacion
+/**
+ * devuelve el correo Enviado seleccionado a partir de la fecha de creacion
+ * @param Fecha
+ * @return objeto Correo
+ */
     
     public Correo DevuelveRecibido(String Fecha){
     	  
@@ -222,10 +248,21 @@ public class FachadaLog {
 		cuenta.crearDirectorioCuenta();
 	}
 	
-	//Devuelve el array de Dominios
+	/**
+	 * Devuelve el array de Dominios
+	 * @return String[]
+	 */
     public String[] GetDom(){
     	String[] Dominios;
     	Dominios = BD.GetDominio();
     	return Dominios;
+    }
+    
+    /**
+     * Elimina correo de hastable y persistencia
+     *  @param clave 
+     */
+    public void EliminarCorreo(String directorio, String clave){
+    	correos.Eliminar_Correo(directorio, clave);
     }
 }

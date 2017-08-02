@@ -3,21 +3,22 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
-
-
-// guarda un correo en la carpeta que se especifique
-// el correo que se le pasa es una case que implementa la interfaz serializable
 public class Archivos {
 	
 	private static int contador = 0;
 	
+	/**
+	 * Guarda el objeto correo en la carpeta que se le especifique
+	 * @param carpeta
+	 * @param correo
+	 * @throws IOException
+	 */
 	public void guarda(String carpeta, Correo correo) throws IOException{
-		String emisor = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
 		String fecha = correo.getFecha();
-		String conversacion = String.valueOf(correo.getId_conversacion());		
-		String nom_archivo = fecha+"$"+conversacion+"$"+emisor; // se crea el nombre del archivo (objeto) con fecha, id converacion y cuenta del emisor
-		
+		fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
+		fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
+		fecha = fecha.replace(":","-");
+		String nom_archivo = fecha;
 		try{
 			FileOutputStream f = new FileOutputStream(carpeta+nom_archivo, true);
 			ObjectOutputStream escribiendo = new ObjectOutputStream(f);
@@ -31,7 +32,12 @@ public class Archivos {
 	}
 	
 	
-	// lee desde disco y retorna un correo segun la ruta y nombre de archivo que se le pasa
+	/**
+	 * lee desde disco y retorna un correo segun la ruta y nombre de archivo que se le pasa
+	 * @param carpeta
+	 * @param archivo
+	 * @return
+	 */
 	public Correo leer(String carpeta, String archivo){
 		Correo correo = new Correo();
 		ObjectInputStream leyendo = null;
@@ -54,7 +60,12 @@ public class Archivos {
 	
 	
 
- // Para leer los datos da la cuenta guardada en configuracion. Este se va a suar para cuando no sea la primer conexion para el login
+ /**
+  * Para leer los datos da la cuenta guardada en configuracion. Este se va a suar para cuando no sea la primer conexion para el login
+  * @param carpeta
+  * @param archivo
+  * @return
+  */
     public Cuenta leerCuenta(String carpeta, String archivo){
 	   Cuenta cuenta = new Cuenta();
 	   ObjectInputStream leyendo = null;
@@ -75,14 +86,22 @@ public class Archivos {
 }
 	
 	
-	//retorna todos los archivos (objetos) que hay dentro de una ruta especificada
+	/**
+	 * retorna todos los archivos (objetos) que hay dentro de una ruta especificada
+	 * @param directorio
+	 * @return
+	 */
 	public File[] listadoDirectorio (String directorio){
 		File dir = new File(directorio);
 		File[]ficheros = dir.listFiles();			
 		return ficheros;	 	
 	}
 	
-	// guarda el objeto cuenta (que implementa la interfaz serializable) como un archivo en persistencia dentro de la carpeta configuracion.
+	/**
+	 * guarda el objeto cuenta (que implementa la interfaz serializable) como un archivo en persistencia dentro de la carpeta configuracion.
+	 * @param cuenta
+	 * @throws IOException
+	 */
 	public void guardaConfiguracion(Cuenta cuenta) throws IOException{
 		String nombre = cuenta.getNom_us()+"@"+cuenta.getDom();
 		Configuracion conf = Configuracion.getInstancia();		
@@ -176,6 +195,25 @@ public class Archivos {
 			return Dominios;
 		}
 		
+		
+		/**
+		 * Elimina archivo de la carpeta especificada
+		 * @param directorio
+		 * @param archivo
+		 */
+		public void Eliminar(String directorio, String archivo){
+			archivo = archivo.replace(".","-"); //Para evitar problemas en el nombre del archivo
+			archivo = archivo.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
+			archivo = archivo.replace(":","-");
+			File f = new File(directorio+archivo);
+			try{
+				f.delete();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			
+		}
 	
 
 }
