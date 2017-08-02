@@ -7,6 +7,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
+
+import Conectividad.FachadaCon;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -26,6 +28,7 @@ public class Nuevo_Correo extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	FachadaLog FL = new FachadaLog();
+	FachadaCon FC = FachadaCon.getInstancia();
 	Verificaciones verifica = new Verificaciones();
 	
 	
@@ -90,6 +93,7 @@ public class Nuevo_Correo extends JFrame {
 		JButton btnEnviar = new JButton();
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String NomUsu, PassUsu, DomUsu, Cuenta;
 				
 				if (verifica.verificaCuentaReceptor(textpara.getText())){// aca verificamos si puso un y solo un @ en la cuenta de envio
 				Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
@@ -108,6 +112,13 @@ public class Nuevo_Correo extends JFrame {
 				
 				/*Guardamos correo en archivo y memoria*/
 				FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
+				
+				//Coidgo para Enviar el coreo, actualmente lo probmos aca pero va a ejecutarse en otra instancia
+				NomUsu = FL.Devuelve_us_cuenta();
+				PassUsu = FL.Devuelve_pas_cuenta();
+				DomUsu = FL.Devuelve_dom_cuenta();
+				Cuenta = NomUsu+"@"+DomUsu;
+				FC.EnviaCorreo(NomUsu, PassUsu, Cuenta, cuenta, textasunto.getText(), textcorreo.getText());
 				dispose();
 				principal.apareceLogo();
 				}

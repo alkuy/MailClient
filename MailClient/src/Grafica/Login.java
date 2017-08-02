@@ -34,7 +34,7 @@ public class Login extends JFrame {
 	public Login() {
 		
 		
-		FL.crearDirectorioCuenta(); // se crea el direccorio cuent si es el primer ingreso
+		
 		setTitle("Login");
      	setIconImage(Toolkit.getDefaultToolkit().getImage(principal.class.getResource("/imagenes/icon1.jpg")));
 		getContentPane().setLayout(null);
@@ -53,7 +53,8 @@ public class Login extends JFrame {
 		label.setBounds(247, 84, 24, 28);
 		getContentPane().add(label);
 		
-		JComboBox comboDominio = new JComboBox();
+		@SuppressWarnings({ "unchecked", "rawtypes" })
+		JComboBox comboDominio = new JComboBox(FL.GetDom());
 		comboDominio.setBounds(265, 89, 121, 25);
 		getContentPane().add(comboDominio);
 		

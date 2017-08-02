@@ -20,6 +20,7 @@ public class Configuracion {
 		private static String carpetaConfiguracion;
 		private static String carpetaUsuario;
 		private static String carpetaCuentas = "c:\\Cuentas\\";
+		private static String carpetaDominio = "c:\\Cuentas\\Dominios\\";
 		
 	  
 	  
@@ -38,6 +39,11 @@ public class Configuracion {
 	public static String getCarpetaCuentas() {
 		
 		return carpetaCuentas;
+	}
+	
+	//Devuelce la carpeta Dominios
+	public static String getCarpetaDominios(){
+		return carpetaDominio;
 	}
 	
 		/**
@@ -142,6 +148,13 @@ public class Configuracion {
 		File cuentas = new File(getCarpetaCuentas()); 
 		cuentas.mkdir();
 				
+	}
+	
+	//Crea la carpeta Domionios dentro de la Carpeta Cuentas C:\\Cuentas\Dominios
+	public static void crearDirectorioDominios(){
+		
+		File Dominio = new File(getCarpetaDominios());
+		Dominio.mkdir();
 	}
 	
 	//Crea el directorio del usuario segun la cuenta con la que se logeo si es que no ingreso antes con la misma

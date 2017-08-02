@@ -182,6 +182,13 @@ public class FachadaPers {
 		arch.guarda(directorio, correoper);// aca o guarda en el disco por medio de la clase archivo
 	}
 	
+	//Guarda los dominios en la persistencia
+	public void GuardaDominios(String directorio, String Dom, int Prioridad){
+		Archivos arch = new Archivos();
+		Dominio D = new Dominio(Dom, Prioridad);
+		arch.guardaDominio(directorio, D);
+	}
+	
 	public void creaDirectorioUsuario(String nom, String dom){
 		
 		conf.crearDirectorioUsuario(nom, dom);
@@ -193,6 +200,11 @@ public class FachadaPers {
 		conf.crearDirectorioCuenta();
 	}
 	
+        public void crearDirectorioDominios(){
+            
+        	conf.crearDirectorioDominios();
+        }
+        
         public void crearDirectorios(String nom, String dom){
     		
     		conf.crearDirectorios(nom, dom);
@@ -271,5 +283,19 @@ public class FachadaPers {
 	
 	public String CarpetaBorradores(){
 		return conf.getCarpetaBorradores();
+	}
+	
+	public void GuardaDominios(String Dom, int P){
+		Dominio D = new Dominio(Dom, P);
+		Archivos Arch = new Archivos();
+		String CarpetaDom = conf.getCarpetaDominios();
+		Arch.guardaDominio(CarpetaDom, D);
+	}
+	
+	public String[] GetDominio(){
+		String[] Dom;
+		Archivos Arch = new Archivos();
+		Dom = Arch.LeerDom(conf.getCarpetaDominios());
+		return Dom;
 	}
 }

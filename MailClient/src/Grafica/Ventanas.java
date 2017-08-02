@@ -5,7 +5,9 @@ import javax.swing.*;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.UIManager;
-
+import logica.FachadaLog;
+import Conectividad.FachadaCon;
+import persistencia.Configuracion;
 
 public class Ventanas {
 
@@ -28,7 +30,11 @@ public class Ventanas {
 			 }
 		// TODO Auto-generated method stub
 		Presentacion present = new Presentacion();
-		present.setLocationRelativeTo(null);  
+		present.setLocationRelativeTo(null);
+		FachadaLog FL = new FachadaLog();
+		FL.crearDirectorioCuenta(); // se crea el direccorio cuent si es el primer ingreso
+		FachadaCon FC = FachadaCon.getInstancia();
+		FC.IniSocket();
 		
 		JTextPane txtpnIniciando = new JTextPane();
 		txtpnIniciando.setBackground(UIManager.getColor("Button.background"));

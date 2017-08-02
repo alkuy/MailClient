@@ -2,12 +2,13 @@ package logica;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
+import persistencia.FachadaPers;
 import javax.swing.table.DefaultTableModel;
 
 public class FachadaLog {
 	
 	private static FachadaLog instancia;
+	private FachadaPers BD = FachadaPers.getInstancia();
 	//private Correos hcorreo;
 
 	
@@ -221,5 +222,10 @@ public class FachadaLog {
 		cuenta.crearDirectorioCuenta();
 	}
 	
-	
+	//Devuelve el array de Dominios
+    public String[] GetDom(){
+    	String[] Dominios;
+    	Dominios = BD.GetDominio();
+    	return Dominios;
+    }
 }

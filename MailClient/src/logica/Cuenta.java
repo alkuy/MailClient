@@ -83,6 +83,7 @@ public class Cuenta {
 	 public void crearDirectorioCuenta(){
 			
 			BD.crearDirectorioCuenta();
+			BD.crearDirectorioDominios();
 		}
 	
 	
