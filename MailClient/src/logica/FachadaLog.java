@@ -264,5 +264,6 @@ public class FachadaLog {
      */
     public void EliminarCorreo(String directorio, String clave){
     	correos.Eliminar_Correo(directorio, clave);
+    	
     }
 }

@@ -210,10 +210,13 @@ public class Archivos {
 				f.delete();
 			}catch(Exception e){
 				e.printStackTrace();
-			}
-			
-			
+			}	
 		}
 	
+		public void moverCorreos(String d_origen, String archivo, String d_destino){
+			File f = new File(d_origen+archivo);
+			f.renameTo(new File(d_destino+archivo));
+			f.delete();
+		}
 
 }

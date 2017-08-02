@@ -16,6 +16,7 @@ public class Correos {
 	private Hashtable<String, Correo> setCorreosEnviados;
 	private Hashtable<String, Correo> setCorreosRecibidos;
 	private Hashtable<String, Correo> setBandejaSalida;
+	private Hashtable<String, Correo> setPapelera;
 	private Hashtable<String, Correo> setBorradores;
 	
 	public static Correos getInstancia(){
@@ -31,6 +32,7 @@ public class Correos {
 		this.setCorreosRecibidos = new Hashtable<String, Correo>();
 		this.setBandejaSalida = new Hashtable<String, Correo>();
 		this.setBorradores = new Hashtable<String, Correo>();
+		this.setPapelera = new Hashtable<String, Correo>();
 		
 	}
 		
@@ -60,6 +62,39 @@ public class Correos {
 		return setBorradores;
 	}
 	
+	
+	public Hashtable<String, Correo> getSetPapelera() {
+		return setPapelera;
+	}
+
+	
+	public Correo obtenerCorreo(String directorio, String clave){
+		
+		Correo correo = new Correo();
+		if(directorio == FachPer.CarpetaPapelera()){
+			correo = setPapelera.get(clave);
+		}
+		
+		if(directorio == FachPer.CarpetaEnviados()){
+			correo = setCorreosEnviados.get(clave);
+		}
+		if(directorio == FachPer.CarpetaRecibidos()){
+			correo = setCorreosRecibidos.get(clave);
+		}
+		if(directorio == FachPer.CarpetaBuzonSalida()){
+			correo = setBandejaSalida.get(clave);
+		}
+		
+		if(directorio == FachPer.CarpetaBorradores()){
+			correo = setBorradores.get(clave);
+		}
+		
+		
+		return correo;
+		
+		
+	}
+	
 	/**
 	 * Carga los correos en memoria. 
 	 * @param directorio: Directorio donde se encuentran los correos
@@ -80,7 +115,8 @@ public class Correos {
 			
 			String fecha = FachPer.getFecha(directorio, archivo);
 				
-			if(directorio == FachPer.CarpetaEnviados()){		
+			Insertar(directorio, fecha,correo);
+	/*		if(directorio == FachPer.CarpetaEnviados()){		
 				setCorreosEnviados.put(fecha, correo);
 			}
 			if(directorio == FachPer.CarpetaRecibidos()){
@@ -94,7 +130,11 @@ public class Correos {
 			if(directorio == FachPer.CarpetaBorradores()){
 				setBorradores.put(fecha, correo);
 			}
-			 
+			
+			if(directorio == FachPer.CarpetaPapelera()){
+				setPapelera.put(fecha, correo);
+			}
+			 */
 		}
 		
 	}
@@ -120,6 +160,10 @@ public class Correos {
 		if(directorio == FachPer.CarpetaBorradores()){
 			setBorradores.put(clave, correo);
 		}
+		
+		if(directorio == FachPer.CarpetaPapelera()){
+			setPapelera.put(clave, correo);
+		}
 	}
 	
 	/**
@@ -144,14 +188,17 @@ public class Correos {
 	} 
 	
 	/**
-	 * Eliminar un determinado correo del hashtable y eliminar archivo
+	 * Envia a la papelera los correos. No es eliminacion definitiva
 	 * @param directorio
 	 * @param clave
 	 */
 	public void Eliminar_Correo(String directorio, String clave){
-		Eliminar(directorio, clave);
-		FachPer.eliminar(directorio, clave);
-		
+		String papelera = FachPer.CarpetaPapelera();
+		Correo correo = new Correo();
+		correo = obtenerCorreo(directorio, clave); //Cargo el correo para poder pasarlo al Hashtable papelera
+		Eliminar(directorio, clave); //Lo elimina del Hashtable
+		Insertar(papelera, clave, correo); //Insero en Hashtable Tapelera
+		FachPer.MoverdeCarpeta(directorio, clave, papelera); //Muevo el arvhivo fisico de carpeta
 	}
 	
 	/**

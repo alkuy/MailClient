@@ -309,6 +309,10 @@ public class FachadaPers {
 		return conf.getCarpetaBorradores();
 	}
 	
+	public String CarpetaPapelera(){
+		return conf.getCarpetaPapelera();
+	}
+	
 	/**
 	 * Carga los dominios en un archivo
 	 * @param Dom
@@ -338,5 +342,10 @@ public class FachadaPers {
 	public void eliminar(String directorio, String archivo){
 		Archivos arch = new Archivos();
 		arch.Eliminar(directorio, archivo);
+	}
+	
+	public void MoverdeCarpeta(String d_origen, String archivo, String d_destino){
+		Archivos arch = new Archivos();
+		arch.moverCorreos(d_origen, archivo, d_destino);
 	}
 }

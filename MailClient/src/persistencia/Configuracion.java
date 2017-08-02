@@ -17,6 +17,7 @@ public class Configuracion {
 		private static String carpetaRecibidos;
 		private static String carpetaBorradores;
 		private static String carpetaBozonSalida;
+		private static String carpetaPapelera;
 		private static String carpetaConfiguracion;
 		private static String carpetaUsuario;
 		private static String carpetaCuentas = "c:\\Cuentas\\";
@@ -92,11 +93,23 @@ public class Configuracion {
 	}
 
 	/**
+	 * @param carpetaBozonSalida the carpetaPapelera to set
+	 */
+	public static void setCarpetaPapelera(String carpetaPapelera) {
+		Configuracion.carpetaPapelera = carpetaPapelera;
+	}
+	
+	public static String getCarpetaPapelera() {
+		return carpetaPapelera;
+	}
+
+	/**
 	 * @param carpetaBozonSalida the carpetaBozonSalida to set
 	 */
 	public static void setCarpetaBozonSalida(String carpetaBozonSalida) {
 		Configuracion.carpetaBozonSalida = carpetaBozonSalida;
 	}
+
 
 	/**
 	 * @return the carpetaConfiguracion
@@ -177,6 +190,7 @@ public class Configuracion {
 		Configuracion.setCarpetaBorradores(Configuracion.getCarpetaUsuario()+"\\Borradores\\");
 		Configuracion.setCarpetaEnviados(Configuracion.getCarpetaUsuario()+"\\Enviados\\");
 		Configuracion.setCarpetaRecibidos(Configuracion.getCarpetaUsuario()+"\\Recibidos\\");
+		Configuracion.setCarpetaPapelera(Configuracion.getCarpetaUsuario()+"\\Papelera\\");
 		Configuracion.setCarpetaConfiguracion(Configuracion.getCarpetaUsuario()+"\\Configuracion\\");
 	}
 	
@@ -196,6 +210,9 @@ public class Configuracion {
 
 		File borradores = new File(Configuracion.getCarpetaUsuario()+"\\Borradores\\"); 
 		borradores.mkdir();
+		
+		File papelera = new File(Configuracion.getCarpetaUsuario()+"\\Papelera\\"); 
+		papelera.mkdir();
 		
 		File config = new File(Configuracion.getCarpetaUsuario()+"\\Configuracion\\"); 
 		config.mkdir();
