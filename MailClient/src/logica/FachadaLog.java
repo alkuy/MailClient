@@ -296,7 +296,7 @@ public class FachadaLog {
 	
 	/**
 	 * Devuelve el array de Dominios
-	 * @return String[]
+	 * @return String[] Lista de dominios
 	 */
     public String[] GetDom(){
     	String[] Dominios;
@@ -313,7 +313,21 @@ public class FachadaLog {
     	
     }
     
+    /**
+     * Elimina el archivo de memoria y quita del Hashtable.
+     * @param directorio (String)
+     * @param clave (String)
+     */
     public void EliminarCorreoDefinitivo(String directorio, String clave){
     	correos.Eliminar_Definitivo(directorio, clave);
+    }
+    
+    /**
+     * Restaura a la carpeta Recibidos los correos que puedan estar en papelera o Spam
+     * @param directorio
+     * @param clave
+     */
+    public void RestaurarEliminados(String directorio, String clave){
+    	correos.Restaurar(directorio, clave);
     }
 }

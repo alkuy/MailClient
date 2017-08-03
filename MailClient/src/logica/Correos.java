@@ -180,6 +180,15 @@ public class Correos {
 		if(directorio == FachPer.CarpetaBorradores()){
 			setBorradores.remove(clave);
 		}
+		
+		if(directorio == FachPer.CarpetaPapelera()){
+			setPapelera.remove(clave);
+		}
+		
+		if(directorio == FachPer.CarpetaSpam()){
+			setSpam.remove(clave);
+		}
+		
 	} 
 	
 	/**
@@ -199,6 +208,21 @@ public class Correos {
 	public void Eliminar_Definitivo(String directorio, String clave){
 		Eliminar(directorio, clave); //Lo elimina del Hashtable
 		FachPer.eliminar(directorio, clave);
+	}
+	
+	
+	/**
+	 * Devuelve a Enviados los correos que estan en papelera o Sapm
+	 * @param directorio indica directorio origen (desde donde hago la restauracion)
+	 * @param clave Hashtable Key de Correo
+	 */
+	public void Restaurar(String directorio, String clave){
+		String recibidos = FachPer.CarpetaRecibidos();
+		Correo correo = new Correo();
+		correo = obtenerCorreo(directorio, clave); //Cargo el correo para poder pasarlo al Hashtable de origen
+		Eliminar(directorio, clave); //Lo elimina del Hashtable
+		Insertar(recibidos, clave, correo); //Insero en Hashtable Nuevamente en origen
+		FachPer.MoverdeCarpeta(directorio, clave, recibidos); //Muevo el arvhivo fisico de carpeta
 	}
 	
 	/**
@@ -260,7 +284,12 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	}	
 
 
-   //Devuelve una tabla con destintario y asunto de cada correo de Boradores que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
+   /**
+    * Devuelve una tabla con destintario y asunto de cada correo de Boradores 
+    * que se cargo en memoria 
+    * anteriormente desde el disco para mostrar en la bandeja de salida
+    * @return ModelTable
+    */
    public DefaultTableModel DevTablaBorradores(){
 	
 	String col[] = {"Destinatario","Asunto", "Fecha"};
@@ -284,7 +313,12 @@ public DefaultTableModel DevTablaBandejaSalida(){
    }
    
    
-   //Devuelve una tabla con remitente, asunto y fecha de cada correo recibido que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de entrada
+   /**
+    * Devuelve una tabla con remitente, asunto y fecha de cada correo recibido 
+    * que se cargo en memoria anteriormente desde el disco 
+    * para mostrar en la bandeja de entrada
+    * @return modelTable
+    */
    public DefaultTableModel DevTablaRecibidos(){
 	
 	String col[] = {"Remitente","Asunto", "Fecha"};
@@ -308,7 +342,12 @@ public DefaultTableModel DevTablaBandejaSalida(){
    }
    
    
-   //Devuelve una tabla con remitente, asunto y fecha de cada correo elimindo que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de eliminados
+   /**
+    * Devuelve una tabla con remitente, asunto y fecha de cada correo 
+    * elimindo que se cargo en memoria anteriormente desde el disco
+    *  para mostrar en la bandeja de eliminados
+    * @return modelTable
+    */
    public DefaultTableModel DevTablaEliminados(){
 	
 	String col[] = {"Remitente","Asunto", "Fecha"};
@@ -332,7 +371,12 @@ public DefaultTableModel DevTablaBandejaSalida(){
    }
    
    
-   //Devuelve una tabla con remitente, asunto y fecha de cada correo spam que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de spams
+   /**
+    * Devuelve una tabla con remitente, asunto y fecha de cada 
+    * correo spam que se cargo en memoria anteriormente desde 
+    * el disco para mostrar en la bandeja de spams
+    * @return modelTable
+    */
    public DefaultTableModel DevTablaSpam(){
 	
 	String col[] = {"Remitente","Asunto", "Fecha"};
@@ -358,7 +402,11 @@ public DefaultTableModel DevTablaBandejaSalida(){
    
    // tabla de correos segun busqueda realizada
    
-   //Devuelve una tabla con remitente, asunto y fecha de cada correo selecionado
+   /**
+    * Devuelve una tabla con remitente, asunto y fecha de cada correo selecionado
+    * @param cuentaBusqueda
+    * @return modelTable
+    */
    public DefaultTableModel DevTablaBusqueda(String cuentaBusqueda){
 	
 	String col[] = {"Remitente","Asunto", "Fecha"};
@@ -383,7 +431,11 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	
    }
    
-   // Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Borradores
+   /**
+    * Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Borradores
+    * @param Fecha
+    * @return Correo (Objeto)
+    */
    
    public Correo DevolverCorreoBorrador(String Fecha){
 	   
@@ -391,14 +443,22 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	}
    
    
-   // Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Bandeja de Salida
+   /**
+    * Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Bandeja de Salida
+    * @param Fecha (String)
+    * @return Correo (Objeto)
+    */
    
    public Correo DevolverCorreoBandejaSalida(String Fecha){
 	   
 	   	return this.setBandejaSalida.get(Fecha);
 	}
    
-// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Enviados
+/**
+ * Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Enviados
+ * @param Fecha (String)
+ * @return Correo (Objeto)
+ */
    
    public Correo DevolverCorreoEnviado(String Fecha){
 	   
@@ -406,7 +466,11 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	}
 	
    
-// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Recibidos
+/**
+ * Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Recibidos
+ * @param Fecha (String)
+ * @return Correo (Objeto)
+ */
    
    public Correo DevolverCorreoRecibido(String Fecha){
 	   
@@ -414,14 +478,22 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	}
    
    
-// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Eliminados
+/**
+ *  Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Eliminados
+ * @param Fecha (String)
+ * @return Correo (Objeto)
+ */
    
    public Correo DevolverCorreoEliminado(String Fecha){
 	   
 	   	return this.setPapelera.get(Fecha);
 	}
    
-// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Spam
+/**
+ *  Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Spam
+ * @param Fecha (String)
+ * @return Correo (Objeto)
+ */
    
    public Correo DevolverCorreoSpam(String Fecha){
 	   

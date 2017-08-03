@@ -48,7 +48,7 @@ public class FrmMuestraEliminados extends JInternalFrame {
 		getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);
 		
 		
-		/* BOTON PARA RESTAURAR AL CORREO SELECCIONADO */
+/* BOTON PARA RESTAURAR AL CORREO SELECCIONADO */
 		
 		JButton btnVer = new JButton("RESTAURAR");
 		btnVer.addActionListener(new ActionListener() {
@@ -56,16 +56,31 @@ public class FrmMuestraEliminados extends JInternalFrame {
 				
 				int pos = tblMuestraCorreos.getSelectedRow();
 				if (pos == -1){
-					JOptionPane.showMessageDialog(new JPanel(), "Debe seleccionar primero el correo que desea restaurar");
+					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere restaurar");
 				}else{
-				fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
-				cuenta = (String) tblMuestraCorreos.getValueAt(pos, 0);
-				/** aca va el mover carpeta que hiciste **/
-
+					Object [] opciones ={"Restaurar","Cancelar"};
+					int eleccion = JOptionPane.showOptionDialog(rootPane,"El correo volvera a Recibidos","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+					if (eleccion == JOptionPane.YES_OPTION){
+						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
+						FL.RestaurarEliminados(FL.Devuelve_Ruta_Papelera(), fecha);;
+						
+						/*Quito todo para tener un refresh all instante*/
+						getContentPane().remove(scrlMCMostrarCorreos);
+						getContentPane().revalidate();
+						getContentPane().repaint();
+						
+						SetTable();
+						JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+				      	scrlMCMostrarCorreos.setEnabled(false);
+				      	scrlMCMostrarCorreos.setSize(793, 301);
+				      	scrlMCMostrarCorreos.setLocation(10, 57);
+						//Agregamos el JScrollPane al contenedor
+						getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);
+					}
 				}	
 			}
 		});
-		btnVer.setBounds(686, 363, 117, 23);
+		btnVer.setBounds(685, 363, 118, 23);
 		getContentPane().add(btnVer);
 		
 		
