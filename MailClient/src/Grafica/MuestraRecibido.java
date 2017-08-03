@@ -2,22 +2,18 @@ package Grafica;
 
 
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.border.LineBorder;
 import logica.Correo;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -27,7 +23,6 @@ public class MuestraRecibido extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private FrmMuestraBuzonSalida salida;
 	private FrmMuestraBandejaEntrada recibido;
 	FachadaLog FL = new FachadaLog();
 	Verificaciones verifica = new Verificaciones();
@@ -41,7 +36,7 @@ public class MuestraRecibido extends JFrame {
 	public MuestraRecibido() {
 		
 		
-			Correo correo = FL.DevuelveEnviado(String.valueOf(recibido.fecha));
+			Correo correo = FL.DevuelveRecibido(String.valueOf(recibido.fecha));
 		  
 		
 		

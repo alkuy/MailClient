@@ -139,6 +139,18 @@ public class FachadaLog {
 				modelo = correos.DevTablaSpam();
 				return modelo;
 				}
+		
+		
+		/**
+		 *  metodo que devuelve una tabla para mostrar la busqueda realizada
+		 * @return TableModel
+		 * @throws SQLException
+		 */
+			public DefaultTableModel DevBusqueda(String cuentaBusqueda) throws SQLException{
+				DefaultTableModel modelo;
+				modelo = correos.DevTablaBusqueda(cuentaBusqueda);
+				return modelo;
+			}
 	
 	/** Metodo para pasar los datos de la cuenta a persistencia y dejar el ojeto cuenta instanciado para usar
 	 * 

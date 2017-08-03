@@ -355,6 +355,34 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	
    }
    
+   
+   // tabla de correos segun busqueda realizada
+   
+   //Devuelve una tabla con remitente, asunto y fecha de cada correo selecionado
+   public DefaultTableModel DevTablaBusqueda(String cuentaBusqueda){
+	
+	String col[] = {"Remitente","Asunto", "Fecha"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+	Enumeration<Correo> cor = setCorreosRecibidos.elements();
+	Correo correo;
+	
+	while(cor.hasMoreElements()){
+		correo = cor.nextElement();
+		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
+		
+		if(remitente.equals(cuentaBusqueda)){
+		   String asunto = correo.getAsunto();
+		   String fecha = correo.getFecha();		
+		   String carga [] = {remitente, asunto, fecha};	   
+	       modelo.addRow(carga);
+		}
+		}
+	
+	return modelo;
+	
+   }
+   
    // Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Borradores
    
    public Correo DevolverCorreoBorrador(String Fecha){
