@@ -18,6 +18,7 @@ public class Correos {
 	private Hashtable<String, Correo> setBandejaSalida;
 	private Hashtable<String, Correo> setPapelera;
 	private Hashtable<String, Correo> setBorradores;
+	private Hashtable<String, Correo> setSpam;
 	
 	public static Correos getInstancia(){
 		if(instancia == null)
@@ -33,7 +34,7 @@ public class Correos {
 		this.setBandejaSalida = new Hashtable<String, Correo>();
 		this.setBorradores = new Hashtable<String, Correo>();
 		this.setPapelera = new Hashtable<String, Correo>();
-		
+		this.setSpam = new Hashtable<String, Correo>();
 	}
 		
 	/** Método que retorna la coleccion Set de Correos Recibidos.
@@ -66,6 +67,10 @@ public class Correos {
 	public Hashtable<String, Correo> getSetPapelera() {
 		return setPapelera;
 	}
+	
+	public Hashtable<String, Correo> getSetSpam() {
+		return setSpam;
+	}
 
 	
 	public Correo obtenerCorreo(String directorio, String clave){
@@ -87,6 +92,10 @@ public class Correos {
 		
 		if(directorio == FachPer.CarpetaBorradores()){
 			correo = setBorradores.get(clave);
+		}
+		
+		if(directorio == FachPer.CarpetaBorradores()){
+			correo = setSpam.get(clave);
 		}
 		
 		
@@ -116,25 +125,7 @@ public class Correos {
 			String fecha = FachPer.getFecha(directorio, archivo);
 				
 			Insertar(directorio, fecha,correo);
-	/*		if(directorio == FachPer.CarpetaEnviados()){		
-				setCorreosEnviados.put(fecha, correo);
-			}
-			if(directorio == FachPer.CarpetaRecibidos()){
-				setCorreosRecibidos.put(fecha, correo);
-			}
-			
-			if(directorio == FachPer.CarpetaBuzonSalida()){
-				setBandejaSalida.put(fecha, correo);
-			}
-			
-			if(directorio == FachPer.CarpetaBorradores()){
-				setBorradores.put(fecha, correo);
-			}
-			
-			if(directorio == FachPer.CarpetaPapelera()){
-				setPapelera.put(fecha, correo);
-			}
-			 */
+
 		}
 		
 	}
@@ -163,6 +154,10 @@ public class Correos {
 		
 		if(directorio == FachPer.CarpetaPapelera()){
 			setPapelera.put(clave, correo);
+		}
+		
+		if(directorio == FachPer.CarpetaSpam()){
+			setSpam.put(clave, correo);
 		}
 	}
 	
@@ -307,6 +302,54 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	
    }
    
+   
+   //Devuelve una tabla con remitente, asunto y fecha de cada correo elimindo que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de eliminados
+   public DefaultTableModel DevTablaEliminados(){
+	
+	String col[] = {"Remitente","Asunto", "Fecha"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+	Enumeration<Correo> cor = setPapelera.elements();
+	Correo correo;
+	
+	while(cor.hasMoreElements()){
+		correo = cor.nextElement();
+		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
+		String asunto = correo.getAsunto();
+		String fecha = correo.getFecha();
+		
+		String carga [] = {remitente, asunto, fecha};	   
+	   	modelo.addRow(carga);
+		}
+	
+	return modelo;
+	
+   }
+   
+   
+   //Devuelve una tabla con remitente, asunto y fecha de cada correo spam que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de spams
+   public DefaultTableModel DevTablaSpam(){
+	
+	String col[] = {"Remitente","Asunto", "Fecha"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+	Enumeration<Correo> cor = setSpam.elements();
+	Correo correo;
+	
+	while(cor.hasMoreElements()){
+		correo = cor.nextElement();
+		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
+		String asunto = correo.getAsunto();
+		String fecha = correo.getFecha();
+		
+		String carga [] = {remitente, asunto, fecha};	   
+	   	modelo.addRow(carga);
+		}
+	
+	return modelo;
+	
+   }
+   
    // Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Borradores
    
    public Correo DevolverCorreoBorrador(String Fecha){
@@ -335,6 +378,21 @@ public DefaultTableModel DevTablaBandejaSalida(){
    public Correo DevolverCorreoRecibido(String Fecha){
 	   
 	   	return this.setCorreosRecibidos.get(Fecha);
+	}
+   
+   
+// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Eliminados
+   
+   public Correo DevolverCorreoEliminado(String Fecha){
+	   
+	   	return this.setPapelera.get(Fecha);
+	}
+   
+// Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Spam
+   
+   public Correo DevolverCorreoSpam(String Fecha){
+	   
+	   	return this.setSpam.get(Fecha);
 	}
 	
    

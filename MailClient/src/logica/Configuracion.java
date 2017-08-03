@@ -26,6 +26,21 @@ public class Configuracion {
 		
 		return FachPer.devRutaBorradores();
 	}
+   
+   
+// Metodo que devuelve la ruta para guardar dentro de la carpeta de Eliminados
+	
+   public String devRutaPapelera(){
+		
+		return FachPer.devRutaPapelera();
+	}
+   
+// Metodo que devuelve la ruta para guardar dentro de la carpeta Spam
+	
+   public String devRutaSpam(){
+		
+		return FachPer.devRutaSpam();
+	}
 	
 	// Metodo que devuelve la ruta para guardar dentro de la carpeta Recibidos
    

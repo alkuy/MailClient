@@ -71,7 +71,8 @@ public class FachadaLog {
 		correos.cargaCorreos(this.Devuelve_Ruta_BuzonSalida());
 		correos.cargaCorreos(this.Devuelve_Ruta_Recibidos());
 		correos.cargaCorreos(this.Devuelve_Ruta_Borradores());
-		
+		correos.cargaCorreos(this.Devuelve_Ruta_Papelera());
+		correos.cargaCorreos(this.Devuelve_Ruta_Spam());
 		}
 	
 	
@@ -116,6 +117,28 @@ public class FachadaLog {
 			modelo = correos.DevTablaRecibidos();
 			return modelo;
 		}
+		
+		/**
+		 *  metodo que devuelve una tabla para mostrar Eliminados
+		 * @return TableModel
+		 * @throws SQLException
+		 */
+		public DefaultTableModel DevPapelera() throws SQLException{
+			DefaultTableModel modelo;
+			modelo = correos.DevTablaEliminados();
+			return modelo;
+			}
+			
+		/**
+		 *  metodo que devuelve una tabla para mostrar Spam
+		 * @return TableModel
+		 * @throws SQLException
+		*/
+		public DefaultTableModel DevSpam() throws SQLException{
+				DefaultTableModel modelo;
+				modelo = correos.DevTablaSpam();
+				return modelo;
+				}
 	
 	/** Metodo para pasar los datos de la cuenta a persistencia y dejar el ojeto cuenta instanciado para usar
 	 * 
@@ -130,8 +153,7 @@ public class FachadaLog {
 		cuenta.setDominio(Dom);
 		cuenta.setContraseña_cuenta(Pas);		
 		cuenta.carga_cuenta(cuenta); 
-		
-		
+			
 	}
 	
 	
@@ -197,6 +219,18 @@ public class FachadaLog {
     public String Devuelve_Ruta_Configuracion(){
  		
  		return configuracion.devRutaConfiguracion();
+ 	}
+    
+    // devuelve la ruta absoluta de Papelera
+    public String Devuelve_Ruta_Papelera(){
+ 		
+ 		return configuracion.devRutaPapelera();
+ 	}
+    
+ // devuelve la ruta absoluta de Spam
+    public String Devuelve_Ruta_Spam(){
+ 		
+ 		return configuracion.devRutaSpam();
  	}
 	
     // devuelve el correo borrador seleccionado a partir de la fecha de creacion

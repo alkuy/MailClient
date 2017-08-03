@@ -268,6 +268,18 @@ public class FachadaPers {
         	return conf.getCarpetaConfiguracion();
         	
         }
+        
+         public String devRutaPapelera(){
+        	
+        	return conf.getCarpetaPapelera();
+        	
+        }
+         
+         public String devRutaSpam(){
+         	
+         	return conf.getCarpetaSpam();
+         	
+         }
     
     /**
      * Metodo que gurda una cuenta en disco (tomando los datos de la cuenta instanciada en la capa logica) en el directorio indicado
@@ -311,6 +323,10 @@ public class FachadaPers {
 	
 	public String CarpetaPapelera(){
 		return conf.getCarpetaPapelera();
+	}
+	
+	public String CarpetaSpam(){
+		return conf.getCarpetaSpam();
 	}
 	
 	/**

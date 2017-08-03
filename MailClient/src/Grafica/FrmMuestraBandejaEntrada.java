@@ -39,7 +39,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
 	private JTable tblMuestraCorreos;
 	private JTextField txtBuscar;
-	public static String fecha = new String(); // variable estatica para poder mantener utilizar en otras clases como la clave del hash
+	public static String fecha = new String(); // variable estatica para poder utilizar en otras clases como la clave del hash
 	public static String cuenta = new String(); // la usamos para no tener que traerla desde el diccionari correos y juntar los campos usuario y dominio	 
 	public MuestraRecibido muestra;
 	FachadaLog FL = new FachadaLog();
@@ -75,7 +75,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 				
 				int pos = tblMuestraCorreos.getSelectedRow();
 				if (pos == -1){
-					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere editar");
+					JOptionPane.showMessageDialog(new JPanel(), "Debe seleccionar primero el correo que desea visualizar");
 				}else{
 				fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
 				cuenta = (String) tblMuestraCorreos.getValueAt(pos, 0);

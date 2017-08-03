@@ -20,6 +20,7 @@ public class Configuracion {
 		private static String carpetaPapelera;
 		private static String carpetaConfiguracion;
 		private static String carpetaUsuario;
+		private static String carpetaSpam;
 		private static String carpetaCuentas = "c:\\Cuentas\\";
 		private static String carpetaDominio = "c:\\Cuentas\\Dominios\\";
 		
@@ -61,8 +62,7 @@ public class Configuracion {
 	public static void setCarpetaEnviados(String carpetaEnviados) {
 		Configuracion.carpetaEnviados = carpetaEnviados;
 	}
-
-
+	
 	/**
 	 * @return the carpetaRecibidos
 	 */
@@ -153,8 +153,22 @@ public class Configuracion {
 	public static void setCarpetaUsuario(String carpetaUsuario) {
 		Configuracion.carpetaUsuario = carpetaUsuario;
 	}
-
 	
+	
+	/**
+	 * @return the carpetaSpam
+	 */
+	public static String getCarpetaSpam() {
+		return carpetaSpam;
+	}
+
+	/**
+	 * @param carpetaSpam the carpetaSpam to set
+	 */
+	public static void setCarpetaSpam(String carpetaSpam) {
+		Configuracion.carpetaSpam = carpetaSpam;
+	}
+
 	// crea la carpeta cuenta en el disco ubicada en C:\\Cuentas
 	public static void crearDirectorioCuenta(){
 				
@@ -191,7 +205,9 @@ public class Configuracion {
 		Configuracion.setCarpetaEnviados(Configuracion.getCarpetaUsuario()+"\\Enviados\\");
 		Configuracion.setCarpetaRecibidos(Configuracion.getCarpetaUsuario()+"\\Recibidos\\");
 		Configuracion.setCarpetaPapelera(Configuracion.getCarpetaUsuario()+"\\Papelera\\");
+		Configuracion.setCarpetaSpam(Configuracion.getCarpetaUsuario()+"\\Spam\\");
 		Configuracion.setCarpetaConfiguracion(Configuracion.getCarpetaUsuario()+"\\Configuracion\\");
+		
 	}
 	
 	// Crea los directorios dentro de la carpeta del usuario si es que es la primera vez que ingresa desde esa pc
@@ -216,6 +232,9 @@ public class Configuracion {
 		
 		File config = new File(Configuracion.getCarpetaUsuario()+"\\Configuracion\\"); 
 		config.mkdir();
+		
+		File spam = new File(Configuracion.getCarpetaSpam()+"\\Spam\\"); 
+		spam.mkdir();
 		
 		
 	}		
