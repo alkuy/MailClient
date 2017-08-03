@@ -196,6 +196,11 @@ public class Correos {
 		FachPer.MoverdeCarpeta(directorio, clave, papelera); //Muevo el arvhivo fisico de carpeta
 	}
 	
+	public void Eliminar_Definitivo(String directorio, String clave){
+		Eliminar(directorio, clave); //Lo elimina del Hashtable
+		FachPer.eliminar(directorio, clave);
+	}
+	
 	/**
 	 * ModelTable para los Correos Enviados
 	 * @return modelTable Carpeta Enviados

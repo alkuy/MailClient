@@ -89,7 +89,7 @@ public class FrmMuestraEliminados extends JInternalFrame {
 					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 					if (eleccion == JOptionPane.YES_OPTION){
 						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
-						FL.EliminarCorreo(FL.Devuelve_Ruta_Papelera(), fecha);
+						FL.EliminarCorreoDefinitivo(FL.Devuelve_Ruta_Papelera(), fecha);
 						
 						/*Quito todo para tener un refresh all instante*/
 						getContentPane().remove(scrlMCMostrarCorreos);

@@ -233,7 +233,7 @@ public class Configuracion {
 		File config = new File(Configuracion.getCarpetaUsuario()+"\\Configuracion\\"); 
 		config.mkdir();
 		
-		File spam = new File(Configuracion.getCarpetaSpam()+"\\Spam\\"); 
+		File spam = new File(Configuracion.getCarpetaUsuario()+"\\Spam\\"); 
 		spam.mkdir();
 		
 		

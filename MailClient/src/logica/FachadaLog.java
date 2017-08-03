@@ -300,4 +300,8 @@ public class FachadaLog {
     	correos.Eliminar_Correo(directorio, clave);
     	
     }
+    
+    public void EliminarCorreoDefinitivo(String directorio, String clave){
+    	correos.Eliminar_Definitivo(directorio, clave);
+    }
 }
