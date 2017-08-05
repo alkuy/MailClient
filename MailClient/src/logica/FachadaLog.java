@@ -2,6 +2,8 @@ package logica;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import persistencia.FachadaPers;
 import javax.swing.table.DefaultTableModel;
 
@@ -329,5 +331,12 @@ public class FachadaLog {
      */
     public void RestaurarEliminados(String directorio, String clave){
     	correos.Restaurar(directorio, clave);
+    }
+    
+    
+     //Metodo que devuelve un array list con los correos de determinada conversacion segun id
+    public ArrayList<Correo> DevConveracionRecibidos(int id){
+    	
+    	return correos.DevConveracionRecibidos(id);
     }
 }

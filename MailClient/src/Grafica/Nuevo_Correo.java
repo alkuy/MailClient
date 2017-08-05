@@ -154,7 +154,7 @@ public class Nuevo_Correo extends JFrame {
 			String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
 			String asunto = verifica.remplazoCaracteres(textasunto.getText());
 				
-			  FL.Guarda_Correo(FL.Devuelve_Ruta_Borradores(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
+			  FL.Guarda_Correo(FL.Devuelve_Ruta_Borradores(),3,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
 	          guardado();
 			}
 			

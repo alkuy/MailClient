@@ -14,6 +14,8 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -36,25 +38,16 @@ public class MuestraRecibido extends JFrame {
 	public MuestraRecibido() {
 		
 		
-			Correo correo = FL.DevuelveRecibido(String.valueOf(recibido.fecha));
-		  
+		Correo correo = FL.DevuelveRecibido(String.valueOf(recibido.fecha)); // busco el correo seleccionado segun la fecha que traigo del otro formulario or ser una variable static
+		ArrayList<Correo> conversacion = new ArrayList<Correo>();
+		conversacion = FL.DevConveracionRecibidos(correo.getId_conversacion());// cargo aca solo lo correos de esa conversacion
 		
 		
-		//setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-		 
-	/*    addWindowListener(new java.awt.event.WindowAdapter() {
-	            @Override // sobrescribimos el metodo para preguntar antes de cerrar y que no cierre automticamente
-	            public void windowClosing(java.awt.event.WindowEvent evt) {
-	                cerrar();
-	            }
-	        });*/
 		
 		getContentPane().setBackground(SystemColor.activeCaption);
-		
 		setTitle("Correo");
      	setIconImage(Toolkit.getDefaultToolkit().getImage(principal.class.getResource("/imagenes/icon1.jpg")));
 		setBounds(100, 100, 970, 620);
-				
 		getContentPane().setLayout(null);
 		
 		JLabel lblPara = new JLabel("Remite:");
@@ -80,8 +73,37 @@ public class MuestraRecibido extends JFrame {
 		textcorreo.setEditable(false);
 		textcorreo.setBounds(10, 95, 914, 405);
 		textcorreo.setLineWrap(true);
+		
+		Iterator<Correo> iterador = conversacion.iterator();
+		correo = iterador.next();
+		textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
+		textcorreo.append(System.getProperty("line.separator"));
+	    textcorreo.append(correo.getTexto());// esto para que la primera vez no me cargue ni remitente ni asunto
+	    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
+	    textcorreo.append(System.getProperty("line.separator")); 
+	    textcorreo.append(System.getProperty("line.separator"));
+	    textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
+	    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
+	    textcorreo.append(System.getProperty("line.separator"));
+	    textcorreo.append(System.getProperty("line.separator"));
+		while(iterador.hasNext()){
+			
+			correo = iterador.next();
+			textcorreo.append("Remitente:"+correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio());
+			textcorreo.append(System.getProperty("line.separator")); 
+			textcorreo.append("Asunto:"+correo.getAsunto());
+			textcorreo.append(System.getProperty("line.separator")); 
+			textcorreo.append(System.getProperty("line.separator")); 
+		    textcorreo.append(correo.getTexto());
+		    textcorreo.append(System.getProperty("line.separator")); 
+		    textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
+		    textcorreo.append(System.getProperty("line.separator")); 
+		    textcorreo.append(System.getProperty("line.separator"));
+		    textcorreo.append(System.getProperty("line.separator"));
+		}
+		
 		getContentPane().add(textcorreo);
-		textcorreo.setText(correo.getTexto());
+		//textcorreo.setText(correo.getTexto());
 		
 		
 		/* Logo en Nuevo correo*/

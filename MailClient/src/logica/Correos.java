@@ -499,6 +499,26 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	   
 	   	return this.setSpam.get(Fecha);
 	}
+   
+   
+   //Metodo que devuelve un array list con los correos de determinada conversacion segun id
+     public ArrayList<Correo> DevConveracionRecibidos(int idconversacion){
+	
+	
+	     Enumeration<Correo> cor = setCorreosRecibidos.elements();// cargo todos los correos recibidos en el enumeration para recorrerlo
+	     Correo correo;
+	     ArrayList<Correo> corconv = new ArrayList<Correo>();
+	     while(cor.hasMoreElements()){// minetras quedan objetos del tipo correo recibidos voy fijandome si pertenecen a la conversacion buscada y si es asi los cargo en el array list
+		     correo = cor.nextElement();
+		     if (correo.getId_conversacion() == idconversacion){
+		    	 corconv.add(correo);
+		     }
+		          
+		   }
+	
+	   return corconv;
+	
+     }
 	
    
 }
