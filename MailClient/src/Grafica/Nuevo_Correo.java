@@ -99,9 +99,9 @@ public class Nuevo_Correo extends JFrame {
 				Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
 				String fecha = timestamp.toString();
-				fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
+				/*fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
 				fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
-				fecha = fecha.replace(":","-");
+				fecha = fecha.replace(":","-");*/
 				String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
 				String asunto = verifica.remplazoCaracteres(textasunto.getText());
 				

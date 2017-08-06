@@ -14,11 +14,10 @@ public class Archivos {
 	 * @throws IOException
 	 */
 	public void guarda(String carpeta, Correo correo) throws IOException{
-		String fecha = correo.getFecha();
-		fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
-		fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
-		fecha = fecha.replace(":","-");
-		String nom_archivo = fecha;
+		String nom_archivo = correo.getFecha();
+		nom_archivo = nom_archivo.replace(".","-"); //Para evitar problemas en el nombre del archivo
+		nom_archivo = nom_archivo.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
+		nom_archivo = nom_archivo.replace(":","-");
 		try{
 			FileOutputStream f = new FileOutputStream(carpeta+nom_archivo, true);
 			ObjectOutputStream escribiendo = new ObjectOutputStream(f);
