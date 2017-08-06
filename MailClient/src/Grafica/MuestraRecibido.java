@@ -9,7 +9,10 @@ import javax.swing.JFrame;
 import logica.Correo;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
+
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
@@ -18,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 public class MuestraRecibido extends JFrame {
 	
@@ -69,9 +74,15 @@ public class MuestraRecibido extends JFrame {
 		labelasunto.setBounds(245, 70, 679, 14);
 		getContentPane().add(labelasunto);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBounds(10, 95, 914, 405);
+		getContentPane().add(scrollPane);
+		
+				
 		JTextArea textcorreo = new JTextArea();
+		scrollPane.setViewportView(textcorreo);
 		textcorreo.setEditable(false);
-		textcorreo.setBounds(10, 95, 914, 405);
 		textcorreo.setLineWrap(true);
 		
 		Iterator<Correo> iterador = conversacion.iterator();
@@ -82,7 +93,7 @@ public class MuestraRecibido extends JFrame {
 	    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
 	    textcorreo.append(System.getProperty("line.separator")); 
 	    textcorreo.append(System.getProperty("line.separator"));
-	    textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
+	    textcorreo.append("---------------------------------------------------------------------------------------------------------------");
 	    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
 	    textcorreo.append(System.getProperty("line.separator"));
 	    textcorreo.append(System.getProperty("line.separator"));
@@ -96,14 +107,15 @@ public class MuestraRecibido extends JFrame {
 			textcorreo.append(System.getProperty("line.separator")); 
 		    textcorreo.append(correo.getTexto());
 		    textcorreo.append(System.getProperty("line.separator")); 
-		    textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
+		    textcorreo.append("---------------------------------------------------------------------------------------------------------------");
 		    textcorreo.append(System.getProperty("line.separator")); 
 		    textcorreo.append(System.getProperty("line.separator"));
 		    textcorreo.append(System.getProperty("line.separator"));
 		}
 		
-		getContentPane().add(textcorreo);
-		//textcorreo.setText(correo.getTexto());
+		
+		scrollPane.setViewportView(textcorreo);
+		
 		
 		
 		/* Logo en Nuevo correo*/
@@ -136,6 +148,8 @@ public class MuestraRecibido extends JFrame {
 		});
 		btnResponder.setBounds(810, 523, 115, 23);
 		getContentPane().add(btnResponder);
+		
+		
 		
 		
 		
