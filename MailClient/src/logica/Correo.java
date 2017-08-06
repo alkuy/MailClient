@@ -3,7 +3,7 @@ import java.io.IOException;
 
 import persistencia.FachadaPers;
 
-public class Correo  {
+public class Correo implements Comparable<Correo> {
 	
 	private int id_conversacion;
 	private String fecha;
@@ -100,5 +100,14 @@ public class Correo  {
 	}
 	
 	
+    @Override
+    public int compareTo(Correo o) {
+       String a=new String(String.valueOf(this.getFecha()));
+       String b=new String(String.valueOf(o.getFecha()));
+       return a.compareTo(b);
+    }
+	
 	
 }
+
+

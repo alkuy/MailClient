@@ -1,12 +1,14 @@
 package logica;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
 import javax.swing.table.DefaultTableModel;
 import persistencia.FachadaPers;
 
-public class Correos {
+public class Correos  {
 	
 	FachadaPers FachPer = FachadaPers.getInstancia();
 
@@ -501,6 +503,15 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	}
    
    
+   
+  
+		public int compareTo(Correo cor1, Correo cor2) {
+			return new Integer(cor1.getFecha()).compareTo(new Integer(cor2.getFecha()));
+		}
+	
+   
+   
+   
    //Metodo que devuelve un array list con los correos de determinada conversacion segun id
      public ArrayList<Correo> DevConveracionRecibidos(int idconversacion, String Fecha){
 	
@@ -517,12 +528,17 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		     if (correo.getId_conversacion() == idconversacion && Long.parseLong(Fecha) <= Long.parseLong(fecha_comparar) ){
 		    	 corconv.add(correo);
 		     }
-		          
+		    
+		  Collections.sort(corconv);		          
 		   }
 	
 	   return corconv;
 	
      }
+     
+     
+     
+     
 	
    
 }
