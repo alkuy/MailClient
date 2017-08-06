@@ -1,7 +1,16 @@
 package Conectividad;
 
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
+import com.icegreen.greenmail.user.UserException;
+
+import logica.FachadaLog;
+
 public class FachadaCon {
 
+	private FachadaLog FL = FachadaLog.getInstancia();
 	private static FachadaCon instancia;
 	
 	//Esta clase utiliza el patron Singleton
@@ -13,9 +22,11 @@ public class FachadaCon {
 	}
 	
 	//Envia el correo hacia el Servidor
-	public void EnviaCorreo(String NomUsu, String PassUsu, String MailUsu, String MailDest, String Asunto, String Texto){
+	public void EnviaCorreo(String NomUsu, String PassUsu, String MailUsu, String MailDest, String Asunto, String Texto) throws IOException, MessagingException, UserException, InterruptedException{
+		ConSocket S = new ConSocket();
 		EnviaCorreo C = new EnviaCorreo(NomUsu, PassUsu, MailUsu, MailDest, Asunto, Texto);
-		C.Enviar();
+		S.UsuToServer();
+		C.Enviar();	
 	}
 	
 	public void IniSocket(){

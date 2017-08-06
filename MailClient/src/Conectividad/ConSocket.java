@@ -1,6 +1,9 @@
 package Conectividad;
 
 import java.net.*;
+
+import logica.FachadaLog;
+
 import java.io.*;
 import persistencia.FachadaPers;
 
@@ -8,8 +11,9 @@ import persistencia.FachadaPers;
 public class ConSocket {
 
 	private FachadaPers BD = FachadaPers.getInstancia();
+	private FachadaLog LN = FachadaLog.getInstancia();
 	private Socket cliente;
-	private int puerto = 5000;
+	private int puerto = 6000;
 	private String ip = "127.0.0.1";
 	private DataOutputStream salida;
 	private DataInputStream entrada;
@@ -27,7 +31,8 @@ public class ConSocket {
 			entrada = new DataInputStream(cliente.getInputStream());
 			salida = new DataOutputStream(cliente.getOutputStream());
 			
-			
+			msg = "Conn";
+			salida.writeUTF(msg);
 			
 			msg = entrada.readUTF();
 			while (msg.compareToIgnoreCase("fin") != 0){
@@ -43,5 +48,37 @@ public class ConSocket {
 			salida.close();
 			cliente.close();
 		}catch(Exception e){};
+	}
+	
+	
+	public void UsuToServer(){
+		String msg;
+		String Usu, Pass;
+		
+		try{
+			cliente = new Socket(ip, puerto);
+			entrada = new DataInputStream(cliente.getInputStream());
+			salida = new DataOutputStream(cliente.getOutputStream());
+			
+			msg = "Usu";
+			salida.writeUTF(msg);
+			
+			Usu = LN.Devuelve_us_cuenta();
+			salida.writeUTF(Usu);
+			
+			msg = entrada.readUTF();
+			Pass = LN.Devuelve_pas_cuenta();
+			RecibeCorreo R = new RecibeCorreo(Usu, Pass);
+			R.getMails();
+			
+			msg = "OK";
+			salida.writeUTF(msg);
+			
+			entrada.close();
+			salida.close();
+			cliente.close();
+		}catch(Exception e){
+			System.out.println("Imposible loguearse al POP3 Server");
+		};
 	}
 }

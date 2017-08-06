@@ -3,10 +3,14 @@ package Grafica;
 
 import java.awt.Color;
 import java.awt.Toolkit;
+
+import javax.mail.MessagingException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
+
+import com.icegreen.greenmail.user.UserException;
 
 import Conectividad.FachadaCon;
 import logica.FachadaLog;
@@ -17,6 +21,7 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -118,7 +123,21 @@ public class Nuevo_Correo extends JFrame {
 				PassUsu = FL.Devuelve_pas_cuenta();
 				DomUsu = FL.Devuelve_dom_cuenta();
 				Cuenta = NomUsu+"@"+DomUsu;
-				FC.EnviaCorreo(NomUsu, PassUsu, Cuenta, cuenta, textasunto.getText(), textcorreo.getText());
+				try {
+					FC.EnviaCorreo(NomUsu, PassUsu, Cuenta, cuenta, textasunto.getText(), textcorreo.getText());
+				} catch (IOException e1) {
+					// TODO Bloque catch generado automáticamente
+					e1.printStackTrace();
+				} catch (MessagingException e1) {
+					// TODO Bloque catch generado automáticamente
+					e1.printStackTrace();
+				} catch (UserException e1) {
+					// TODO Bloque catch generado automáticamente
+					e1.printStackTrace();
+				} catch (InterruptedException e1) {
+					// TODO Bloque catch generado automáticamente
+					e1.printStackTrace();
+				}
 				dispose();
 				principal.apareceLogo();
 				}
