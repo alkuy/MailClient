@@ -3,6 +3,7 @@ package logica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import persistencia.FachadaPers;
 import javax.swing.table.DefaultTableModel;
@@ -50,6 +51,15 @@ public class FachadaLog {
 		correo.setFecha(fecha);
 		correo.setTexto(texto);
 		
+		ArrayList<String> SPAM = configuracion.TraeListaSpam();
+		Iterator<String> it = SPAM.iterator();
+		while (it.hasNext()){
+			String no = it.next();
+			if (no.equals(emisor+"@"+e_dom)){
+				directorio = configuracion.devRutaSpam();
+			}
+			
+		}
 		correo.GuardaCorreo(directorio); // carga los correso desde el disco segun la ruta que se le indique
 		correos.Insertar(directorio, fecha, correo); //crea el set correspondiente en memoria
 
@@ -362,9 +372,10 @@ public class FachadaLog {
     	configuracion.CargaListaSpam(correo);
     }
     
+    /*
     public ArrayList<String> TraeListaSpam(){
     	ArrayList<String> SPAM = configuracion.TraeListaSpam();
     	return SPAM;
-    }
+    }*/
 }
 

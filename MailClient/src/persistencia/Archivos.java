@@ -213,6 +213,9 @@ public class Archivos {
 		}
 	
 		public void moverCorreos(String d_origen, String archivo, String d_destino){
+			archivo = archivo.replace(".","-"); //Para evitar problemas en el nombre del archivo
+			archivo = archivo.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
+			archivo = archivo.replace(":","-");
 			File f = new File(d_origen+archivo);
 			f.renameTo(new File(d_destino+archivo));
 			f.delete();

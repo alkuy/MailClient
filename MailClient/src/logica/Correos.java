@@ -204,11 +204,13 @@ public class Correos  {
 		correo = obtenerCorreo(directorio, clave); //Cargo el correo para poder pasarlo al Hashtable papelera
 		Eliminar(directorio, clave); //Lo elimina del Hashtable
 		Insertar(destino, clave, correo); //Insero en Hashtable Tapelera
+		
 		FachPer.MoverdeCarpeta(directorio, clave, destino); //Muevo el arvhivo fisico de carpeta
 	}
 	
 	public void Eliminar_Definitivo(String directorio, String clave){
 		Eliminar(directorio, clave); //Lo elimina del Hashtable
+		
 		FachPer.eliminar(directorio, clave);
 	}
 	
