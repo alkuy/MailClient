@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
@@ -100,6 +101,12 @@ public class principal extends JFrame {
 		
 		btnEnv_Rec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				/*Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el momento en que llamo la actualizacion
+				String fecha = timestamp.toString();
+				FL.GuardaActualizacion(fecha);
+				
+				String dato = FL.TraeUltimaActualizacion();
+				System.out.println(dato);*/
 			}
 		});
 		

@@ -217,5 +217,49 @@ public class Archivos {
 			f.renameTo(new File(d_destino+archivo));
 			f.delete();
 		}
+		
+		/**
+		 * Guarda la ultima actualizaion de enviar y recibir en archivo
+		 * @param destino
+		 * @param fecha
+		 */
+		public void GuardaUltimaActualizacion(String destino, String fecha){
+			File f = new File(destino+"actualizacion");
+			try{
+				FileWriter w = new FileWriter(f);
+				BufferedWriter bw = new BufferedWriter(w);
+				PrintWriter wr = new PrintWriter(bw);
+				wr.write(fecha);
+				wr.close();
+				bw.close();
+			}catch(IOException e){
+				
+			}
+		}	
+			
+		/**
+		 * Lee el archivo de ultima actualizacion de bandeja de entrada
+		 * @param destino
+		 * @return
+		 * @throws IOException
+		 */
+		public String leerActualizacion(String destino) throws IOException{
+			String fecha = "0";
+			File archivo = new File(destino+"actualizacion");
+			if (archivo.exists()){
+				try {
+					FileReader f;
+					f = new FileReader(destino+"actualizacion");
+					BufferedReader b = new BufferedReader(f);
+					fecha = b.readLine();
+					b.close();	 
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+			return fecha;
+			
+		}
 
 }
