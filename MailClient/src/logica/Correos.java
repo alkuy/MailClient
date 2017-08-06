@@ -198,13 +198,13 @@ public class Correos  {
 	 * @param directorio
 	 * @param clave
 	 */
-	public void Eliminar_Correo(String directorio, String clave){
+	public void Eliminar_Correo(String directorio, String clave, String destino){
 		String papelera = FachPer.CarpetaPapelera();
 		Correo correo = new Correo();
 		correo = obtenerCorreo(directorio, clave); //Cargo el correo para poder pasarlo al Hashtable papelera
 		Eliminar(directorio, clave); //Lo elimina del Hashtable
-		Insertar(papelera, clave, correo); //Insero en Hashtable Tapelera
-		FachPer.MoverdeCarpeta(directorio, clave, papelera); //Muevo el arvhivo fisico de carpeta
+		Insertar(destino, clave, correo); //Insero en Hashtable Tapelera
+		FachPer.MoverdeCarpeta(directorio, clave, destino); //Muevo el arvhivo fisico de carpeta
 	}
 	
 	public void Eliminar_Definitivo(String directorio, String clave){
@@ -513,7 +513,12 @@ public DefaultTableModel DevTablaBandejaSalida(){
    
 
 
-   //Metodo que devuelve un array list con los correos de determinada conversacion segun id
+   /**
+    * Metodo que devuelve un array list con los correos de determinada conversacion segun id
+    * @param idconversacion
+    * @param Fecha
+    * @return
+    */
      public ArrayList<Correo> DevConveracionRecibidos(int idconversacion, String Fecha){
 	
 	     Fecha = Fecha.replaceAll("-","");
@@ -530,7 +535,7 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		    	 corconv.add(correo);
 		     }
 		    
-		  Collections.sort(corconv);		          
+		  Collections.sort(corconv); //Ordena por fecha en el array list		          
 		   }
 	
 	   return corconv;

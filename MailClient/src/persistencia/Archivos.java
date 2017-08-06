@@ -261,5 +261,71 @@ public class Archivos {
 			return fecha;
 			
 		}
+		
+		/**
+		 * Escribe e archivo lista de spam
+		 * @param destino
+		 * @param correo
+		 * @throws IOException 
+		 */
+		public void guardaListaSpam (String destino, String correo) throws IOException{
+			BufferedWriter bw = null;
+			FileWriter fw = null;
+			try {
+				File file = new File(destino+"listaSpam");
+				if (!file.exists()) {
+					file.createNewFile();
+				}
+
+				fw = new FileWriter(file.getAbsoluteFile(), true);
+				bw = new BufferedWriter(fw);
+				
+				bw.write(correo);
+				bw.newLine();
+				
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (bw != null)
+						bw.close();
+
+					if (fw != null)
+						fw.close();
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+			}
+
+		}
+		
+		/**
+		 * Devuelve lista de SPAM
+		 * @param origen (ruta de configuracion de spam)
+		 * @return
+		 */
+		public ArrayList<String> CargaSpam(String origen){
+			ArrayList<String> SPAM = new ArrayList<String>();
+			File f = new File(origen);
+			
+			Scanner s = null;
+			//En primer instancia creamos un Array list para obtener los dominios con su prioridad
+			try{
+				s = new Scanner(f);
+				while (s.hasNextLine()){
+					String linea = s.nextLine();	
+					SPAM.add(linea);
+				}
+			}catch(Exception e){
+				
+			}
+			return SPAM;
+			
+		}
+
+	
+			
+		
 
 }

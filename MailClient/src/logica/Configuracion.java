@@ -3,6 +3,9 @@
  */
 package logica;
 
+import java.util.ArrayList;
+
+import persistencia.Archivos;
 import persistencia.FachadaPers;
 
 /**
@@ -89,5 +92,19 @@ public class Configuracion {
 	   String fecha= FachPer.devuelveUltimaActualizacion(destino);
 	   return fecha;
    }
+   
+   /**
+    * Carga el correo en la lista de SPAM
+    * @param correo
+    */
+   public void CargaListaSpam (String correo){
+	   FachPer.CargaenListaSpam(FachPer.devRutaConfiguracion(), correo);
+   }
+   
+   public ArrayList<String> TraeListaSpam(){	
+		ArrayList<String> SPAM = FachPer.TraeListaSpam(FachPer.devRutaConfiguracion()+"listaSpam");
+		return SPAM;
+		
+	}
 
 }

@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class FachadaPers {
 	
@@ -392,6 +393,33 @@ public class FachadaPers {
 		}
 		
 		return fecha;
+		
+	}
+	
+	/**
+	 * Agrega que va a la lista de spam
+	 * @param destino
+	 * @param correo
+	 */
+	public void CargaenListaSpam(String destino, String correo){
+		Archivos arch = new Archivos();
+		try {
+			arch.guardaListaSpam(destino, correo);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Devuelve listado de coreos para SPAM
+	 * @param origen
+	 * @return
+	 */
+	public ArrayList<String> TraeListaSpam(String origen){
+		Archivos arch = new Archivos();
+		ArrayList<String> SPAM = arch.CargaSpam(origen);
+		return SPAM;
 		
 	}
 	

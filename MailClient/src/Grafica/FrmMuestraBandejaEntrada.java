@@ -101,11 +101,13 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 				if (pos == -1){
 					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere eliminar");
 				}else{
-					Object [] opciones ={"Eliminar","Cancelar"};
+					Object [] opciones ={"Spam","Cancelar"};
 					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 					if (eleccion == JOptionPane.YES_OPTION){
 						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
-						FL.EliminarCorreo(FL.Devuelve_Ruta_Recibidos(), fecha);
+						String correoSpam = tblMuestraCorreos.getValueAt(pos, 0).toString();
+						FL.EliminarCorreo(FL.Devuelve_Ruta_Recibidos(), fecha, FL.Devuelve_Ruta_Papelera());
+						FL.CargaListaSpam(correoSpam);
 						
 						/*Quito todo para tener un refresh all instante*/
 						getContentPane().remove(scrlMCMostrarCorreos);
@@ -180,6 +182,42 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		Icon iconobuscar = new ImageIcon(imagenbuscar.getImage().getScaledInstance(btnBuscar.getWidth(),btnBuscar.getHeight(),Image.SCALE_DEFAULT));
 		btnBuscar.setIcon(iconobuscar);
       	getContentPane().add(btnBuscar);
+      	
+      	JButton btnSpam = new JButton("SPAM");
+      	btnSpam.addActionListener(new ActionListener() {
+      		public void actionPerformed(ActionEvent arg0) {
+      			int pos = tblMuestraCorreos.getSelectedRow();
+				if (pos == -1){
+					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere marcar como Spam");
+				}else{
+					Object [] opciones ={"Eliminar","Cancelar"};
+					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea marcar como Spam","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+					if (eleccion == JOptionPane.YES_OPTION){
+						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
+						String correoSpam = tblMuestraCorreos.getValueAt(pos, 0).toString();
+						FL.EliminarCorreo(FL.Devuelve_Ruta_Recibidos(), fecha, FL.Devuelve_Ruta_Spam()); // Cambiar por  Sapm
+						FL.CargaListaSpam(correoSpam);
+						
+						/*Quito todo para tener un refresh all instante*/
+						getContentPane().remove(scrlMCMostrarCorreos);
+						getContentPane().revalidate();
+						getContentPane().repaint();
+						
+						SetTableRecibidos();
+						JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+				      	scrlMCMostrarCorreos.setEnabled(false);
+				      	scrlMCMostrarCorreos.setSize(793, 301);
+				      	scrlMCMostrarCorreos.setLocation(10, 57);
+						//Agregamos el JScrollPane al contenedor
+						getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);
+						
+						
+					}
+				}
+			}
+		});
+      	btnSpam.setBounds(109, 363, 89, 23);
+      	getContentPane().add(btnSpam);
 		
 	}
 	
@@ -221,5 +259,4 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		
 		
 	}
-	
 }

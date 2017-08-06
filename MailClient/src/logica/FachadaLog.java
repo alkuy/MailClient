@@ -310,8 +310,8 @@ public class FachadaLog {
      * Elimina correo de hastable y persistencia
      *  @param clave 
      */
-    public void EliminarCorreo(String directorio, String clave){
-    	correos.Eliminar_Correo(directorio, clave);
+    public void EliminarCorreo(String directorio, String clave, String destino){
+    	correos.Eliminar_Correo(directorio, clave, destino);
     	
     }
     
@@ -349,8 +349,22 @@ public class FachadaLog {
     	
     }
     
+    /**
+     * Trae la ultima actualizacion que se realizo con enviar y recibir
+     * @return fecha (Timestamp) de la ultima actualizacion
+     */
     public String TraeUltimaActualizacion(){
     	String fecha = configuracion.devuelveUltimaActualizacion(configuracion.devRutaConfiguracion());
     	return fecha;
     }
+    
+    public void CargaListaSpam(String correo){
+    	configuracion.CargaListaSpam(correo);
+    }
+    
+    public ArrayList<String> TraeListaSpam(){
+    	ArrayList<String> SPAM = configuracion.TraeListaSpam();
+    	return SPAM;
+    }
 }
+
