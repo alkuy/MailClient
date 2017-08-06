@@ -335,8 +335,8 @@ public class FachadaLog {
     
     
      //Metodo que devuelve un array list con los correos de determinada conversacion segun id
-    public ArrayList<Correo> DevConveracionRecibidos(int id){
+    public ArrayList<Correo> DevConveracionRecibidos(int id,String Fecha){
     	
-    	return correos.DevConveracionRecibidos(id);
+    	return correos.DevConveracionRecibidos(id, Fecha);
     }
 }

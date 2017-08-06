@@ -502,15 +502,19 @@ public DefaultTableModel DevTablaBandejaSalida(){
    
    
    //Metodo que devuelve un array list con los correos de determinada conversacion segun id
-     public ArrayList<Correo> DevConveracionRecibidos(int idconversacion){
+     public ArrayList<Correo> DevConveracionRecibidos(int idconversacion, String Fecha){
 	
-	
+	     Fecha = Fecha.replaceAll("-","");
+	     String fecha_comparar;
 	     Enumeration<Correo> cor = setCorreosRecibidos.elements();// cargo todos los correos recibidos en el enumeration para recorrerlo
 	     Correo correo;
 	     ArrayList<Correo> corconv = new ArrayList<Correo>();
 	     while(cor.hasMoreElements()){// minetras quedan objetos del tipo correo recibidos voy fijandome si pertenecen a la conversacion buscada y si es asi los cargo en el array list
 		     correo = cor.nextElement();
-		     if (correo.getId_conversacion() == idconversacion){
+		     fecha_comparar = correo.getFecha();
+		     fecha_comparar = fecha_comparar.replaceAll("-","");
+		   
+		     if (correo.getId_conversacion() == idconversacion && Long.parseLong(Fecha) <= Long.parseLong(fecha_comparar) ){
 		    	 corconv.add(correo);
 		     }
 		          
