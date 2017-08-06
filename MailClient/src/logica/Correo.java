@@ -99,6 +99,7 @@ public class Correo implements Comparable<Correo> {
 		}
 	}
 	
+	//sobreescribo el metodo para comparar por fecha
 	
     @Override
     public int compareTo(Correo o) {

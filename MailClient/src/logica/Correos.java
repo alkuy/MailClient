@@ -511,7 +511,8 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	
    
    
-   
+
+
    //Metodo que devuelve un array list con los correos de determinada conversacion segun id
      public ArrayList<Correo> DevConveracionRecibidos(int idconversacion, String Fecha){
 	
