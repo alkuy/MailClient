@@ -38,6 +38,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTable tblMuestraCorreos;
+	private JScrollPane scrlMCMostrarCorreos;
 	private JTextField txtBuscar;
 	public static String fecha = new String(); // variable estatica para poder utilizar en otras clases como la clave del hash
 	public static String cuenta = new String(); // la usamos para no tener que traerla desde el diccionari correos y juntar los campos usuario y dominio	 
@@ -60,7 +61,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
       	getContentPane().add(txtBuscar);
       	txtBuscar.setColumns(10);
       	
-      	JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+      	scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
       	scrlMCMostrarCorreos.setEnabled(false);
       	scrlMCMostrarCorreos.setSize(793, 301);
       	scrlMCMostrarCorreos.setLocation(10, 57);
@@ -115,7 +116,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 						getContentPane().repaint();
 						
 						SetTableRecibidos();
-						JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+						scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
 				      	scrlMCMostrarCorreos.setEnabled(false);
 				      	scrlMCMostrarCorreos.setSize(793, 301);
 				      	scrlMCMostrarCorreos.setLocation(10, 57);
@@ -140,9 +141,9 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
       						
       		if(txtBuscar.getText().isEmpty()){ // si no puso nada en la barra de busqueda mustro todos los correos	
       		
-      			
+      			getContentPane().remove(scrlMCMostrarCorreos);
 				SetTableRecibidos();
-				JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+				scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
 		      	scrlMCMostrarCorreos.setEnabled(false);
 		      	scrlMCMostrarCorreos.setSize(793, 301);
 		      	scrlMCMostrarCorreos.setLocation(10, 57);
@@ -158,12 +159,12 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 			
 			if (tblMuestraCorreos.getRowCount() == 0){ // si no hay coincidencia
 				/*Quito todo para tener un refresh al instante*/
-				getContentPane().remove(scrlMCMostrarCorreos);
+				//getContentPane().remove(scrlMCMostrarCorreos);
 				JOptionPane.showMessageDialog(new JPanel(), "El correo/s asocido/s a la cuenta ingresada no existe");
 			}else{
 			
-			
-      		   JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+			   getContentPane().remove(scrlMCMostrarCorreos);
+      		   scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
 	      	   scrlMCMostrarCorreos.setEnabled(false);
 	      	   scrlMCMostrarCorreos.setSize(793, 301);
 	      	   scrlMCMostrarCorreos.setLocation(10, 57);
