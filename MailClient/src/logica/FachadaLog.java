@@ -339,4 +339,18 @@ public class FachadaLog {
     	
     	return correos.DevConveracionRecibidos(id, Fecha);
     }
+    
+    /**
+     * Metodo para guaradar mometo de la ultima actualizacion de los correos (Enviar y Recibir)
+     * @param fecha
+     */
+    public void GuardaActualizacion(String fecha){
+    	configuracion.GuardaActualizacion(configuracion.devRutaConfiguracion(), fecha);
+    	
+    }
+    
+    public String TraeUltimaActualizacion(){
+    	String fecha = configuracion.devuelveUltimaActualizacion(configuracion.devRutaConfiguracion());
+    	return fecha;
+    }
 }

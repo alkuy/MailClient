@@ -364,4 +364,35 @@ public class FachadaPers {
 		Archivos arch = new Archivos();
 		arch.moverCorreos(d_origen, archivo, d_destino);
 	}
+	
+	/**
+	 * Metodo para leer actualizacion
+	 * @param destino
+	 * @param fecha
+	 */
+	public void GuardaActualizacion(String destino, String fecha){
+		Archivos arch = new Archivos();
+		arch.GuardaUltimaActualizacion(destino, fecha);
+		
+	}
+	/**
+	 * Devuelve cuando fue la ultima actualzacion de Enviar/Recibir. Si es la primera devuelve 0
+	 * @param destino
+	 * @return
+	 */
+	
+	public String devuelveUltimaActualizacion (String destino){
+		Archivos arch = new Archivos();
+		String fecha = "0";
+		try {
+			fecha = arch.leerActualizacion(destino);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return fecha;
+		
+	}
+	
 }

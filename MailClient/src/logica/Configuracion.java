@@ -70,5 +70,24 @@ public class Configuracion {
 		
 		return FachPer.devRutaConfiguracion();
 	}
+   
+   /**
+    * Para guarda el ultimo enviar/recibir realizado y que solo traiga correos que no bajaron aun
+    * @param destino
+    * @param fecha
+    */
+   public void GuardaActualizacion(String destino, String fecha){
+	   FachPer.GuardaActualizacion(destino, fecha);
+   }
+   
+   /**\
+    *  Devuelve cuando fue la ultima actualzacion de Enviar/Recibir. Si es la primera devuelve 0
+    * @param destino
+    * @return
+    */
+   public String devuelveUltimaActualizacion (String destino){
+	   String fecha= FachPer.devuelveUltimaActualizacion(destino);
+	   return fecha;
+   }
 
 }
