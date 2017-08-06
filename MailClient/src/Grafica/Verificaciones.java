@@ -111,19 +111,26 @@ public class Verificaciones {
 	  }
   }
 
- // Metodo que verifica que la cuenta tenga un y solo un @
+ // Metodo que verifica que la cuenta tenga un y solo un @ y que no tenga ñ
   
   public boolean verificaCuentaReceptor(String texto){
 	    char caracter = '@';
+	    char caracter2 = 'ñ';
 	  	int veces=0;
+	  	int veces2 = 0;
 		char []caracteres=texto.toCharArray();
 		for(int i=0;i<=caracteres.length-1;i++){
 			if(caracter == caracteres[i]){
 				veces++;
 			}
+			
+			if( caracter2 == caracteres[i]){
+				
+				veces2++;
+			}
 	     }
 		
-		if (veces == 1){
+		if (veces == 1 && veces2 == 0){
 		 return true;
 		}else {
 			
