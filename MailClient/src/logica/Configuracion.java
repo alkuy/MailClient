@@ -4,6 +4,7 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import persistencia.Archivos;
 import persistencia.FachadaPers;
@@ -101,10 +102,43 @@ public class Configuracion {
 	   FachPer.CargaenListaSpam(FachPer.devRutaConfiguracion(), correo);
    }
    
+   /**
+    * Trae en un array la lista de direcciones SPAM
+    * @return
+    */
    public ArrayList<String> TraeListaSpam(){	
 		ArrayList<String> SPAM = FachPer.TraeListaSpam(FachPer.devRutaConfiguracion()+"listaSpam");
 		return SPAM;
 		
 	}
+   
+   /**
+    * Elimina cualquier archivo
+    * @param directorio
+    * @param archivo
+    */
+   public void EliminarArchivo(String directorio, String archivo){
+	   FachPer.eliminar(directorio, archivo);
+   }
+   
+   /**
+    * Quitar un correo de la lista de SPAM
+    * @param correo
+    * @return
+    */
+   public ArrayList<String> QuitadeListaSPAM (String correo){
+	   ArrayList<String> SPAM = FachPer.TraeListaSpam(FachPer.devRutaConfiguracion()+"listaSpam");
+	   ArrayList<String> SPAMnuevo = new ArrayList<String>(); 
+	   Iterator<String> it = SPAM.iterator();
+	   while (it.hasNext()){
+		   String actual = it.next();
+		   if (!actual.equals(correo)){
+			   SPAMnuevo.add(actual);
+		   }
+		   
+	   }
+	return SPAMnuevo;
+	   
+   }
 
 }

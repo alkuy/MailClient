@@ -58,12 +58,22 @@ public class FrmMuestraSpam extends JInternalFrame {
 				if (pos == -1){
 					JOptionPane.showMessageDialog(new JPanel(), "Debe seleccionar primero el correo que quiere visualizar");
 				}else{
-				fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
-				cuenta = (String) tblMuestraCorreos.getValueAt(pos, 0);
+					cuenta = (String) tblMuestraCorreos.getValueAt(pos, 0);
+					String clave = (String) tblMuestraCorreos.getValueAt(pos, 2);
+					FL.RestaurarEliminados(FL.Devuelve_Ruta_Spam(), clave);
+					FL.QuitaCorreodeListaSPAM(cuenta);
 				
-				principal.apareceLogo();
-			    //dispose();				
-
+					getContentPane().remove(scrlMCMostrarCorreos);
+					getContentPane().revalidate();
+					getContentPane().repaint();
+				
+					SetTable();
+					JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+					scrlMCMostrarCorreos.setEnabled(false);
+					scrlMCMostrarCorreos.setSize(793, 301);
+					scrlMCMostrarCorreos.setLocation(10, 57);
+					//Agregamos el JScrollPane al contenedor
+					getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);
 				}	
 			}
 		});

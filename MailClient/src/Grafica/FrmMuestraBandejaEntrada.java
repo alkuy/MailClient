@@ -102,13 +102,12 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 				if (pos == -1){
 					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere eliminar");
 				}else{
-					Object [] opciones ={"Spam","Cancelar"};
+					Object [] opciones ={"ELIMINAR","Cancelar"};
 					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 					if (eleccion == JOptionPane.YES_OPTION){
 						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
 						String correoSpam = tblMuestraCorreos.getValueAt(pos, 0).toString();
 						FL.EliminarCorreo(FL.Devuelve_Ruta_Recibidos(), fecha, FL.Devuelve_Ruta_Papelera());
-						FL.CargaListaSpam(correoSpam);
 						
 						/*Quito todo para tener un refresh all instante*/
 						getContentPane().remove(scrlMCMostrarCorreos);
@@ -191,7 +190,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 				if (pos == -1){
 					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere marcar como Spam");
 				}else{
-					Object [] opciones ={"Eliminar","Cancelar"};
+					Object [] opciones ={"Marcar SPAM","Cancelar"};
 					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea marcar como Spam","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 					if (eleccion == JOptionPane.YES_OPTION){
 						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);

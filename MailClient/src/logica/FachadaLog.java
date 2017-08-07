@@ -367,15 +367,26 @@ public class FachadaLog {
     	String fecha = configuracion.devuelveUltimaActualizacion(configuracion.devRutaConfiguracion());
     	return fecha;
     }
-    
+    /**
+     * Carga la lista de SPAM
+     * @param correo
+     */
     public void CargaListaSpam(String correo){
     	configuracion.CargaListaSpam(correo);
     }
     
-    /*
-    public ArrayList<String> TraeListaSpam(){
-    	ArrayList<String> SPAM = configuracion.TraeListaSpam();
-    	return SPAM;
-    }*/
+    /**
+     * Quita el correo del archivo de SPAM 
+     * @param correo
+     */
+    public void QuitaCorreodeListaSPAM (String correo){
+ 	   ArrayList<String> SPAM = configuracion.QuitadeListaSPAM(correo);
+ 	   configuracion.EliminarArchivo(configuracion.devRutaConfiguracion(), "listaSpam");
+ 	   Iterator<String> it = SPAM.iterator();
+ 	   while (it.hasNext()){
+ 		   String carga = it.next();
+ 		   configuracion.CargaListaSpam(carga);
+ 	   }
+    }
 }
 

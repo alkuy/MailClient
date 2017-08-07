@@ -74,7 +74,12 @@ public class Correos  {
 		return setSpam;
 	}
 
-	
+	/**
+	 * Obtiene el correo a partir del setlist y la clave
+	 * @param directorio (Pasamos el directorio que va a hacer referencia al setlist)
+	 * @param clave (Fecha)
+	 * @return
+	 */
 	public Correo obtenerCorreo(String directorio, String clave){
 		
 		Correo correo = new Correo();
@@ -96,7 +101,7 @@ public class Correos  {
 			correo = setBorradores.get(clave);
 		}
 		
-		if(directorio == FachPer.CarpetaBorradores()){
+		if(directorio == FachPer.CarpetaSpam()){
 			correo = setSpam.get(clave);
 		}
 		

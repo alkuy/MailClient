@@ -320,6 +320,7 @@ public class Archivos {
 					String linea = s.nextLine();	
 					SPAM.add(linea);
 				}
+				s.close();
 			}catch(Exception e){
 				
 			}
