@@ -1,34 +1,23 @@
 package Grafica;
 
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 import logica.FachadaLog;
 
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 
 
@@ -66,6 +55,9 @@ public class FrmMuestraBorradores extends JInternalFrame {
 		//Agregamos el JScrollPane al contenedor
 		getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);
 		
+		
+		// Boton para continuar escribendo el correo que estaba en borradores que se seleccione
+		
 		JButton btnEditar = new JButton("EDITAR");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -89,6 +81,9 @@ public class FrmMuestraBorradores extends JInternalFrame {
 		btnEditar.setBounds(714, 369, 89, 23);
 		getContentPane().add(btnEditar);
 		
+		
+		
+		// Boton para eliminar un correo de borradores
 		
 		JButton btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addActionListener(new ActionListener() {

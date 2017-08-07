@@ -528,12 +528,11 @@ public DefaultTableModel DevTablaBandejaSalida(){
     */
      public ArrayList<Correo> DevConveracionRecibidos(int idconversacion, String Fecha){
 
-    	 System.out.println(Fecha);
+    	
 	     Fecha = Fecha.replace(".",""); //Para evitar problemas en el nombre del archivo
 	     Fecha = Fecha.replace(" ","");	//Que no haya espacios e unifique todo al una barra
 	     Fecha = Fecha.replace(":","");
-	     Fecha = Fecha.replace("-", "");
-	     System.out.println(Fecha);
+	     Fecha = Fecha.replace("-", "");	    
 	     String fecha_comparar;
 	     Enumeration<Correo> cor = setCorreosRecibidos.elements();// cargo todos los correos recibidos en el enumeration para recorrerlo
 	     Correo correo;
@@ -541,12 +540,11 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	     while(cor.hasMoreElements()){// minetras quedan objetos del tipo correo recibidos voy fijandome si pertenecen a la conversacion buscada y si es asi los cargo en el array list
 		     correo = cor.nextElement();
 		     fecha_comparar = correo.getFecha();
-		     System.out.println(fecha_comparar);
 		     fecha_comparar = fecha_comparar.replace(".",""); //Para evitar problemas en el nombre del archivo
 		     fecha_comparar = fecha_comparar.replace(" ","");	//Que no haya espacios e unifique todo al una barra
 		     fecha_comparar = fecha_comparar.replace(":","");
 		     fecha_comparar = fecha_comparar.replace("-","");
-		     System.out.println(fecha_comparar);
+		    
 		   
 		     if (correo.getId_conversacion() == idconversacion && Long.parseLong(Fecha) <= Long.parseLong(fecha_comparar) ){
 		    	 corconv.add(correo);

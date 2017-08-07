@@ -11,8 +11,6 @@ import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
-
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
@@ -21,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
 public class MuestraRecibido extends JFrame {
@@ -30,7 +27,11 @@ public class MuestraRecibido extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static String destinatario = new String(); // variable estatica 
+	public static String asunto = new String();  
+	public static int id;  
 	private FrmMuestraBandejaEntrada recibido;
+	private FrmResponder responder;
 	FachadaLog FL = new FachadaLog();
 	Verificaciones verifica = new Verificaciones();
 	
@@ -141,9 +142,20 @@ public class MuestraRecibido extends JFrame {
 		
 		/* BOTON PARA RESPONDER EL CORREO */
 		
+		destinatario = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
+		asunto = "Re:"+correo.getAsunto();
+		id = correo.getId_conversacion();
+		
 		JButton btnResponder = new JButton("RESPONDER");
 		btnResponder.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				responder = new FrmResponder();
+				responder.setLocationRelativeTo(null);
+				responder.setVisible(true);
+			    dispose();	
+				
 			}
 		});
 		btnResponder.setBounds(810, 523, 115, 23);

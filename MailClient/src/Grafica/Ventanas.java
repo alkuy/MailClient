@@ -7,7 +7,7 @@ import java.awt.Font;
 import javax.swing.UIManager;
 import logica.FachadaLog;
 import Conectividad.FachadaCon;
-import persistencia.Configuracion;
+
 
 public class Ventanas {
 
