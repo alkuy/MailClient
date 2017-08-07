@@ -281,6 +281,12 @@ public class FachadaPers {
          	return conf.getCarpetaSpam();
          	
          }
+         
+         public String devRutaCuentas(){
+          	
+          	return conf.getCarpetaCuentas();
+          	
+          }
     
     /**
      * Metodo que gurda una cuenta en disco (tomando los datos de la cuenta instanciada en la capa logica) en el directorio indicado
@@ -421,6 +427,22 @@ public class FachadaPers {
 		ArrayList<String> SPAM = arch.CargaSpam(origen);
 		return SPAM;
 		
+	}
+	
+	
+	public boolean ExisteCuenta(String carpeta, String cuenta){
+		
+		Archivos arch = new Archivos();
+		
+		return arch.ExisteCuenta(carpeta, cuenta);
+	}
+	
+	
+	public Cuenta leerCuenta(String carpeta, String nomcuenta){
+		
+		Archivos arch = new Archivos();
+		
+		return arch.leerCuenta(carpeta, nomcuenta);
 	}
 	
 }

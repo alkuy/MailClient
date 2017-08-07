@@ -1,9 +1,8 @@
 package Grafica;
 
-import javax.swing.JPanel;
+
 import javax.swing.JTextField;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
@@ -13,17 +12,16 @@ import javax.swing.JComboBox;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
-
 import logica.FachadaLog;
 
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField usuario;
 	private JTextField textPasswd;
 	boolean verifica_servidor = true; // por ahora queda forzado hasta que se conecte y compruebe la cuenta en el servidor
@@ -68,16 +66,29 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
-				if ( verifica_servidor){
+				if(FL.Busca_cuenta(FL.Devuelve_Ruta_Cuentas(), usuario.getText(),comboDominio.getSelectedItem().toString())){
 					
-				FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());	
-				principal pri = new principal();
-				pri.setLocationRelativeTo(null); 			
-				pri.setVisible(true);
-				dispose();
+					System.out.println("la cuenta existe");
+				
+					if( FL.compara_passwd("c:\\Cuentas\\"+usuario.getText()+"-"+comboDominio.getSelectedItem().toString()+"\\Configuracion\\", usuario.getText(),comboDominio.getSelectedItem().toString(), textPasswd.getText())){
+					
+						
+					
+					FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
+					
+					principal pri = new principal();
+					pri.setLocationRelativeTo(null); 			
+					pri.setVisible(true);
+					dispose();
+					
+					}else {}
+					
+				}else {
+					
 				
 				}
 				
+							
 			}
 		});
 		btnLogin.setBounds(146, 222, 133, 38);

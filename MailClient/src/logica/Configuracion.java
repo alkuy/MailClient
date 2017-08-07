@@ -6,7 +6,6 @@ package logica;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import persistencia.Archivos;
 import persistencia.FachadaPers;
 
 /**
@@ -73,6 +72,14 @@ public class Configuracion {
    public String devRutaConfiguracion(){
 		
 		return FachPer.devRutaConfiguracion();
+	}
+   
+   
+// Metodo que devuelve la ruta para guardar dentro de la carpeta Cuentas  
+   
+   public String devRutaCuentas(){
+		
+		return FachPer.devRutaCuentas();
 	}
    
    /**

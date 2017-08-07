@@ -3,6 +3,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 public class Archivos {
 	
 	private static int contador = 0;
@@ -60,7 +62,7 @@ public class Archivos {
 	
 
  /**
-  * Para leer los datos da la cuenta guardada en configuracion. Este se va a suar para cuando no sea la primer conexion para el login
+  * Para leer los datos da la cuenta guardada en configuracion. Este se va a usar para cuando no sea la primer conexion para el login
   * @param carpeta
   * @param archivo
   * @return
@@ -68,6 +70,10 @@ public class Archivos {
     public Cuenta leerCuenta(String carpeta, String archivo){
 	   Cuenta cuenta = new Cuenta();
 	   ObjectInputStream leyendo = null;
+	   
+	   System.out.println(carpeta);
+	   System.out.println(archivo);
+	   
 	try {
 		leyendo = new ObjectInputStream(new FileInputStream(carpeta+archivo));
 	    } catch (IOException e) {
@@ -327,8 +333,24 @@ public class Archivos {
 			return SPAM;
 			
 		}
-
+		
+		
+		// metodo que busca si existe un archivo por nombre
+		
+		 public  boolean ExisteCuenta(String rutaCarpeta, String cuentabusqueda){
+		   File carpet=new File(rutaCarpeta);
+		    for(File archivo:carpet.listFiles()){
+			   
+			   if(cuentabusqueda.equals(archivo.getName())){
+				   
+				   return true;
+			   }
+		   }
+		   return false;
+		 }
 	
+		
+		
 			
 		
 

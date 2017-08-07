@@ -107,4 +107,22 @@ public class Cuenta {
 
 }
 	
+	public boolean busca_cuenta(String archivo, String cuenta){
+		
+		return BD.ExisteCuenta(archivo, cuenta);
+	}
+	
+	public boolean busca_Passwd(String archivo, String nomcuenta, String passwd){
+		
+		if(BD.leerCuenta(archivo, nomcuenta).getPasswd().equals(passwd)){
+			
+			return true;
+		}else{
+			
+			return false;
+		}
+		
+		
+	}
+	
 }

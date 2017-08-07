@@ -181,6 +181,24 @@ public class FachadaLog {
 	}
 	
 	
+    public boolean Busca_cuenta(String archivo, String usuario, String dominio){
+		
+		String cuentabuscada = usuario+"-"+dominio;
+		Cuenta cuenta = Cuenta.getInstancia();
+		return cuenta.busca_cuenta(archivo, cuentabuscada); 
+			
+	}
+    
+    
+    public boolean compara_passwd(String archivo, String cuentabusqueda,String domBusqueda, String passwd){
+    	
+    	
+    	Cuenta cuenta = Cuenta.getInstancia();	
+	
+    	return cuenta.busca_Passwd(archivo, cuentabusqueda+"@"+domBusqueda, passwd);
+    }
+	
+	
 	/**
 	 * devuelve el nombre de usuario actual logeado
 	 * @return String (Nombre de usuario)
@@ -255,6 +273,12 @@ public class FachadaLog {
     public String Devuelve_Ruta_Spam(){
  		
  		return configuracion.devRutaSpam();
+ 	}
+    
+    // devuelve la ruta absoluta de Cuentas
+    public String Devuelve_Ruta_Cuentas(){
+ 		
+ 		return configuracion.devRutaCuentas();
  	}
 	
     // devuelve el correo borrador seleccionado a partir de la fecha de creacion
