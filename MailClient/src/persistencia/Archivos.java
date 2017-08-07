@@ -71,8 +71,7 @@ public class Archivos {
 	   Cuenta cuenta = new Cuenta();
 	   ObjectInputStream leyendo = null;
 	   
-	   System.out.println(carpeta);
-	   System.out.println(archivo);
+	  
 	   
 	try {
 		leyendo = new ObjectInputStream(new FileInputStream(carpeta+archivo));

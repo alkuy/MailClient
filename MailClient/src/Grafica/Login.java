@@ -68,7 +68,7 @@ public class Login extends JFrame {
 				
 				if(FL.Busca_cuenta(FL.Devuelve_Ruta_Cuentas(), usuario.getText(),comboDominio.getSelectedItem().toString())){
 					
-					System.out.println("la cuenta existe");
+				
 				
 					if( FL.compara_passwd("c:\\Cuentas\\"+usuario.getText()+"-"+comboDominio.getSelectedItem().toString()+"\\Configuracion\\", usuario.getText(),comboDominio.getSelectedItem().toString(), textPasswd.getText())){
 					
