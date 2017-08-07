@@ -34,6 +34,7 @@ public class FrmMuestraEnviados extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField txtBuscar;
+	private JScrollPane scrlMCMostrarCorreos;
 	private JTable tblMuestraCorreos;
 	public static String fecha = new String(); // variable estatica para poder mantener utilizar en otras clases como la clave del hash
 	public static String cuenta = new String(); // la usamos para no tener que traerla desde el diccionari correos y juntar los campos usuario y dominio
@@ -58,7 +59,7 @@ public class FrmMuestraEnviados extends JInternalFrame {
       	getContentPane().add(txtBuscar);
       	txtBuscar.setColumns(10);
       	
-      	JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+      	scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
       	scrlMCMostrarCorreos.setEnabled(false);
       	scrlMCMostrarCorreos.setSize(793, 301);
       	scrlMCMostrarCorreos.setLocation(10, 57);
@@ -127,7 +128,7 @@ public class FrmMuestraEnviados extends JInternalFrame {
 					getContentPane().repaint();
 					
 					SetTable();
-					JScrollPane scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+					scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
 			      	scrlMCMostrarCorreos.setEnabled(false);
 			      	scrlMCMostrarCorreos.setSize(793, 301);
 			      	scrlMCMostrarCorreos.setLocation(10, 57);
