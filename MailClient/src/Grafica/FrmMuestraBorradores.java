@@ -134,6 +134,9 @@ public class FrmMuestraBorradores extends JInternalFrame {
 		
 		
 		tblMuestraCorreos = new JTable(modelo);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setMinWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setMaxWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setWidth(0);
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		/*Oculto columnas con Timestamp usada como clave del diccionario */

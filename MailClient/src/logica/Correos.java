@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 import javax.swing.table.DefaultTableModel;
 import persistencia.FachadaPers;
@@ -243,24 +244,26 @@ public class Correos  {
 	
 	public DefaultTableModel DevTablaCorreosEnviados(){
 		
-		String col[] = {"Destinatario","Asunto", "Fecha"};
+		String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+		ArrayList<Correo> correos = this.CargaCorreosOrdenados(setCorreosEnviados);
 		
-		Enumeration<Correo> cor = setCorreosEnviados.elements();
+		Iterator<Correo> it = correos.iterator();
 		Correo correo;
 			
-			while(cor.hasMoreElements()){
-				correo = cor.nextElement();
-				String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
-				String asunto = correo.getAsunto();
-				String fecha = correo.getFecha();
-				
-				String carga [] = {destino, asunto, fecha};		   
+		while(it.hasNext()){
+			correo = it.next();
+			String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+			String asunto = correo.getAsunto();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
+			
+			String carga [] = {destino, asunto, clave, fecha};		   
 		   	modelo.addRow(carga);
 			}
 		
 		return modelo;
-		
 	}	
 	
 	/**
@@ -272,19 +275,22 @@ public class Correos  {
 	// Devuelve una tabla con destintario y asunto de cada correo del buzon de salida que se cargo en memoria anteriormente desde el disco para mostrar en la bandeja de salida
 public DefaultTableModel DevTablaBandejaSalida(){
 		
-		String col[] = {"Destinatario","Asunto", "Fecha"};
+		String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
-		Enumeration<Correo> cor = setBandejaSalida.elements();
-		Correo correo;
+		ArrayList<Correo> correos = this.CargaCorreosOrdenados(setBandejaSalida);
 		
-		while(cor.hasMoreElements()){
-			correo = cor.nextElement();
+		Iterator<Correo> it = correos.iterator();
+		Correo correo;
+			
+		while(it.hasNext()){
+			correo = it.next();
 			String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
 			String asunto = correo.getAsunto();
-			String fecha = correo.getFecha();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
 			
-			String carga [] = {destino, asunto, fecha};		   
+			String carga [] = {destino, asunto, clave, fecha};		   
 		   	modelo.addRow(carga);
 			}
 		
@@ -301,23 +307,26 @@ public DefaultTableModel DevTablaBandejaSalida(){
     */
    public DefaultTableModel DevTablaBorradores(){
 	
-	String col[] = {"Destinatario","Asunto", "Fecha"};
-	DefaultTableModel modelo = new DefaultTableModel(col,0);
+	   String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
-	Enumeration<Correo> cor = setBorradores.elements();
-	Correo correo;
-	
-	while(cor.hasMoreElements()){
-		correo = cor.nextElement();
-		String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
-		String asunto = correo.getAsunto();
-		String fecha = correo.getFecha();
+		ArrayList<Correo> correos = this.CargaCorreosOrdenados(setBorradores);
 		
-		String carga [] = {destino, asunto, fecha};	   
-	   	modelo.addRow(carga);
-		}
-	
-	return modelo;
+		Iterator<Correo> it = correos.iterator();
+		Correo correo;
+			
+		while(it.hasNext()){
+			correo = it.next();
+			String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+			String asunto = correo.getAsunto();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
+			
+			String carga [] = {destino, asunto, clave, fecha};		   
+		   	modelo.addRow(carga);
+			}
+		
+		return modelo;
 	
    }
    
@@ -330,23 +339,26 @@ public DefaultTableModel DevTablaBandejaSalida(){
     */
    public DefaultTableModel DevTablaRecibidos(){
 	
-	String col[] = {"Remitente","Asunto", "Fecha"};
-	DefaultTableModel modelo = new DefaultTableModel(col,0);
+	   String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
-	Enumeration<Correo> cor = setCorreosRecibidos.elements();
-	Correo correo;
-	
-	while(cor.hasMoreElements()){
-		correo = cor.nextElement();
-		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
-		String asunto = correo.getAsunto();
-		String fecha = correo.getFecha();
+		ArrayList<Correo> correos = this.CargaCorreosOrdenados(setCorreosRecibidos);
 		
-		String carga [] = {remitente, asunto, fecha};	   
-	   	modelo.addRow(carga);
-		}
-	
-	return modelo;
+		Iterator<Correo> it = correos.iterator();
+		Correo correo;
+			
+		while(it.hasNext()){
+			correo = it.next();
+			String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+			String asunto = correo.getAsunto();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
+			
+			String carga [] = {destino, asunto, clave, fecha};		   
+		   	modelo.addRow(carga);
+			}
+		
+		return modelo;
 	
    }
    
@@ -359,23 +371,26 @@ public DefaultTableModel DevTablaBandejaSalida(){
     */
    public DefaultTableModel DevTablaEliminados(){
 	
-	String col[] = {"Remitente","Asunto", "Fecha"};
-	DefaultTableModel modelo = new DefaultTableModel(col,0);
+	   String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
-	Enumeration<Correo> cor = setPapelera.elements();
-	Correo correo;
-	
-	while(cor.hasMoreElements()){
-		correo = cor.nextElement();
-		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
-		String asunto = correo.getAsunto();
-		String fecha = correo.getFecha();
+		ArrayList<Correo> correos = this.CargaCorreosOrdenados(setPapelera);
 		
-		String carga [] = {remitente, asunto, fecha};	   
-	   	modelo.addRow(carga);
-		}
-	
-	return modelo;
+		Iterator<Correo> it = correos.iterator();
+		Correo correo;
+			
+		while(it.hasNext()){
+			correo = it.next();
+			String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+			String asunto = correo.getAsunto();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
+			
+			String carga [] = {destino, asunto, clave, fecha};		   
+		   	modelo.addRow(carga);
+			}
+		
+		return modelo;
 	
    }
    
@@ -388,23 +403,26 @@ public DefaultTableModel DevTablaBandejaSalida(){
     */
    public DefaultTableModel DevTablaSpam(){
 	
-	String col[] = {"Remitente","Asunto", "Fecha"};
-	DefaultTableModel modelo = new DefaultTableModel(col,0);
+	   String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
 
-	Enumeration<Correo> cor = setSpam.elements();
-	Correo correo;
-	
-	while(cor.hasMoreElements()){
-		correo = cor.nextElement();
-		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
-		String asunto = correo.getAsunto();
-		String fecha = correo.getFecha();
+		ArrayList<Correo> correos = this.CargaCorreosOrdenados(setSpam);
 		
-		String carga [] = {remitente, asunto, fecha};	   
-	   	modelo.addRow(carga);
-		}
-	
-	return modelo;
+		Iterator<Correo> it = correos.iterator();
+		Correo correo;
+			
+		while(it.hasNext()){
+			correo = it.next();
+			String destino = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+			String asunto = correo.getAsunto();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
+			
+			String carga [] = {destino, asunto, clave, fecha};		   
+		   	modelo.addRow(carga);
+			}
+		
+		return modelo;
 	
    }
    
@@ -417,15 +435,17 @@ public DefaultTableModel DevTablaBandejaSalida(){
     * @return modelTable
     */
    public DefaultTableModel DevTablaBusqueda(String cuentaBusqueda){
-	
-	String col[] = {"Remitente","Asunto", "Fecha"};
+		
+	String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
 	DefaultTableModel modelo = new DefaultTableModel(col,0);
 
-	Enumeration<Correo> cor = setCorreosRecibidos.elements();
-	Correo correo;
+	ArrayList<Correo> correos = this.CargaCorreosOrdenados(setCorreosRecibidos);
 	
-	while(cor.hasMoreElements()){
-		correo = cor.nextElement();
+	Iterator<Correo> it = correos.iterator();
+	Correo correo;
+		
+	while(it.hasNext()){
+		correo = it.next();
 		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
 		
 		if(remitente.equals(cuentaBusqueda)){
@@ -557,6 +577,24 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	
      }
      
+     /**
+      * Carga en ArrayList los correos para poder mostrarlos ordenados por fecha en las tablas
+      * @param Correos
+      * @return
+      */
+     public ArrayList<Correo> CargaCorreosOrdenados (Hashtable<String, Correo> Correos){
+    	 Enumeration<Correo> cor = Correos.elements();
+    	 Correo correo;
+    	 ArrayList<Correo> correoOrdenado = new ArrayList<Correo>();
+    	 while(cor.hasMoreElements()){
+    		 correo = cor.nextElement();
+    		 correoOrdenado.add(correo);
+    		 Collections.sort(correoOrdenado);
+    	 }
+    	
+    	 Collections.reverse(correoOrdenado); //Para invertirlos y que queden arriba los ultimos
+    	 return correoOrdenado;
+     }
      
      
      

@@ -124,7 +124,7 @@ public class FrmMuestraBuzonSalida extends JInternalFrame {
 	}
 	
 	public void SetTable(){
-		String col[] = {"Destinatario","Asunto", "Fecha"};
+		String col[] = {"Destinatario","Asunto","Clave", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
 		try{
 			modelo = FL.DevBandejaSalida();
@@ -133,6 +133,16 @@ public class FrmMuestraBuzonSalida extends JInternalFrame {
 		}
 		
 		tblMuestraCorreos = new JTable(modelo);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setMinWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setMaxWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(0).setMinWidth(250);
+		tblMuestraCorreos.getColumnModel().getColumn(0).setMaxWidth(250);
+		tblMuestraCorreos.getColumnModel().getColumn(0).setWidth(250);
+		tblMuestraCorreos.getColumnModel().getColumn(3).setMinWidth(150);
+		tblMuestraCorreos.getColumnModel().getColumn(3).setMaxWidth(150);
+		tblMuestraCorreos.getColumnModel().getColumn(3).setWidth(150);
+
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		/*Oculto columnas con Timestamp usada como clave del diccionario */
