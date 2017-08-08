@@ -2,13 +2,21 @@ package Grafica;
 
 
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+
+import Conectividad.FachadaCon;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JComboBox;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,6 +33,9 @@ public class Login extends JFrame {
 	private JTextField usuario;
 	private JTextField textPasswd;
 	boolean verifica_servidor = true; // por ahora queda forzado hasta que se conecte y compruebe la cuenta en el servidor
+	String Status = "NotOk";
+	String Servidor;
+	FachadaCon FC = FachadaCon.getInstancia();
 	FachadaLog FL = new FachadaLog();
 	/**
 	 * Create the panel.
@@ -64,31 +75,58 @@ public class Login extends JFrame {
 		JButton btnLogin = new JButton("");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				usuario.setBorder(null);
+				textPasswd.setBorder(null);
 				
-				
-				if(FL.Busca_cuenta(FL.Devuelve_Ruta_Cuentas(), usuario.getText(),comboDominio.getSelectedItem().toString())){
+				if (!usuario.getText().isEmpty() && !textPasswd.getText().isEmpty()){
 					
-				
-				
-					if( FL.compara_passwd("c:\\Cuentas\\"+usuario.getText()+"-"+comboDominio.getSelectedItem().toString()+"\\Configuracion\\", usuario.getText(),comboDominio.getSelectedItem().toString(), textPasswd.getText())){
+					Servidor = FC.Login(usuario.getText(),comboDominio.getSelectedItem().toString(), textPasswd.getText());
 					
+					if (Servidor.compareToIgnoreCase("No_Conect") == 0){
 						
-					
-					FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
-					
-					principal pri = new principal();
-					pri.setLocationRelativeTo(null); 			
-					pri.setVisible(true);
-					dispose();
-					
-					}else {}
-					
-				}else {
-					
-				
-				}
-				
+						if(FL.Busca_cuenta(FL.Devuelve_Ruta_Cuentas(), usuario.getText(),comboDominio.getSelectedItem().toString())){
 							
+							if( FL.compara_passwd("c:\\Cuentas\\"+usuario.getText()+"-"+comboDominio.getSelectedItem().toString()+"\\Configuracion\\", usuario.getText(),comboDominio.getSelectedItem().toString(), textPasswd.getText())){
+							
+								FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
+							
+								principal pri = new principal();
+								pri.setLocationRelativeTo(null); 			
+								pri.setVisible(true);
+								Status = "Ok";
+								dispose();
+							
+							}else {
+								JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta");
+							}
+							
+						}else {
+							JOptionPane.showMessageDialog(null, "La primer conexión del Usuario debe ser contra el Servidor");
+						}
+				
+					}
+					else if(Servidor.compareToIgnoreCase("Valido") == 0){
+						
+						FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());	
+						principal pri = new principal();
+						pri.setLocationRelativeTo(null); 			
+						pri.setVisible(true);
+						Status = "Ok";
+						dispose();
+					}
+					else if(Servidor.compareToIgnoreCase("NoPass") == 0){
+						JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos");
+					}
+					else if(Servidor.compareToIgnoreCase("NoCuenta") == 0){
+						JOptionPane.showMessageDialog(null, "Cuenta no existe o no esta habilitada");
+					}
+				}
+			else{
+				JOptionPane.showMessageDialog(null, "Debe indicar Nombre de Usuario y Password");
+				Border border = BorderFactory.createLineBorder(Color.red);
+				usuario.setBorder(border);
+				textPasswd.setBorder(border);
+			}
 			}
 		});
 		btnLogin.setBounds(146, 222, 133, 38);

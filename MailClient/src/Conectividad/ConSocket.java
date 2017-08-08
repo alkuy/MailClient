@@ -50,6 +50,34 @@ public class ConSocket {
 		}catch(Exception e){};
 	}
 	
+	public String Login(String Usu, String NomDom, String Pass){
+		String msg, result;
+		result = "No_Conect";
+		try{
+			cliente = new Socket(ip, puerto);
+			entrada = new DataInputStream(cliente.getInputStream());
+			salida = new DataOutputStream(cliente.getOutputStream());
+			
+			msg = "Auth";
+			salida.writeUTF(msg);
+			
+			salida.writeUTF(Usu);
+			salida.writeUTF(NomDom);
+			salida.writeUTF(Pass);
+
+			result = entrada.readUTF();
+			
+			entrada.close();
+			salida.close();
+			cliente.close();
+			
+			return result;
+		}catch(Exception e){
+			return result;
+		}
+		
+	}
+	
 	
 	public void UsuToServer(){
 		String msg;

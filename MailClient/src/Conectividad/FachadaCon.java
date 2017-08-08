@@ -33,4 +33,9 @@ public class FachadaCon {
 		ConSocket S = new ConSocket();
 		S.ConToServer();
 	}
+	
+	public String Login(String Usu, String NomDom, String Pass){
+		ConSocket S = new ConSocket();
+		return S.Login(Usu, NomDom, Pass);
+	}
 }
