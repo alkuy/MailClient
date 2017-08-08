@@ -29,6 +29,7 @@ public class MuestraRecibido extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static String destinatario = new String(); // variable estatica 
 	public static String asunto = new String();  
+	public static String textoanterior = new String();  
 	public static int id;  
 	private FrmMuestraBandejaEntrada recibido;
 	private FrmResponder responder;
@@ -45,10 +46,10 @@ public class MuestraRecibido extends JFrame {
 		
 		
 		Correo correo = FL.DevuelveRecibido(String.valueOf(recibido.fecha)); // busco el correo seleccionado segun la fecha que traigo del otro formulario or ser una variable static
-		ArrayList<Correo> conversacion = new ArrayList<Correo>();
+	/*	ArrayList<Correo> conversacion = new ArrayList<Correo>();
 		conversacion = FL.DevConveracionRecibidos(correo.getId_conversacion(),String.valueOf(recibido.fecha));// cargo aca solo lo correos de esa conversacion
 		
-		
+		*/
 		
 		getContentPane().setBackground(SystemColor.activeCaption);
 		setTitle("Correo");
@@ -86,21 +87,21 @@ public class MuestraRecibido extends JFrame {
 		textcorreo.setEditable(false);
 		textcorreo.setLineWrap(true);
 		
-		Iterator<Correo> iterador = conversacion.iterator();
-		correo = iterador.next();
-		textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
-		textcorreo.append(System.getProperty("line.separator"));
-	    textcorreo.append(correo.getTexto());// esto para que la primera vez no me cargue ni remitente ni asunto
-	    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
+	//	Iterator<Correo> iterador = conversacion.iterator();
+	//	correo = iterador.next();
+	//	textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
+	//	textcorreo.append(System.getProperty("line.separator"));
+	    textcorreo.setText(correo.getTexto());// esto para que la primera vez no me cargue ni remitente ni asunto
+	/*    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
 	    textcorreo.append(System.getProperty("line.separator")); 
 	    textcorreo.append(System.getProperty("line.separator"));
 	    textcorreo.append("---------------------------------------------------------------------------------------------------------------");
 	    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
 	    textcorreo.append(System.getProperty("line.separator"));
 	    textcorreo.append(System.getProperty("line.separator"));
-		while(iterador.hasNext()){
+		while(iterador.hasNext()){*/
 			
-			correo = iterador.next();
+		/*	correo = iterador.next();
 			textcorreo.append("Remitente:"+correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio());
 			textcorreo.append(System.getProperty("line.separator")); 
 			textcorreo.append("Asunto:"+correo.getAsunto());
@@ -113,7 +114,7 @@ public class MuestraRecibido extends JFrame {
 		    textcorreo.append(System.getProperty("line.separator"));
 		    textcorreo.append(System.getProperty("line.separator"));
 		}
-		
+		*/
 		
 		scrollPane.setViewportView(textcorreo);
 		
@@ -143,7 +144,8 @@ public class MuestraRecibido extends JFrame {
 		/* BOTON PARA RESPONDER EL CORREO */
 		
 		destinatario = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
-		asunto = "Re:"+correo.getAsunto();
+		asunto = correo.getAsunto();
+		textoanterior = correo.getTexto();
 		id = correo.getId_conversacion();
 		
 		JButton btnResponder = new JButton("RESPONDER");

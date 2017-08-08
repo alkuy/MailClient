@@ -174,6 +174,8 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		btnBuscar.setIcon(iconobuscar);
       	getContentPane().add(btnBuscar);
       	
+      	/* Boton para enviar a lista de spam un correo*/
+      	
       	JButton btnSpam = new JButton("SPAM");
       	btnSpam.addActionListener(new ActionListener() {
       		public void actionPerformed(ActionEvent arg0) {

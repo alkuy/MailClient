@@ -8,7 +8,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
-import logica.Correo;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
@@ -20,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import javax.swing.JEditorPane;
 
 public class FrmResponder extends JFrame {
 	
@@ -59,31 +59,56 @@ public class FrmResponder extends JFrame {
 				
 		getContentPane().setLayout(null);
 		
-		JTextArea textpara = new JTextArea();
-		textpara.setBounds(245, 29, 679, 22);
-		getContentPane().add(textpara);
-		textpara.setText(muestra.destinatario);
+		JTextArea textcorreo = new JTextArea();
+		textcorreo.setBounds(10, 95, 914, 405);
+		textcorreo.setLineWrap(true);
+		
+		textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
+		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
+		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append("EMISOR: "+muestra.destinatario);
+		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append("RECEPTOR: "+FL.Devuelve_us_cuenta()+"@"+FL.Devuelve_dom_cuenta());
+		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append("ASUNTO: "+muestra.asunto);
+		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
+		textcorreo.append(muestra.textoanterior);
+		textcorreo.setCaretPosition(0);
+		getContentPane().add(textcorreo);
+		//textcorreo.setCaretPosition(0);
+		
+		
+		//textcorreo.setLocation(0, 0);
+		
 		
 		JLabel lblPara = new JLabel("Para:");
 		lblPara.setFont(new Font("Verdana", Font.BOLD, 13));
 		lblPara.setBounds(167, 32, 46, 14);
 		getContentPane().add(lblPara);
 		
-		JTextArea textasunto = new JTextArea();
-		textasunto.setBounds(245, 62, 679, 22);
-		getContentPane().add(textasunto);
-		textasunto.setText(muestra.asunto);
-	
+		JTextArea textpara = new JTextArea();
+		textpara.setEditable(false);
+		textpara.setBounds(245, 29, 679, 22);
+		getContentPane().add(textpara);
+		textpara.setText(muestra.destinatario);
 		
 		JLabel lblAsunto = new JLabel("Asunto:");
 		lblAsunto.setFont(new Font("Verdana", Font.BOLD, 13));
 		lblAsunto.setBounds(167, 70, 70, 14);
 		getContentPane().add(lblAsunto);
 		
-		JTextArea textcorreo = new JTextArea();
-		textcorreo.setBounds(10, 95, 914, 405);
-		textcorreo.setLineWrap(true);
-		getContentPane().add(textcorreo);
+		JTextArea textasunto = new JTextArea();
+		textasunto.setEditable(false);
+		textasunto.setBounds(245, 62, 679, 22);
+		getContentPane().add(textasunto);
+		textasunto.setText("Re: "+muestra.asunto);
+	
+		
+	
+		
 		
 		
 		
