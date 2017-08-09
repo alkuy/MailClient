@@ -52,6 +52,7 @@ public class principal extends JFrame {
 	private JButton btnsalida;
 	private JButton btnspam;
 	private JButton btnpapelera;
+	JButton btnRecibirAnteriores;
 	private FrmMuestraBandejaEntrada frmbandejaentrada;
 	private FrmMuestraEnviados frmenviados;
 	private FrmMuestraBorradores frmborradores;
@@ -101,7 +102,7 @@ public class principal extends JFrame {
 				
 		/* Boton Enviar - Recibir */
 		JButton btnEnv_Rec = new JButton();
-		btnEnv_Rec.setBounds(0, 0, 52, 47);		
+		btnEnv_Rec.setBounds(51, 0, 52, 47);		
 		ImageIcon imagen = new ImageIcon(principal.class.getResource("/imagenes/enviar-recibir.png"));		
 		Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(btnEnv_Rec.getWidth(),btnEnv_Rec.getHeight(),Image.SCALE_DEFAULT));		
 		btnEnv_Rec.setIcon(icono);
@@ -132,7 +133,7 @@ public class principal extends JFrame {
 		/* Boton nuevo correo */
 		
 		btnNuevoCorreo = new JButton();
-		btnNuevoCorreo.setBounds(51, 0, 52, 47);		
+		btnNuevoCorreo.setBounds(102, 0, 52, 47);		
         ImageIcon imagen2 = new ImageIcon(principal.class.getResource("/imagenes/nuevo.gif"));		
 		Icon icono2 = new ImageIcon(imagen2.getImage().getScaledInstance(btnNuevoCorreo.getWidth(),btnNuevoCorreo.getHeight(),Image.SCALE_DEFAULT));		
 		btnNuevoCorreo.setIcon(icono2);
@@ -151,6 +152,27 @@ public class principal extends JFrame {
 				cierraVentana(frmbandejaentrada);
 			}
 		});
+		
+		/* Boton para recibir todos los correos (anteriores y nuevos) */
+		
+		btnRecibirAnteriores = new JButton();
+		btnRecibirAnteriores.setBounds(0, 0, 52, 47);
+		ImageIcon imagenrespaldo = new ImageIcon(principal.class.getResource("/imagenes/reloj.png"));		
+		Icon iconores = new ImageIcon(imagenrespaldo.getImage().getScaledInstance(btnRecibirAnteriores.getWidth(),btnRecibirAnteriores.getHeight(),Image.SCALE_DEFAULT));		
+		btnRecibirAnteriores.setIcon(iconores);
+		btnRecibirAnteriores.setToolTipText("Recibir Anteriores");
+		btnRecibirAnteriores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				
+				
+			}
+		});
+		
+		VentPrincipal.add(btnRecibirAnteriores);
+		
+		
 		
 		
 		/*······························*/
@@ -350,7 +372,7 @@ public class principal extends JFrame {
 		ImagenLogo.setBounds(279, 106, 362, 248);
 		VentPrincipal.add(ImagenLogo);
 		
-		
+			
 		
 	}
 	/**
@@ -394,5 +416,4 @@ public class principal extends JFrame {
 		lblVersion.setVisible(true);
 		lblCreadoEnInet.setVisible(true);
 	}
-
 }
