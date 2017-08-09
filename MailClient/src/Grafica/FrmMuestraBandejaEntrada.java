@@ -14,10 +14,12 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.JScrollPane;
 import java.sql.SQLException;
 import java.awt.BorderLayout;
@@ -225,6 +227,17 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		}
 		
 		tblMuestraCorreos = new JTable(modelo);
+		JTableHeader header = tblMuestraCorreos.getTableHeader();
+		 header.setOpaque(false);
+		 header.setBackground(Color.DARK_GRAY);
+	     header.setForeground(Color.white);
+	     header.setFont(new Font("Consolas", Font.BOLD, 13));
+	    
+	    tblMuestraCorreos.setShowVerticalLines(false);
+	    tblMuestraCorreos.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		tblMuestraCorreos.setRowHeight(35);
+		
+		
 		tblMuestraCorreos.getColumnModel().getColumn(2).setMinWidth(0);
 		tblMuestraCorreos.getColumnModel().getColumn(2).setMaxWidth(0);
 		tblMuestraCorreos.getColumnModel().getColumn(2).setWidth(0);

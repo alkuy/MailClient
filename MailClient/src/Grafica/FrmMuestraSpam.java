@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import logica.FachadaLog;
 
@@ -18,6 +19,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
@@ -133,6 +135,17 @@ public class FrmMuestraSpam extends JInternalFrame {
 		}
 		
 		tblMuestraCorreos = new JTable(modelo);
+		JTableHeader header = tblMuestraCorreos.getTableHeader();
+		 header.setOpaque(false);
+		 header.setBackground(Color.DARK_GRAY);
+	     header.setForeground(Color.white);
+	     header.setFont(new Font("Consolas", Font.BOLD, 13));
+	    
+	    tblMuestraCorreos.setShowVerticalLines(false);
+	    tblMuestraCorreos.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		tblMuestraCorreos.setRowHeight(35);
+		
+		
 		tblMuestraCorreos.getColumnModel().getColumn(2).setMinWidth(0);
 		tblMuestraCorreos.getColumnModel().getColumn(2).setMaxWidth(0);
 		tblMuestraCorreos.getColumnModel().getColumn(2).setWidth(0);
@@ -142,7 +155,7 @@ public class FrmMuestraSpam extends JInternalFrame {
 		tblMuestraCorreos.getColumnModel().getColumn(3).setMinWidth(150);
 		tblMuestraCorreos.getColumnModel().getColumn(3).setMaxWidth(150);
 		tblMuestraCorreos.getColumnModel().getColumn(3).setWidth(150);
-		//tblMuestraCorreos.setFont(new Font("Arial", Font.BOLD, 15));
+
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		/*Oculto columnas con Timestamp usada como clave del diccionario */
