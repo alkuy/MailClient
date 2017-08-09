@@ -123,21 +123,17 @@ public class Nuevo_Correo extends JFrame {
 				PassUsu = FL.Devuelve_pas_cuenta();
 				DomUsu = FL.Devuelve_dom_cuenta();
 				Cuenta = NomUsu+"@"+DomUsu;
-				try {
-					FC.EnviaCorreo(NomUsu, PassUsu, Cuenta, cuenta, textasunto.getText(), textcorreo.getText());
-				} catch (IOException e1) {
-					// TODO Bloque catch generado automáticamente
-					e1.printStackTrace();
-				} catch (MessagingException e1) {
-					// TODO Bloque catch generado automáticamente
-					e1.printStackTrace();
-				} catch (UserException e1) {
-					// TODO Bloque catch generado automáticamente
-					e1.printStackTrace();
-				} catch (InterruptedException e1) {
-					// TODO Bloque catch generado automáticamente
-					e1.printStackTrace();
-				}
+				
+//				try {
+//					FC.EnviaCorreo(NomUsu, PassUsu, Cuenta, cuenta, textasunto.getText(), textcorreo.getText());
+//					FL.Guarda_Correo(FL.Devuelve_Ruta_Enviados(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
+//				} catch (IOException | MessagingException | UserException | InterruptedException e1) {
+//					//e1.printStackTrace();
+//					/*Guardamos correo en archivo y memoria*/
+//					FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
+//				}
+				
+
 				dispose();
 				principal.apareceLogo();
 				}

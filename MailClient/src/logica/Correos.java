@@ -220,6 +220,20 @@ public class Correos  {
 		FachPer.eliminar(directorio, clave);
 	}
 	
+	/**
+	 * Mueve los correos Enviados al buzon de Enviados
+	 * @param directorio
+	 * @param clave
+	 */
+	public void Correo_Enviado(String directorio, String clave, String destino){
+		String Enviados = FachPer.CarpetaEnviados();
+		Correo correo = new Correo();
+		correo = obtenerCorreo(directorio, clave); //Cargo el correo para poder pasarlo al Hashtable papelera
+		Eliminar(directorio, clave); //Lo elimina del Hashtable
+		Insertar(destino, clave, correo); //Insero en Hashtable Tapelera
+		
+		FachPer.MoverdeCarpeta(directorio, clave, destino); //Muevo el arvhivo fisico de carpeta
+	}
 	
 	/**
 	 * Devuelve a Enviados los correos que estan en papelera o Sapm
@@ -330,6 +344,37 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	
    }
    
+   /**
+    * Devuelve una tabla para el envío de correos desde la bandeja de salida 
+    * 
+    * 
+    * @return modelTable
+    */
+   public DefaultTableModel DevTablaSalida(){
+	Cuenta C = Cuenta.getInstancia();
+	String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto", "Fecha"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+	Enumeration<Correo> cor = setBandejaSalida.elements();
+	Correo correo;
+	
+	while(cor.hasMoreElements()){
+		correo = cor.nextElement();
+		String NomEmisor = correo.getEmisor_nombre();
+		String PassEmisor = C.getContraseña_cuenta();
+		String CuentaEmisor = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
+		String CuentaDest = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+		String asunto = correo.getAsunto();
+		String Texto = correo.getTexto();
+		String fecha = correo.getFecha();
+		
+		String carga [] = {NomEmisor, PassEmisor, CuentaEmisor, CuentaDest, asunto, Texto, fecha};	   
+	   	modelo.addRow(carga);
+		}
+	
+	return modelo;
+	
+   }
    
    /**
     * Devuelve una tabla con remitente, asunto y fecha de cada correo recibido 

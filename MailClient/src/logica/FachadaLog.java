@@ -131,6 +131,17 @@ public class FachadaLog {
 		}
 		
 		/**
+		 *  metodo que devuelve una tabla para envio masivo de mails
+		 * @return TableModel
+		 * 
+		 */
+			public DefaultTableModel DevCorreosSalida(){
+				DefaultTableModel modelo;
+				modelo = correos.DevTablaSalida();
+				return modelo;
+			}
+		
+		/**
 		 *  metodo que devuelve una tabla para mostrar Eliminados
 		 * @return TableModel
 		 * @throws SQLException
@@ -356,6 +367,16 @@ public class FachadaLog {
      */
     public void EliminarCorreoDefinitivo(String directorio, String clave){
     	correos.Eliminar_Definitivo(directorio, clave);
+    }
+    
+    
+    /**
+     * Mueve los correos Enviados al buzon Enviados
+     *  @param clave 
+     */
+    public void CorreoEnviado(String directorio, String clave, String destino){
+    	correos.Correo_Enviado(directorio, clave, destino);
+    	
     }
     
     /**

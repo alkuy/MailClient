@@ -5,6 +5,8 @@ import logica.FachadaLog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
@@ -12,12 +14,20 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+import javax.mail.MessagingException;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
+
+import com.icegreen.greenmail.user.UserException;
+
+import Conectividad.FachadaCon;
+
 import javax.swing.border.LineBorder;
 
 
@@ -67,7 +77,7 @@ public class principal extends JFrame {
 	 * Create the frame.
 	 */
 	public principal() {
-		
+		FachadaCon FC = FachadaCon.getInstancia();
 		FachadaLog FL = new FachadaLog();  		
   		FL.cargaTodoenMemoria();
   		
@@ -101,12 +111,21 @@ public class principal extends JFrame {
 		
 		btnEnv_Rec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				/*Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el momento en que llamo la actualizacion
-				String fecha = timestamp.toString();
-				FL.GuardaActualizacion(fecha);
-				
-				String dato = FL.TraeUltimaActualizacion();
-				System.out.println(dato);*/
+				int i, j;
+				String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto"};
+				DefaultTableModel modelo = new DefaultTableModel(col,0);
+				modelo = FL.DevCorreosSalida();
+				JTable T = new JTable(modelo);
+				for (i=0; i < T.getRowCount(); i++){
+					try {
+						FC.EnviaCorreo(T.getValueAt(i, 0).toString(), T.getValueAt(i, 1).toString(), T.getValueAt(i, 2).toString(), T.getValueAt(i, 3).toString(), T.getValueAt(i, 4).toString(), T.getValueAt(i, 5).toString());
+						FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
+					} catch (IOException | MessagingException | UserException | InterruptedException e) {
+						// TODO Bloque catch generado automáticamente
+						e.printStackTrace();
+					}
+				}
+				FC.RecibeCorreo();
 			}
 		});
 		

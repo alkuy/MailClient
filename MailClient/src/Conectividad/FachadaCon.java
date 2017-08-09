@@ -25,8 +25,13 @@ public class FachadaCon {
 	public void EnviaCorreo(String NomUsu, String PassUsu, String MailUsu, String MailDest, String Asunto, String Texto) throws IOException, MessagingException, UserException, InterruptedException{
 		ConSocket S = new ConSocket();
 		EnviaCorreo C = new EnviaCorreo(NomUsu, PassUsu, MailUsu, MailDest, Asunto, Texto);
-		S.UsuToServer();
+		//S.UsuToServer();
 		C.Enviar();	
+	}
+	
+	public void RecibeCorreo(){
+		ConSocket S = new ConSocket();
+		S.UsuToServer();
 	}
 	
 	public void IniSocket(){
