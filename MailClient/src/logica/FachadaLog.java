@@ -433,5 +433,19 @@ public class FachadaLog {
  		   configuracion.CargaListaSpam(carga);
  	   }
     }
+    
+    
+    /** Encripta o desencripta texto
+     * 
+     * @param texto
+     * @param clave
+     * @return texto encriptado o desencriptado segun lo que se le pase
+     */
+        
+    public String encriptaOdesencripta(String texto, String clave){
+       
+             
+        return configuracion.EncriptaDesencripta(texto, clave);
+    }
 }
 

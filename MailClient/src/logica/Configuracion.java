@@ -147,5 +147,29 @@ public class Configuracion {
 	return SPAMnuevo;
 	   
    }
+   
+   /** Metodo de encriptacion por Xor 
+    * 
+    * @param dato
+    * @param clave
+    * @return texto encriptado
+    * 
+    */
+   
+   public static String EncriptaDesencripta(String texto, String clave){
+       String textoEncriptado="";
+
+       if (texto.length() > clave.length()) { // si el largo del texto supera el de la clave duplico esta ultima hasta que me alcance
+           for (int i=0; i<texto.length(); i++)
+               clave+=clave.charAt(i);
+       }
+
+       for (int i=0; i<texto.length(); i++){
+           textoEncriptado+=(char) (texto.charAt(i)^clave.charAt(i)); // aplico cifrado por Xor
+       }
+
+       return textoEncriptado;
+   }
+
 
 }

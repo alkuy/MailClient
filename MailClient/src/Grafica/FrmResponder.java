@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-import javax.swing.JEditorPane;
 
 public class FrmResponder extends JFrame {
 	
@@ -30,7 +29,6 @@ public class FrmResponder extends JFrame {
 	private MuestraRecibido muestra;
 	FachadaLog FL = new FachadaLog();
 	Verificaciones verifica = new Verificaciones();
-	
 	
 	
 	
@@ -74,15 +72,10 @@ public class FrmResponder extends JFrame {
 		textcorreo.append(System.getProperty("line.separator"));
 		textcorreo.append("ASUNTO: "+muestra.asunto);
 		textcorreo.append(System.getProperty("line.separator"));
-		textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
 		textcorreo.append(muestra.textoanterior);
 		textcorreo.setCaretPosition(0);
 		getContentPane().add(textcorreo);
-		//textcorreo.setCaretPosition(0);
-		
-		
-		//textcorreo.setLocation(0, 0);
-		
+				
 		
 		JLabel lblPara = new JLabel("Para:");
 		lblPara.setFont(new Font("Verdana", Font.BOLD, 13));
@@ -106,10 +99,6 @@ public class FrmResponder extends JFrame {
 		getContentPane().add(textasunto);
 		textasunto.setText("Re: "+muestra.asunto);
 	
-		
-	
-		
-		
 		
 		
 		/* Logo en Nuevo correo*/
@@ -136,6 +125,7 @@ public class FrmResponder extends JFrame {
 				fecha = fecha.replace(":","-");
 				String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
 				String asunto = verifica.remplazoCaracteres(textasunto.getText());
+				texto = FL.encriptaOdesencripta(texto,principal.clave);// encripta el texto de correo antes de guardarlo en buzon de salida
 				
 				String cuenta = textpara.getText();
 				int index = cuenta.indexOf("@");

@@ -3,15 +3,10 @@ package Grafica;
 
 import java.awt.Color;
 import java.awt.Toolkit;
-
-import javax.mail.MessagingException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
-
-import com.icegreen.greenmail.user.UserException;
-
 import Conectividad.FachadaCon;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
@@ -21,7 +16,6 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
@@ -104,11 +98,9 @@ public class Nuevo_Correo extends JFrame {
 				Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
 				String fecha = timestamp.toString();
-				/*fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
-				fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
-				fecha = fecha.replace(":","-");*/
 				String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
 				String asunto = verifica.remplazoCaracteres(textasunto.getText());
+				texto = FL.encriptaOdesencripta(texto,principal.clave);// encripta el texto de correo antes de guardarlo en buzon de salida
 				
 				String cuenta = textpara.getText();
 				int index = cuenta.indexOf("@");
@@ -123,17 +115,6 @@ public class Nuevo_Correo extends JFrame {
 				PassUsu = FL.Devuelve_pas_cuenta();
 				DomUsu = FL.Devuelve_dom_cuenta();
 				Cuenta = NomUsu+"@"+DomUsu;
-				
-//				try {
-//					FC.EnviaCorreo(NomUsu, PassUsu, Cuenta, cuenta, textasunto.getText(), textcorreo.getText());
-//					FL.Guarda_Correo(FL.Devuelve_Ruta_Enviados(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
-//				} catch (IOException | MessagingException | UserException | InterruptedException e1) {
-//					//e1.printStackTrace();
-//					/*Guardamos correo en archivo y memoria*/
-//					FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
-//				}
-				
-
 				dispose();
 				principal.apareceLogo();
 				}

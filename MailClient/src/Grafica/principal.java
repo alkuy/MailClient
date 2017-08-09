@@ -19,7 +19,6 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -53,15 +52,13 @@ public class principal extends JFrame {
 	private JButton btnsalida;
 	private JButton btnspam;
 	private JButton btnpapelera;
-	
-	
-	
 	private FrmMuestraBandejaEntrada frmbandejaentrada;
 	private FrmMuestraEnviados frmenviados;
 	private FrmMuestraBorradores frmborradores;
 	private FrmMuestraBuzonSalida frmbuzon;
 	private FrmMuestraSpam frmspam;
 	private FrmMuestraEliminados frmeliminados;
+	public static String clave = new String(); // variable static global utilizada como clave de encriptacion y desencriptacion
 	
 	
 	public static JPanel getInstancia() {
@@ -77,6 +74,8 @@ public class principal extends JFrame {
 	 * Create the frame.
 	 */
 	public principal() {
+		
+		clave = "correoeduca"; // asignamos el valor de la clave ara encriptar y desencriptar
 		FachadaCon FC = FachadaCon.getInstancia();
 		FachadaLog FL = new FachadaLog();  		
   		FL.cargaTodoenMemoria();

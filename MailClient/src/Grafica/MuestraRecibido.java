@@ -15,8 +15,6 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
@@ -30,7 +28,8 @@ public class MuestraRecibido extends JFrame {
 	public static String destinatario = new String(); // variable estatica 
 	public static String asunto = new String();  
 	public static String textoanterior = new String();  
-	public static int id;  
+	public static int id;
+	private principal principal;
 	private FrmMuestraBandejaEntrada recibido;
 	private FrmResponder responder;
 	FachadaLog FL = new FachadaLog();
@@ -86,36 +85,8 @@ public class MuestraRecibido extends JFrame {
 		scrollPane.setViewportView(textcorreo);
 		textcorreo.setEditable(false);
 		textcorreo.setLineWrap(true);
-		
-	//	Iterator<Correo> iterador = conversacion.iterator();
-	//	correo = iterador.next();
-	//	textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
-	//	textcorreo.append(System.getProperty("line.separator"));
-	    textcorreo.setText(correo.getTexto());// esto para que la primera vez no me cargue ni remitente ni asunto
-	/*    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
-	    textcorreo.append(System.getProperty("line.separator")); 
-	    textcorreo.append(System.getProperty("line.separator"));
-	    textcorreo.append("---------------------------------------------------------------------------------------------------------------");
-	    textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
-	    textcorreo.append(System.getProperty("line.separator"));
-	    textcorreo.append(System.getProperty("line.separator"));
-		while(iterador.hasNext()){*/
-			
-		/*	correo = iterador.next();
-			textcorreo.append("Remitente:"+correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio());
-			textcorreo.append(System.getProperty("line.separator")); 
-			textcorreo.append("Asunto:"+correo.getAsunto());
-			textcorreo.append(System.getProperty("line.separator")); 
-			textcorreo.append(System.getProperty("line.separator")); 
-		    textcorreo.append(correo.getTexto());
-		    textcorreo.append(System.getProperty("line.separator")); 
-		    textcorreo.append("---------------------------------------------------------------------------------------------------------------");
-		    textcorreo.append(System.getProperty("line.separator")); 
-		    textcorreo.append(System.getProperty("line.separator"));
-		    textcorreo.append(System.getProperty("line.separator"));
-		}
-		*/
-		
+		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripto el texto para mostrarlo
+		textcorreo.setText(texto);
 		scrollPane.setViewportView(textcorreo);
 		
 		

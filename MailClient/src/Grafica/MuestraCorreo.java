@@ -2,22 +2,18 @@ package Grafica;
 
 
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.border.LineBorder;
 import logica.Correo;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
@@ -43,10 +39,10 @@ public class MuestraCorreo extends JFrame {
 		
 		Correo correo = new Correo();
 		
-		if(boton.aprete.equals("si") ){ // 
+		if(boton.aprete.equals("si") ){ // si quiero ver un correo de la bandej de enviados 
 			correo = FL.DevuelveEnviado(String.valueOf(enviado.fecha));
 		  
-		} else {
+		} else { // si quiero ver un correo de la bandeja de salida
 			
 			correo = FL.DevuelveBandejaSalida(String.valueOf(salida.fecha));
 		  }
@@ -78,9 +74,9 @@ public class MuestraCorreo extends JFrame {
 			labeldestino.setBounds(245, 32, 567, 16);
 			getContentPane().add(labeldestino);
 		}else{
-		JLabel labeldestino = new JLabel(salida.cuenta);
-		labeldestino.setBounds(245, 32, 567, 16);
-		getContentPane().add(labeldestino);
+		    JLabel labeldestino = new JLabel(salida.cuenta);
+		    labeldestino.setBounds(245, 32, 567, 16);
+		    getContentPane().add(labeldestino);
 		}
 		JLabel lblAsunto = new JLabel("Asunto:");
 		lblAsunto.setFont(new Font("Verdana", Font.BOLD, 13));
@@ -96,7 +92,8 @@ public class MuestraCorreo extends JFrame {
 		textcorreo.setBounds(10, 95, 914, 405);
 		textcorreo.setLineWrap(true);
 		getContentPane().add(textcorreo);
-		textcorreo.setText(correo.getTexto());
+		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripto el texto para mostrarlo
+		textcorreo.setText(texto);
 		
 		boton.aprete = "no";// vuelvo a valor original para nuevas consultas en buzon de salida o enviados
 		
