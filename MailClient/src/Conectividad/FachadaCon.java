@@ -43,4 +43,9 @@ public class FachadaCon {
 		ConSocket S = new ConSocket();
 		return S.Login(Usu, NomDom, Pass);
 	}
+	
+	public void CorreosAntiguos(){
+		ConSocket S = new ConSocket();
+		S.OldToServer();
+	}
 }

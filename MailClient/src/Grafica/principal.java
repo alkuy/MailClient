@@ -60,6 +60,7 @@ public class principal extends JFrame {
 	private FrmMuestraSpam frmspam;
 	private FrmMuestraEliminados frmeliminados;
 	public static String clave = new String(); // variable static global utilizada como clave de encriptacion y desencriptacion
+	private String ventanaAbierta;
 	
 	
 	public static JPanel getInstancia() {
@@ -126,6 +127,7 @@ public class principal extends JFrame {
 					}
 				}
 				FC.RecibeCorreo();
+
 			}
 		});
 		
@@ -163,10 +165,8 @@ public class principal extends JFrame {
 		btnRecibirAnteriores.setToolTipText("Recibir Anteriores");
 		btnRecibirAnteriores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
-				
-				
+				FC.CorreosAntiguos();
+
 			}
 		});
 		
@@ -204,6 +204,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				abreVentana(frmbandejaentrada);
 				
+				
 				}
 			
 		});
@@ -232,6 +233,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				abreVentana(frmborradores);
+				
 			}
 		});
 		
@@ -258,6 +260,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				abreVentana(frmenviados);
+				
 			}
 		});
 		
@@ -286,6 +289,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				abreVentana(frmbuzon);
+				
 			}
 		});
 		
@@ -314,6 +318,7 @@ public class principal extends JFrame {
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(frmeliminados);
 				abreVentana(frmspam);
+				
 			}
 		});
 		
@@ -340,6 +345,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmbandejaentrada);
 				abreVentana(frmeliminados);
+				
 			}
 		});
 		

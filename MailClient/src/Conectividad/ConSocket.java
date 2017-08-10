@@ -109,4 +109,35 @@ public class ConSocket {
 			System.out.println("Imposible loguearse al POP3 Server");
 		};
 	}
+	
+	public void OldToServer(){
+		String msg;
+		String Usu, Pass;
+		
+		try{
+			cliente = new Socket(ip, puerto);
+			entrada = new DataInputStream(cliente.getInputStream());
+			salida = new DataOutputStream(cliente.getOutputStream());
+			
+			msg = "Old";
+			salida.writeUTF(msg);
+			
+			Usu = LN.Devuelve_us_cuenta();
+			salida.writeUTF(Usu);
+			
+			msg = entrada.readUTF();
+			Pass = LN.Devuelve_pas_cuenta();
+			RecibeCorreo R = new RecibeCorreo(Usu, Pass);
+			R.getMails();
+			
+			msg = "OK";
+			salida.writeUTF(msg);
+			
+			entrada.close();
+			salida.close();
+			cliente.close();
+		}catch(Exception e){
+			System.out.println("Imposible loguearse al POP3 Server");
+		};
+	}
 }
