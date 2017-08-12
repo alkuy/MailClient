@@ -91,7 +91,8 @@ public class principal extends JFrame {
 		
 		clave = "correoeduca"; // asignamos el valor de la clave ara encriptar y desencriptar
 		FachadaCon FC = FachadaCon.getInstancia();
-		FachadaLog FL = new FachadaLog();  		
+		FachadaLog FL = new FachadaLog();  	
+		config = new FrmConfiguracion();
   		FL.cargaTodoenMemoria();
   		
      	setResizable(false);
@@ -409,7 +410,7 @@ public class principal extends JFrame {
 					public void mouseClicked(MouseEvent arg0) {
 					
 						
-						FrmConfiguracion config = new FrmConfiguracion();
+						
 						abreVentana(config);
 					
 						desapareceLogo();	
