@@ -7,18 +7,26 @@ import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+
+
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.SwingConstants;
+
 import javax.swing.ImageIcon;
+
 import javax.mail.MessagingException;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
+
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
@@ -28,6 +36,10 @@ import com.icegreen.greenmail.user.UserException;
 import Conectividad.FachadaCon;
 
 import javax.swing.border.LineBorder;
+import javax.swing.JComboBox;
+import java.awt.ComponentOrientation;
+import java.awt.List;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class principal extends JFrame {
@@ -52,15 +64,15 @@ public class principal extends JFrame {
 	private JButton btnsalida;
 	private JButton btnspam;
 	private JButton btnpapelera;
-	JButton btnRecibirAnteriores;
 	private FrmMuestraBandejaEntrada frmbandejaentrada;
 	private FrmMuestraEnviados frmenviados;
 	private FrmMuestraBorradores frmborradores;
 	private FrmMuestraBuzonSalida frmbuzon;
 	private FrmMuestraSpam frmspam;
+	private FrmConfiguracion config;
 	private FrmMuestraEliminados frmeliminados;
 	public static String clave = new String(); // variable static global utilizada como clave de encriptacion y desencriptacion
-	private String ventanaAbierta;
+	private JComboBox comboBox;
 	
 	
 	public static JPanel getInstancia() {
@@ -91,6 +103,7 @@ public class principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 950, 600);
 		VentPrincipal = new JPanel();
+		VentPrincipal.setToolTipText("Configuraci\u00F3n");
 		VentPrincipal.setBackground(new Color(176, 224, 230));
 		VentPrincipal.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(VentPrincipal);
@@ -103,15 +116,23 @@ public class principal extends JFrame {
 				
 		/* Boton Enviar - Recibir */
 		JButton btnEnv_Rec = new JButton();
-		btnEnv_Rec.setBounds(51, 0, 52, 47);		
+		btnEnv_Rec.setBounds(0, 0, 52, 47);		
 		ImageIcon imagen = new ImageIcon(principal.class.getResource("/imagenes/enviar-recibir.png"));		
-		Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(btnEnv_Rec.getWidth(),btnEnv_Rec.getHeight(),Image.SCALE_DEFAULT));		
+		Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(btnEnv_Rec.getWidth(),btnEnv_Rec.getHeight(),Image.SCALE_DEFAULT));
 		btnEnv_Rec.setIcon(icono);
 		btnEnv_Rec.setToolTipText("Enviar/Recibir");		
 		VentPrincipal.add(btnEnv_Rec);
 		
 		btnEnv_Rec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				cierraVentana(frmenviados);
+				cierraVentana(frmborradores);
+				cierraVentana(frmbuzon);
+				cierraVentana(frmspam);
+				cierraVentana(frmeliminados);
+				cierraVentana(frmbandejaentrada);
+				cierraVentana(config);
 				int i, j;
 				String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto"};
 				DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -135,7 +156,7 @@ public class principal extends JFrame {
 		/* Boton nuevo correo */
 		
 		btnNuevoCorreo = new JButton();
-		btnNuevoCorreo.setBounds(102, 0, 52, 47);		
+		btnNuevoCorreo.setBounds(50, 0, 52, 47);		
         ImageIcon imagen2 = new ImageIcon(principal.class.getResource("/imagenes/nuevo.gif"));		
 		Icon icono2 = new ImageIcon(imagen2.getImage().getScaledInstance(btnNuevoCorreo.getWidth(),btnNuevoCorreo.getHeight(),Image.SCALE_DEFAULT));		
 		btnNuevoCorreo.setIcon(icono2);
@@ -152,25 +173,10 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				cierraVentana(frmbandejaentrada);
+				cierraVentana(config);
 			}
 		});
-		
-		/* Boton para recibir todos los correos (anteriores y nuevos) */
-		
-		btnRecibirAnteriores = new JButton();
-		btnRecibirAnteriores.setBounds(0, 0, 52, 47);
-		ImageIcon imagenrespaldo = new ImageIcon(principal.class.getResource("/imagenes/reloj.png"));		
-		Icon iconores = new ImageIcon(imagenrespaldo.getImage().getScaledInstance(btnRecibirAnteriores.getWidth(),btnRecibirAnteriores.getHeight(),Image.SCALE_DEFAULT));		
-		btnRecibirAnteriores.setIcon(iconores);
-		btnRecibirAnteriores.setToolTipText("Recibir Anteriores");
-		btnRecibirAnteriores.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				FC.CorreosAntiguos();
-
-			}
-		});
-		
-		VentPrincipal.add(btnRecibirAnteriores);
+		ImageIcon imagenrespaldo = new ImageIcon(principal.class.getResource("/imagenes/reloj.png"));
 		
 		
 		
@@ -203,7 +209,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				abreVentana(frmbandejaentrada);
-				
+				cierraVentana(config);
 				
 				}
 			
@@ -233,6 +239,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				abreVentana(frmborradores);
+				cierraVentana(config);
 				
 			}
 		});
@@ -260,6 +267,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				abreVentana(frmenviados);
+				cierraVentana(config);
 				
 			}
 		});
@@ -289,6 +297,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmeliminados);
 				abreVentana(frmbuzon);
+				cierraVentana(config);
 				
 			}
 		});
@@ -318,6 +327,7 @@ public class principal extends JFrame {
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(frmeliminados);
 				abreVentana(frmspam);
+				cierraVentana(config);
 				
 			}
 		});
@@ -345,6 +355,7 @@ public class principal extends JFrame {
 				cierraVentana(frmspam);
 				cierraVentana(frmbandejaentrada);
 				abreVentana(frmeliminados);
+				cierraVentana(config);
 				
 			}
 		});
@@ -378,9 +389,57 @@ public class principal extends JFrame {
 		ImagenLogo.setBounds(279, 106, 362, 248);
 		VentPrincipal.add(ImagenLogo);
 		
-			
+		
+
+		
+		getLabelTitulo();
 		
 	}
+		private void getLabelTitulo() {
+			
+				JLabel labelTitulo = new JLabel();
+				labelTitulo.setBounds(898, 0, 46, 47);
+				ImageIcon imagenconfig = new ImageIcon(principal.class.getResource("/imagenes/config.png"));
+				Icon iconoconfig = new ImageIcon(imagenconfig.getImage().getScaledInstance(labelTitulo.getWidth(),labelTitulo.getHeight(),Image.SCALE_DEFAULT));
+				labelTitulo.setIcon(iconoconfig);
+				labelTitulo.setVisible(true);
+			
+				labelTitulo.setText("Soy una etiqueta clicable: ");
+				labelTitulo.addMouseListener(new MouseListener() {
+					public void mouseClicked(MouseEvent arg0) {
+					
+						
+						FrmConfiguracion config = new FrmConfiguracion();
+						abreVentana(config);
+					
+						desapareceLogo();	
+						cierraVentana(frmeliminados);
+						cierraVentana(frmenviados);
+						cierraVentana(frmborradores);
+						cierraVentana(frmbuzon);
+						cierraVentana(frmspam);
+						cierraVentana(frmbandejaentrada);
+					
+					}
+					public void mouseEntered(MouseEvent arg0) {
+						
+					}
+					public void mouseExited(MouseEvent arg0) {
+					
+					}
+					public void mousePressed(MouseEvent arg0) {}
+					public void mouseReleased(MouseEvent arg0) {}
+				});
+			
+				VentPrincipal.add(labelTitulo);
+		}
+
+
+
+		
+		
+	
+	
 	/**
 	 * Abre las ventanas sin marco
 	 * @param panel

@@ -32,7 +32,6 @@ public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField usuario;
 	private JTextField textPasswd;
-	boolean verifica_servidor = true; // por ahora queda forzado hasta que se conecte y compruebe la cuenta en el servidor
 	String Status = "NotOk";
 	String Servidor;
 	FachadaCon FC = FachadaCon.getInstancia();
@@ -97,11 +96,11 @@ public class Login extends JFrame {
 								dispose();
 							
 							}else {
-								JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrecta");
+								JOptionPane.showMessageDialog(null, "Usuario y/o Contraseña Incorrecta");
 							}
 							
 						}else {
-							JOptionPane.showMessageDialog(null, "La primer conexión del Usuario debe ser contra el Servidor");
+							JOptionPane.showMessageDialog(null, "Debe tener conexion a internet si es su primer conexion");
 						}
 				
 					}
