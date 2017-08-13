@@ -48,7 +48,7 @@ public class Login extends JFrame {
 		getContentPane().setLayout(null);
 		setLocationRelativeTo(null);  
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setBounds(100, 100, 408, 300);
 		
 		usuario = new JTextField();
@@ -89,7 +89,7 @@ public class Login extends JFrame {
 							
 								FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
 							
-								principal pri = new principal();
+								principal pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
 								pri.setLocationRelativeTo(null); 			
 								pri.setVisible(true);
 								Status = "Ok";
@@ -107,7 +107,7 @@ public class Login extends JFrame {
 					else if(Servidor.compareToIgnoreCase("Valido") == 0){
 						
 						FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());	
-						principal pri = new principal();
+						principal pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
 						pri.setLocationRelativeTo(null); 			
 						pri.setVisible(true);
 						Status = "Ok";

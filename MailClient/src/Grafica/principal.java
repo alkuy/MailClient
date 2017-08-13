@@ -87,7 +87,7 @@ public class principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public principal() {
+	public principal(String usuario) {
 		
 		clave = "correoeduca"; // asignamos el valor de la clave ara encriptar y desencriptar
 		FachadaCon FC = FachadaCon.getInstancia();
@@ -98,7 +98,7 @@ public class principal extends JFrame {
      	setResizable(false);
 		/**
 		 * Panel Principal*/
-     	setTitle("Gestor de Correos - EduMail");
+     	setTitle("Gestor de Correos - EduMail" + usuario);
      	setIconImage(Toolkit.getDefaultToolkit().getImage(principal.class.getResource("/imagenes/icon1.jpg")));
      	setBackground(new Color(0, 128, 128));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
