@@ -47,15 +47,7 @@ public class MuestraCorreo extends JFrame {
 			correo = FL.DevuelveBandejaSalida(String.valueOf(salida.fecha));
 		  }
 		
-		//setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-		 
-	/*    addWindowListener(new java.awt.event.WindowAdapter() {
-	            @Override // sobrescribimos el metodo para preguntar antes de cerrar y que no cierre automticamente
-	            public void windowClosing(java.awt.event.WindowEvent evt) {
-	                cerrar();
-	            }
-	        });*/
-		
+				
 		getContentPane().setBackground(SystemColor.activeCaption);
 		
 		setTitle("Correo");
@@ -92,7 +84,8 @@ public class MuestraCorreo extends JFrame {
 		textcorreo.setBounds(10, 95, 914, 405);
 		textcorreo.setLineWrap(true);
 		getContentPane().add(textcorreo);
-		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripto el texto para mostrarlo
+		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripta primero por Xor
+		texto = FL.Permutar(texto,principal.claveper, principal.clave);	// desencripta por permutacion	
 		textcorreo.setText(texto);
 		
 		boton.aprete = "no";// vuelvo a valor original para nuevas consultas en buzon de salida o enviados

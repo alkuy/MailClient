@@ -505,6 +505,45 @@ public DefaultTableModel DevTablaBandejaSalida(){
 	
    }
    
+   
+   
+   /**
+    * 
+    * @param cuentaBusqueda
+    * @return
+    */
+   public DefaultTableModel DevTablaBusquedaEnviados(String cuentaBusqueda){
+		
+	String col[] = {"Destinatario","Asunto", "clave", "Fecha"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+
+	ArrayList<Correo> correos = this.CargaCorreosOrdenados(setCorreosEnviados);
+	
+	Iterator<Correo> it = correos.iterator();
+	Correo correo;
+		
+	while(it.hasNext()){
+		correo = it.next();
+		String remitente = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+		
+		if(remitente.equals(cuentaBusqueda)){
+		   String asunto = correo.getAsunto();
+		   String fecha = correo.getFecha();		
+		   String carga [] = {remitente, asunto, fecha};	   
+	       modelo.addRow(carga);
+		}
+		}
+	
+	return modelo;
+	
+   }
+   
+   
+   
+   
+   
+   
+   
    /**
     * Metodo que devuelve el objeto correo seleccionado segun fecha de la coleccion Borradores
     * @param Fecha

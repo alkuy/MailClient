@@ -165,7 +165,7 @@ public class FachadaLog {
 		
 		
 		/**
-		 *  metodo que devuelve una tabla para mostrar la busqueda realizada
+		 *  metodo que devuelve una tabla para mostrar la busqueda realizada de Recibidos
 		 * @return TableModel
 		 * @throws SQLException
 		 */
@@ -174,6 +174,18 @@ public class FachadaLog {
 				modelo = correos.DevTablaBusqueda(cuentaBusqueda);
 				return modelo;
 			}
+			
+			
+			/**
+			 *  metodo que devuelve una tabla para mostrar la busqueda realizada de Enviados
+			 * @return TableModel
+			 * @throws SQLException
+			 */
+				public DefaultTableModel DevBusquedaEnviados(String cuentaBusqueda) throws SQLException{
+					DefaultTableModel modelo;
+					modelo = correos.DevTablaBusquedaEnviados(cuentaBusqueda);
+					return modelo;
+				}
 	
 	/** Metodo para pasar los datos de la cuenta a persistencia y dejar el ojeto cuenta instanciado para usar
 	 * 
@@ -445,7 +457,7 @@ public class FachadaLog {
     }
     
     
-    /** Encripta o desencripta texto
+    /** Llama al metodo que Encripta o desencripta texto por Xor
      * 
      * @param texto
      * @param clave
@@ -457,5 +469,23 @@ public class FachadaLog {
              
         return configuracion.EncriptaDesencripta(texto, clave);
     }
+    
+    
+    
+    /** Llama al metodo que Encripta o desencripta por permutacion con clave
+     * 
+     * @param texto
+     * @param clave
+     * @param clavePermut
+     * @return texto permutado
+     */
+    public String Permutar(String texto, String clave, String clavePermut){
+   	 
+   	 
+   	 return configuracion.Permutar(texto, clave, clavePermut);
+    }
+
+    
+    
 }
 

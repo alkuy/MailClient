@@ -52,7 +52,6 @@ public class FrmMuestraEnviados extends JInternalFrame {
       	getContentPane().setLayout(null);
       	
       	txtBuscar = new JTextField();
-      	txtBuscar.setText("buscar...");
       	txtBuscar.setBounds(46, 11, 762, 20);
       	getContentPane().add(txtBuscar);
       	txtBuscar.setColumns(10);
@@ -69,7 +68,46 @@ public class FrmMuestraEnviados extends JInternalFrame {
       	JButton btnBuscar = new JButton();
       	btnBuscar.addActionListener(new ActionListener() {
       		public void actionPerformed(ActionEvent arg0) {
-      		}
+      			
+      			
+				
+          		if(txtBuscar.getText().isEmpty()){ // si no puso nada en la barra de busqueda mustro todos los correos	
+          		
+          			getContentPane().remove(scrlMCMostrarCorreos);
+    				SetTable();
+    				scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+    		      	scrlMCMostrarCorreos.setEnabled(false);
+    		      	scrlMCMostrarCorreos.setSize(793, 301);
+    		      	scrlMCMostrarCorreos.setLocation(10, 57);
+    				//Agregamos el JScrollPane al contenedor
+    				getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);	
+          			
+          		}else{	
+          			
+          			
+    			SetTableBusqueda(txtBuscar.getText()); // cargo el set con los correos que coinciden con la cuenta ingresada
+    			
+    			
+    			
+    			if (tblMuestraCorreos.getRowCount() == 0){ // si no hay coincidencia
+    				/*Quito todo para tener un refresh al instante*/
+    				//getContentPane().remove(scrlMCMostrarCorreos);
+    				JOptionPane.showMessageDialog(new JPanel(), "El correo/s asocido/s a la cuenta ingresada no existe");
+    			}else{
+    			
+    			   getContentPane().remove(scrlMCMostrarCorreos);
+          		   scrlMCMostrarCorreos = new JScrollPane(tblMuestraCorreos);
+    	      	   scrlMCMostrarCorreos.setEnabled(false);
+    	      	   scrlMCMostrarCorreos.setSize(793, 301);
+    	      	   scrlMCMostrarCorreos.setLocation(10, 57);
+    			   //Agregamos el JScrollPane al contenedor
+    			   getContentPane().add(scrlMCMostrarCorreos, BorderLayout.CENTER);
+    			}
+    			
+    			
+    			}
+          			
+       		}
       	});
       	btnBuscar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
       	btnBuscar.setBounds(10, 11, 26, 20);
@@ -178,10 +216,25 @@ public class FrmMuestraEnviados extends JInternalFrame {
 
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		/*Oculto columnas con Timestamp usada como clave del diccionario */
-	/*	TableColumn myTableColumn1 = tblMuestraCorreos.getColumnModel().getColumn(2);
-		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn1);
-		*/
+	
 		
 	}
+	
+	public void SetTableBusqueda(String cuentaBusqueda){
+		String col[] = {"Remitente","Asunto", "Fecha"};
+		DefaultTableModel modelo = new DefaultTableModel(col,0);
+		try{
+			modelo = FL.DevBusquedaEnviados(cuentaBusqueda);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		tblMuestraCorreos = new JTable(modelo);
+		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		
+		
+		
+	}
+	
+	
 }

@@ -11,6 +11,8 @@ import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
@@ -85,7 +87,8 @@ public class MuestraRecibido extends JFrame {
 		scrollPane.setViewportView(textcorreo);
 		textcorreo.setEditable(false);
 		textcorreo.setLineWrap(true);
-		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripto el texto para mostrarlo
+		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripto por Xor
+		texto = FL.Permutar(texto,principal.claveper, principal.clave);//desecncripta por permutacion con clave		
 		textcorreo.setText(texto);
 		scrollPane.setViewportView(textcorreo);
 		
@@ -106,6 +109,13 @@ public class MuestraRecibido extends JFrame {
 		JButton btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Object [] opciones ={"ELIMINAR","Cancelar"};
+				int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+				if (eleccion == JOptionPane.YES_OPTION){					
+					
+					FL.EliminarCorreo(FL.Devuelve_Ruta_Recibidos(), recibido.fecha, FL.Devuelve_Ruta_Papelera());
+					dispose();	
+				}
 			}
 		});
 		btnEliminar.setBounds(810, 547, 115, 23);

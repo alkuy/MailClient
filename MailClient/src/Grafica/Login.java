@@ -24,6 +24,7 @@ import logica.FachadaLog;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 	/**
@@ -36,6 +37,7 @@ public class Login extends JFrame {
 	String Servidor;
 	FachadaCon FC = FachadaCon.getInstancia();
 	FachadaLog FL = new FachadaLog();
+	private JPasswordField passwordField;
 	/**
 	 * Create the panel.
 	 */
@@ -66,10 +68,13 @@ public class Login extends JFrame {
 		comboDominio.setBounds(265, 89, 121, 25);
 		getContentPane().add(comboDominio);
 		
-		textPasswd = new JTextField();
+		textPasswd = new JPasswordField();
 		textPasswd.setBounds(44, 140, 342, 25);
 		getContentPane().add(textPasswd);
-		textPasswd.setColumns(10);
+		
+
+		
+		/* Boton Login */ 
 		
 		JButton btnLogin = new JButton("");
 		btnLogin.addActionListener(new ActionListener() {
@@ -156,6 +161,8 @@ public class Login extends JFrame {
 		Icon iconopas = new ImageIcon(imagenpas.getImage().getScaledInstance(lblPas.getWidth(),lblPas.getHeight(),Image.SCALE_DEFAULT));
 		lblPas.setIcon(iconopas);
 		getContentPane().add(lblPas);
+		
+		
 
 	}
 }

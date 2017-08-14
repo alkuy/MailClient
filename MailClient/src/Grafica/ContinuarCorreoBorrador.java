@@ -111,6 +111,8 @@ public class ContinuarCorreoBorrador extends JFrame {
 				fecha = fecha.replace(":","-");
 				String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
 				String asunto = verifica.remplazoCaracteres(textasunto.getText());
+				texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
+				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
 				
 				String cuenta = textpara.getText();
 				int index = cuenta.indexOf("@");

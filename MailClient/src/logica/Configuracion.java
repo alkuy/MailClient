@@ -148,28 +148,99 @@ public class Configuracion {
 	   
    }
    
-   /** Metodo de encriptacion por Xor 
-    * 
-    * @param dato
+   /** Metodo para encriptar por permutacion en base a una clave seteada y segun la permutacion de ese clave (la clave no puede tener letrs repetidas)
+    *  
+    * @param texto
     * @param clave
-    * @return texto encriptado
-    * 
+    * @param clavePermut
+    * @return texto permutado
     */
    
-   public static String EncriptaDesencripta(String texto, String clave){
-       String textoEncriptado="";
+  public static String Permutar(String texto, String clave, String clavePermut){
+ 	   
+ 	   
+ 	   int valor = clave.length();//guardo el valor del largo de la clave
+ 	   
+ 	   	  	   
+ 	   // igualo inicialmente un arraypermutado al texto original
+ 	   char[] ArrayTextoPermut = texto.toCharArray();	
+ 	   
+ 	   // pasamos el texto a un array de caracteres
+ 	   char[] ArrayTexto = texto.toCharArray();
+ 	   
+	  // pasamos la clave a un array de caracteres
+	  char[] ArrayClave = clave.toCharArray();
+	 	   
+	   // pasamos la clave permutada a un array de caracteres
+	   char[] ArrayClavePermut = clavePermut.toCharArray();
+ 	   
+ 	  
+ 	   
+ 	   int h = 0; 
+ 	   int j = 0;
+ 	   
+ 	   
+ 	   if (!(texto.length()<valor)){// si el texto no es menor que el largo de la clave
+ 		   
+ 		   		   
+ 	      for (int i = 0; i<texto.length(); i++){ // este for es para recorrer hasta el final el texto e ir permutando		  
+ 		   
+ 		   while(ArrayClavePermut[h] != ArrayClave[j] && h<=valor){ // recorro hasta que el caracter en la clave permutada y la clave original coinciden y hasta que llegue al largo de la clave
+ 			   j++;
+ 		   }
+ 		   
+ 		   ArrayTextoPermut[i] = ArrayTexto[j];	
+ 		   j = 0;
+ 		   h++;	
+ 		  
+ 		   if( h == valor){ // si llegue al largo de la clave
+ 			   texto = texto.substring(valor); // saco del texto lo caracteres que ya se permutaron y guardaron
+ 			   ArrayTexto = texto.toCharArray(); // actualizo el array de caracteres para seguir permutando
+ 			   h = 0;			   
+ 			   
+ 		   }  		  	 
+ 		  
+ 	    }
+ 	   
+ 	  }
+ 	   
+ 	  texto = String.valueOf(ArrayTextoPermut); // cargo un String con todo el texto permutado
+       return texto;
+ 	   
+ 	
+     }// fin Permutar.
+    
+    
+    
+    
+    
+    /** Metodo de encriptacion por Xor utilizando los caracteres de la clave seteada 
+     * 
+     * @param dato
+     * @param clave
+     * @return texto encriptado o desencriptado
+     * 
+     */
+    
+    public static String EncriptaDesencripta(String texto, String clave){
+        
+ 	   String textoEncriptado="";
+ 	   
 
-       if (texto.length() > clave.length()) { // si el largo del texto supera el de la clave duplico esta ultima hasta que me alcance
-           for (int i=0; i<texto.length(); i++)
-               clave+=clave.charAt(i);
-       }
+ 	   
+ 	   // Realizamos una encriptacion utilizando los caracteres de la clave y cifrando por Xor
 
-       for (int i=0; i<texto.length(); i++){
-           textoEncriptado+=(char) (texto.charAt(i)^clave.charAt(i)); // aplico cifrado por Xor
-       }
+        if (texto.length() > clave.length()) { // si el largo del texto supera el de la clave duplicamos esta ultima hasta que me alcance
+            for (int i=0; i<texto.length(); i++)
+                clave+=clave.charAt(i);
+        }
 
-       return textoEncriptado;
-   }
+        for (int i=0; i<texto.length(); i++){
+            textoEncriptado+=(char) (texto.charAt(i)^clave.charAt(i)); // aplicamos cifrado por Xor
+        }
+
+        return textoEncriptado;
+    }//Fin Encriptar por Xor
 
 
 }

@@ -250,11 +250,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		/*Oculto columnas con Timestamp usada como clave del diccionario */
-	/*	TableColumn myTableColumn2 = tblMuestraCorreos.getColumnModel().getColumn(2);
-		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn2);*/
-		
-		
+			
 	}
 	
 	public void SetTableBusqueda(String cuentaBusqueda){
@@ -269,9 +265,6 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		tblMuestraCorreos = new JTable(modelo);
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		/*Oculto columnas con Timestamp usada como clave del diccionario */
-	/*	TableColumn myTableColumn2 = tblMuestraCorreos.getColumnModel().getColumn(2);
-		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn2);*/
 		
 		
 	}

@@ -99,9 +99,10 @@ public class Nuevo_Correo extends JFrame {
 				
 				String fecha = timestamp.toString();
 				String texto = verifica.remplazoCaracteres(textcorreo.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
-				String asunto = verifica.remplazoCaracteres(textasunto.getText());
-				texto = FL.encriptaOdesencripta(texto,principal.clave);// encripta el texto de correo antes de guardarlo en buzon de salida
-				
+				String asunto = verifica.remplazoCaracteres(textasunto.getText());				
+                texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
+				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
+								
 				String cuenta = textpara.getText();
 				int index = cuenta.indexOf("@");
 				String nom_receptor = cuenta.substring(0,index);//Para separar de la cuenta que ingreso el nombre de usuario del dominio

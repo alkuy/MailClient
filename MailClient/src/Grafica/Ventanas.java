@@ -18,10 +18,8 @@ public class Ventanas {
 			  
 			  JFrame.setDefaultLookAndFeelDecorated(true);
 			  JDialog.setDefaultLookAndFeelDecorated(true);
-			  //  UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-			  //UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
-			  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); // el que mas me gusto
-			 // UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+			  UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel"); 
+			
 			 
 			}
 			catch (Exception e)
@@ -32,7 +30,7 @@ public class Ventanas {
 		Presentacion present = new Presentacion();
 		present.setLocationRelativeTo(null);
 		FachadaLog FL = new FachadaLog();
-		FL.crearDirectorioCuenta(); // se crea el direccorio cuent si es el primer ingreso
+		FL.crearDirectorioCuenta(); // se crea el direccorio cuenta si es el primer ingreso
 		FachadaCon FC = FachadaCon.getInstancia();
 		FC.IniSocket();
 		

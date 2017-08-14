@@ -6,19 +6,14 @@ import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-
-
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.SwingConstants;
-
 import javax.swing.ImageIcon;
-
 import javax.mail.MessagingException;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -26,20 +21,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
-
 import com.icegreen.greenmail.user.UserException;
-
 import Conectividad.FachadaCon;
-
 import javax.swing.border.LineBorder;
-import javax.swing.JComboBox;
-import java.awt.ComponentOrientation;
-import java.awt.List;
-import javax.swing.DefaultComboBoxModel;
 
 
 public class principal extends JFrame {
@@ -72,7 +59,7 @@ public class principal extends JFrame {
 	private FrmConfiguracion config;
 	private FrmMuestraEliminados frmeliminados;
 	public static String clave = new String(); // variable static global utilizada como clave de encriptacion y desencriptacion
-	private JComboBox comboBox;
+	public static String claveper = new String();// variable static global utilizada como clave permutada
 	
 	
 	public static JPanel getInstancia() {
@@ -89,7 +76,8 @@ public class principal extends JFrame {
 	 */
 	public principal(String usuario) {
 		
-		clave = "correoeduca"; // asignamos el valor de la clave ara encriptar y desencriptar
+		clave = "inet"; // asignamos el valor de la clave para encriptar y desencriptar permutando primero y luego por Xor
+		claveper = "etni"; //clave permutada para la encriptacion por permutacion
 		FachadaCon FC = FachadaCon.getInstancia();
 		FachadaLog FL = new FachadaLog();  	
 		config = new FrmConfiguracion();
@@ -104,7 +92,7 @@ public class principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 950, 600);
 		VentPrincipal = new JPanel();
-		VentPrincipal.setToolTipText("Configuraci\u00F3n");
+		VentPrincipal.setToolTipText("");
 		VentPrincipal.setBackground(new Color(176, 224, 230));
 		VentPrincipal.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setContentPane(VentPrincipal);
@@ -141,7 +129,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(config);
-				int i, j;
+				int i;
 				String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto"};
 				DefaultTableModel modelo = new DefaultTableModel(col,0);
 				modelo = FL.DevCorreosSalida();
@@ -205,7 +193,6 @@ public class principal extends JFrame {
 				cierraVentana(config);
 			}
 		});
-		ImageIcon imagenrespaldo = new ImageIcon(principal.class.getResource("/imagenes/reloj.png"));
 		
 		
 		
@@ -421,26 +408,25 @@ public class principal extends JFrame {
 		
 
 		
-		getLabelTitulo();
+		getLabelConfig();
 		
 	}
-		private void getLabelTitulo() {
+	
+	
+	// Para crear un boton en el label de configuracion
+		private void getLabelConfig() {
 			
-				JLabel labelTitulo = new JLabel();
-				labelTitulo.setBounds(898, 0, 46, 47);
+				JLabel labelConfig = new JLabel();
+				labelConfig .setBounds(898, 0, 46, 47);
 				ImageIcon imagenconfig = new ImageIcon(principal.class.getResource("/imagenes/config.png"));
-				Icon iconoconfig = new ImageIcon(imagenconfig.getImage().getScaledInstance(labelTitulo.getWidth(),labelTitulo.getHeight(),Image.SCALE_DEFAULT));
-				labelTitulo.setIcon(iconoconfig);
-				labelTitulo.setVisible(true);
-			
-				labelTitulo.setText("Soy una etiqueta clicable: ");
-				labelTitulo.addMouseListener(new MouseListener() {
+				Icon iconoconfig = new ImageIcon(imagenconfig.getImage().getScaledInstance(labelConfig .getWidth(),labelConfig .getHeight(),Image.SCALE_DEFAULT));
+				labelConfig .setIcon(iconoconfig);
+				labelConfig .setVisible(true);				
+				labelConfig .addMouseListener(new MouseListener() {
 					public void mouseClicked(MouseEvent arg0) {
 					
-						
-						
-						abreVentana(config);
-					
+							
+						abreVentana(config);					
 						desapareceLogo();	
 						cierraVentana(frmeliminados);
 						cierraVentana(frmenviados);
@@ -460,15 +446,10 @@ public class principal extends JFrame {
 					public void mouseReleased(MouseEvent arg0) {}
 				});
 			
-				VentPrincipal.add(labelTitulo);
+				VentPrincipal.add(labelConfig );
 		}
 
 
-
-		
-		
-	
-	
 	/**
 	 * Abre las ventanas sin marco
 	 * @param panel
