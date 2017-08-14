@@ -23,6 +23,7 @@ public class Configuracion {
 		private static String carpetaSpam;
 		private static String carpetaCuentas = "c:\\Cuentas\\";
 		private static String carpetaDominio = "c:\\Cuentas\\Dominios\\";
+		private static String carpetaAgenda = "c:\\Cuentas\\Agenda\\";
 		
 	  
 	  
@@ -46,6 +47,11 @@ public class Configuracion {
 	//Devuelce la carpeta Dominios
 	public static String getCarpetaDominios(){
 		return carpetaDominio;
+	}
+	
+	//Devuelce la carpeta Agenda
+	public static String getCarpetaAgenda(){
+		return carpetaAgenda;
 	}
 	
 		/**
@@ -182,6 +188,13 @@ public class Configuracion {
 		
 		File Dominio = new File(getCarpetaDominios());
 		Dominio.mkdir();
+	}
+	
+	//Crea la carpeta Agenda dentro de la Carpeta Cuentas C:\\Cuentas\Agenda
+	public static void crearDirectorioAgenda(){
+		
+		File Agenda = new File(getCarpetaAgenda());
+		Agenda.mkdir();
 	}
 	
 	//Crea el directorio del usuario segun la cuenta con la que se logeo si es que no ingreso antes con la misma

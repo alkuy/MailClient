@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
-
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.Image;
@@ -127,6 +127,13 @@ public class principal extends JFrame {
 		btnEnv_Rec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
+				String [] Dominios = FL.GetDom();
+				String [] Cuentas = FL.GetCuentas();
+				String [] Dominio;
+				boolean Dom, cta;
+				Dom = false;
+				cta = false;
+				
 				cierraVentana(frmenviados);
 				cierraVentana(frmborradores);
 				cierraVentana(frmbuzon);
@@ -141,8 +148,29 @@ public class principal extends JFrame {
 				JTable T = new JTable(modelo);
 				for (i=0; i < T.getRowCount(); i++){
 					try {
-						FC.EnviaCorreo(T.getValueAt(i, 0).toString(), T.getValueAt(i, 1).toString(), T.getValueAt(i, 2).toString(), T.getValueAt(i, 3).toString(), T.getValueAt(i, 4).toString(), T.getValueAt(i, 5).toString());
-						FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
+						Dominio = T.getValueAt(i, 3).toString().split("@");
+						for (int q = 0; q < Dominios.length; q++ ){
+							if (Dominio[1].equals(Dominios[q]))
+								Dom = true;
+						}
+						if (Dom){
+							for (int z = 0; z < Cuentas.length; z++){
+								if(Cuentas[z].equals(T.getValueAt(i, 3).toString()))
+									cta = true;
+							}
+						}
+						if(!Dom){
+							FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
+						}
+						else if (cta){
+							FC.EnviaCorreo(T.getValueAt(i, 0).toString(), T.getValueAt(i, 1).toString(), T.getValueAt(i, 2).toString(), T.getValueAt(i, 3).toString(), T.getValueAt(i, 4).toString(), T.getValueAt(i, 5).toString());
+							FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Error al enviar correo, cuenta "+T.getValueAt(i, 3).toString()+" no existe");
+						}
+
+					
 					} catch (IOException | MessagingException | UserException | InterruptedException e) {
 						// TODO Bloque catch generado automáticamente
 						e.printStackTrace();

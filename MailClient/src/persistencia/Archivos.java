@@ -349,8 +349,125 @@ public class Archivos {
 		 }
 	
 		
-		
+		//Guarda el objeto Agenda en un archivo de la cuenta
+			public void guardaAgenda(String Carpeta, Agenda A){
+				try {
+					File f = new File(Carpeta+"Agenda.txt");
+					FileWriter fw;
+					BufferedWriter bw;
+					if (f.exists()){
+						if (contador == 0){
+							f.delete();
+							f.createNewFile();
+							fw = new FileWriter(f, true);
+							bw = new BufferedWriter(fw);
+							//bw.newLine();
+							bw.write(A.getNomUsuario()+"%"+A.getCuentaUsuario());
+							contador++;
+						}else{
+							fw = new FileWriter(f, true);
+							bw = new BufferedWriter(fw);
+							bw.newLine();
+							bw.write(A.getNomUsuario()+"%"+A.getCuentaUsuario());
+						}
+						
+					}else{
+						fw = new FileWriter(f, true);
+						bw = new BufferedWriter(fw);
+						bw.write(A.getNomUsuario()+"%"+A.getCuentaUsuario());
+						contador++;
+					}
+					bw.close();
+					fw.close();
+				}catch (Exception e){
+					
+				}
+			}
 			
+			
+			//Metodo para leer los Usuario del archivo Agenda
+			public String[][] LeerAgenda(String Carpeta){
+				ArrayList<Agenda> LisAgenda = new ArrayList<Agenda>();
+				File f = new File(Carpeta+"Agenda.txt");
+				Scanner s = null;
+				int Cantidad;
+				
+				//En primer instancia creamos un Array list para obtener los Usuarios con su Cuenta respectiva
+				try{
+					s = new Scanner(f);
+					while (s.hasNextLine()){
+						String linea = s.nextLine();
+						String [] cortarString = linea.split("%");
+						Agenda A = new Agenda();
+						A.setNomUsuario(cortarString[0]);
+						A.setCuentaUsuario(cortarString[1]);
+						
+						LisAgenda.add(A);
+					}
+				}catch(Exception e){
+					
+				}finally{
+					try{
+						if (s != null)
+							s.close();
+					}catch(Exception e2){
+						
+					}
+				}
+				
+				//En segunda instancia creamos un Array de String que contenga solo los dominios
+				Cantidad = LisAgenda.size();
+				String[][] Agenda = new String[Cantidad][2];
+				for(int i=0; i < Cantidad; i++){
+					Agenda[i][0] = LisAgenda.get(i).getNomUsuario();
+					Agenda[i][1] = LisAgenda.get(i).getCuentaUsuario();
+				}
+				
+				//Devuelvo el Array
+				return Agenda;
+			}
+			
+			
+			//Metodo para leer solo las cuentas de la agenda
+			public String[] LeerCtaAgenda(String Carpeta){
+				ArrayList<Agenda> LisAgenda = new ArrayList<Agenda>();
+				File f = new File(Carpeta+"Agenda.txt");
+				Scanner s = null;
+				int Cantidad;
+				
+				//En primer instancia creamos un Array list para obtener los Usuarios con su Cuenta respectiva
+				try{
+					s = new Scanner(f);
+					while (s.hasNextLine()){
+						String linea = s.nextLine();
+						String [] cortarString = linea.split("%");
+						Agenda A = new Agenda();
+						A.setNomUsuario(cortarString[0]);
+						A.setCuentaUsuario(cortarString[1]);
+						
+						LisAgenda.add(A);
+					}
+				}catch(Exception e){
+					
+				}finally{
+					try{
+						if (s != null)
+							s.close();
+					}catch(Exception e2){
+						
+					}
+				}
+				
+				//En segunda instancia creamos un Array de String que contenga solo los dominios
+				Cantidad = LisAgenda.size();
+				String[] Cuenta = new String[Cantidad];
+				for(int i=0; i < Cantidad; i++){
+					Cuenta[i] = LisAgenda.get(i).getCuentaUsuario();
+				}
+				
+				//Devuelvo el Array
+				return Cuenta;
+			}
 		
 
 }

@@ -351,6 +351,16 @@ public class FachadaLog {
     	return Dominios;
     }
     
+	/**
+	 * Devuelve el array de Cuentas del Servidor de Correo
+	 * @return String[] Lista de Cuentas
+	 */
+    public String[] GetCuentas(){
+    	String[] Cuentas;
+    	Cuentas = BD.GetCuentas();
+    	return Cuentas;
+    }
+    
     /**
      * Elimina correo de hastable y persistencia
      *  @param clave 

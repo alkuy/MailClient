@@ -62,6 +62,18 @@ public class FachadaPers {
 	}
 	
 	/**
+	 * Carga los usuario en un archivo para la agenda
+	 * @param Nombre del Usuario
+	 * @param Cuenta del Usuario
+	 */
+	public void GuardaUsuariosAgenda(String NomUsu, String CuentaUsu){
+		Agenda A = new Agenda(NomUsu, CuentaUsu);
+		Archivos Arch = new Archivos();
+		String CarpetaAg = conf.getCarpetaAgenda();
+		Arch.guardaAgenda(CarpetaAg, A);
+	}
+	
+	/**
 	 * Metodo que lista los archivos del deirectorio
 	 * @param directorio que queremos leer
 	 * @return Array de String con los nombres de los archivos
@@ -226,6 +238,11 @@ public class FachadaPers {
         	conf.crearDirectorioDominios();
         }
         
+        public void crearDirectorioAgenda(){
+            
+        	conf.crearDirectorioAgenda();
+        }
+        
         public void crearDirectorios(String nom, String dom){
     		
     		conf.crearDirectorios(nom, dom);
@@ -356,6 +373,26 @@ public class FachadaPers {
 		Archivos Arch = new Archivos();
 		Dom = Arch.LeerDom(conf.getCarpetaDominios());
 		return Dom;
+	}
+	/**
+	 * Metodo que devuelve un array bidimensional con los datos de cada usuario por fila [0]=NomUsu, [1]=CuentaUsu
+	 * @return String[][]
+	 */
+	public String[][] GetAgenda(){
+		String[][] Agenda;
+		Archivos Arch = new Archivos();
+		Agenda = Arch.LeerAgenda(conf.getCarpetaAgenda());
+		return Agenda;
+	}
+	/**
+	 * Metodo que devuelve un array con las cuentas del servidor de correo
+	 * @return String[]
+	 */
+	public String[] GetCuentas(){
+		String[] Cuentas;
+		Archivos Arch = new Archivos();
+		Cuentas = Arch.LeerCtaAgenda(conf.getCarpetaAgenda());
+		return Cuentas;
 	}
 	/**
 	 * Metodo que instancia la eliminacion de un archivo dado

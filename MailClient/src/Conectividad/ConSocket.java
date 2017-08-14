@@ -23,7 +23,7 @@ public class ConSocket {
 	}
 	
 	public void ConToServer(){
-		String NomDom, msg;
+		String NomDom, msg, NomUsu, CuentaUsu;
 		int prioridad, num;
 		
 		try{
@@ -35,11 +35,20 @@ public class ConSocket {
 			salida.writeUTF(msg);
 			
 			msg = entrada.readUTF();
-			while (msg.compareToIgnoreCase("fin") != 0){
+			while (msg.compareToIgnoreCase("finDom") != 0){
 				NomDom = msg;
 				num = entrada.readInt();
 				prioridad = num;
 				BD.GuardaDominios(NomDom, num);
+				//System.out.println("Dominio: "+NomDom+" Prioridad: "+num+"\t");
+				msg = entrada.readUTF();
+			}
+			
+			msg = entrada.readUTF();
+			while (msg.compareToIgnoreCase("fin") != 0){
+				NomUsu = msg;
+				CuentaUsu = entrada.readUTF();
+				BD.GuardaUsuariosAgenda(NomUsu, CuentaUsu);
 				//System.out.println("Dominio: "+NomDom+" Prioridad: "+num+"\t");
 				msg = entrada.readUTF();
 			}

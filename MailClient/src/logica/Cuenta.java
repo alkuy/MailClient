@@ -84,6 +84,7 @@ public class Cuenta {
 			
 			BD.crearDirectorioCuenta();
 			BD.crearDirectorioDominios();
+			BD.crearDirectorioAgenda();
 		}
 	
 	
