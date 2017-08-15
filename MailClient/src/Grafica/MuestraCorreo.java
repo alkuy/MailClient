@@ -10,8 +10,6 @@ import logica.Correo;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;

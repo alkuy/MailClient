@@ -21,8 +21,7 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-import org.apache.commons.*;
-import org.apache.commons.lang3.StringEscapeUtils;
+
 
 
 public class Nuevo_Correo extends JFrame {
