@@ -132,7 +132,7 @@ public class principal extends JFrame {
 				int i;
 				String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto"};
 				DefaultTableModel modelo = new DefaultTableModel(col,0);
-				modelo = FL.DevCorreosSalida();
+				modelo = FL.DevPrioritarios();
 				JTable T = new JTable(modelo);
 				for (i=0; i < T.getRowCount(); i++){
 					try {

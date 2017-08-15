@@ -142,6 +142,18 @@ public class FachadaLog {
 			}
 		
 		/**
+		 *  metodo que devuelve una tabla para envio masivo de mails
+		 * @return TableModel
+		 * 
+		 */
+			public DefaultTableModel DevPrioritarios(){
+				Scheduling Schedul = new Scheduling();
+				DefaultTableModel modelo;
+				modelo = Schedul.AlgoritmoPrioridad();
+				return modelo;
+			}	
+			
+		/**
 		 *  metodo que devuelve una tabla para mostrar Eliminados
 		 * @return TableModel
 		 * @throws SQLException

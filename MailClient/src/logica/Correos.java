@@ -385,7 +385,7 @@ public DefaultTableModel DevTablaBandejaSalida(){
    public DefaultTableModel DevTablaSalidaPri(){
 	String [][] Pri;
 	Cuenta C = Cuenta.getInstancia();
-	String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto", "Fecha", "Prioridad"};
+	String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto", "Prioridad", "Fecha"};
 	DefaultTableModel modelo = new DefaultTableModel(col,0);
 	boolean match = false;
 	int i;
@@ -406,10 +406,12 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		String Prioridad = null;
 		
 		i = 0;
+		match = false;
 		while(i < Pri.length && !match){
 			if (Pri[i][0].equals(correo.getDestinatario_dominio()))
 				match = true;
-			i++;
+			else
+				i++;
 		}
 		
 		if (match){
@@ -417,7 +419,7 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		}
 		
 		
-		String carga [] = {NomEmisor, PassEmisor, CuentaEmisor, CuentaDest, asunto, Texto, fecha, Prioridad};	   
+		String carga [] = {NomEmisor, PassEmisor, CuentaEmisor, CuentaDest, asunto, Texto, Prioridad, fecha};	   
 	   	modelo.addRow(carga);
 		}
 	
