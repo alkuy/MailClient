@@ -374,6 +374,18 @@ public class FachadaPers {
 		Dom = Arch.LeerDom(conf.getCarpetaDominios());
 		return Dom;
 	}
+	
+	/**
+	 * Trae los dominios para le envio por prioridad
+	 * @return String[]
+	 */
+	public String[][] GetDominioPri(){
+		String[][] Dom;
+		Archivos Arch = new Archivos();
+		Dom = Arch.LeerDomPri(conf.getCarpetaDominios());
+		return Dom;
+	}
+	
 	/**
 	 * Metodo que devuelve un array bidimensional con los datos de cada usuario por fila [0]=NomUsu, [1]=CuentaUsu
 	 * @return String[][]

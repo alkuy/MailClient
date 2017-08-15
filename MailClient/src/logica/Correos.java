@@ -377,6 +377,55 @@ public DefaultTableModel DevTablaBandejaSalida(){
    }
    
    /**
+    * Devuelve una tabla para el envío de correos desde Prioridad
+    * 
+    * 
+    * @return modelTable
+    */
+   public DefaultTableModel DevTablaSalidaPri(){
+	String [][] Pri;
+	Cuenta C = Cuenta.getInstancia();
+	String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto", "Fecha", "Prioridad"};
+	DefaultTableModel modelo = new DefaultTableModel(col,0);
+	boolean match = false;
+	int i;
+
+	Enumeration<Correo> cor = setBandejaSalida.elements();
+	Correo correo;
+	Pri = FachPer.GetDominioPri();
+	
+	while(cor.hasMoreElements()){
+		correo = cor.nextElement();
+		String NomEmisor = correo.getEmisor_nombre();
+		String PassEmisor = C.getContraseña_cuenta();
+		String CuentaEmisor = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
+		String CuentaDest = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
+		String asunto = correo.getAsunto();
+		String Texto = correo.getTexto();
+		String fecha = correo.getFecha();
+		String Prioridad = null;
+		
+		i = 0;
+		while(i < Pri.length && !match){
+			if (Pri[i][0].equals(correo.getDestinatario_dominio()))
+				match = true;
+			i++;
+		}
+		
+		if (match){
+			Prioridad = Pri[i][1];
+		}
+		
+		
+		String carga [] = {NomEmisor, PassEmisor, CuentaEmisor, CuentaDest, asunto, Texto, fecha, Prioridad};	   
+	   	modelo.addRow(carga);
+		}
+	
+	return modelo;
+	
+   }
+   
+   /**
     * Devuelve una tabla con remitente, asunto y fecha de cada correo recibido 
     * que se cargo en memoria anteriormente desde el disco 
     * para mostrar en la bandeja de entrada

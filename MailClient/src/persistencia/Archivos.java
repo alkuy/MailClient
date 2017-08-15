@@ -200,6 +200,49 @@ public class Archivos {
 		}
 		
 		
+		//Metodo para leer los dominios del Archivo Dominios
+				public String[][] LeerDomPri(String Carpeta){
+					ArrayList<Dominio> LisDom = new ArrayList<Dominio>();
+					File f = new File(Carpeta+"Dominio.txt");
+					Scanner s = null;
+					int Cantidad;
+					
+					//En primer instancia creamos un Array list para obtener los dominios con su prioridad
+					try{
+						s = new Scanner(f);
+						while (s.hasNextLine()){
+							String linea = s.nextLine();
+							String [] cortarString = linea.split("%");
+							Dominio D = new Dominio();
+							D.setNombre_dominio(cortarString[0]);
+							D.setPrioridad(Integer.parseInt(cortarString[1]));
+							
+							LisDom.add(D);
+						}
+					}catch(Exception e){
+						
+					}finally{
+						try{
+							if (s != null)
+								s.close();
+						}catch(Exception e2){
+							
+						}
+					}
+					
+					//En segunda instancia creamos un Array de String que contenga solo los dominios
+					Cantidad = LisDom.size();
+					String[][] Dominios = new String[Cantidad][2];
+					for(int i=0; i < Cantidad; i++){
+						Dominios[i][0] = LisDom.get(i).getNombre_dominio();
+						Dominios[i][1] = String.valueOf(LisDom.get(i).getPrioridad());
+					}
+					
+					//Devuelvo el Array
+					return Dominios;
+				}
+				
+		
 		/**
 		 * Elimina archivo de la carpeta especificada
 		 * @param directorio
