@@ -72,7 +72,10 @@ public class FrmResponder extends JFrame {
 		textcorreo.append(System.getProperty("line.separator"));
 		textcorreo.append("ASUNTO: "+muestra.asunto);
 		textcorreo.append(System.getProperty("line.separator"));
-		textcorreo.append(muestra.textoanterior);
+		textcorreo.append(System.getProperty("line.separator"));
+		String textAnterior = FL.encriptaOdesencripta(muestra.textoanterior, principal.clave); // desencripta primero por Xor
+		textAnterior = FL.Permutar(textAnterior,principal.claveper, principal.clave);	// desencripta por permutacion	
+		textcorreo.append(textAnterior);
 		textcorreo.setCaretPosition(0);
 		getContentPane().add(textcorreo);
 				
