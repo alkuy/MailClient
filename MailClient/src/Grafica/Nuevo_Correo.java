@@ -17,8 +17,13 @@ import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import org.apache.commons.*;
+import org.apache.commons.lang3.StringEscapeUtils;
+
 
 public class Nuevo_Correo extends JFrame {
 	
@@ -99,7 +104,8 @@ public class Nuevo_Correo extends JFrame {
 				
 				String fecha = timestamp.toString();
 				String texto = textcorreo.getText();
-				String asunto = verifica.remplazoCaracteres(textasunto.getText());				
+				String asunto = verifica.remplazoCaracteres(textasunto.getText());
+				texto = tildes(texto);
                 texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
 				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
 				texto = verifica.remplazoCaracteres(texto);// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
@@ -188,5 +194,18 @@ public class Nuevo_Correo extends JFrame {
 			 dispose();	
 			}else{}
 						
+		}
+		
+		public String tildes(String texto){
+			// Cadena de caracteres original a sustituir.
+		    String original = "·‡‰ÈËÎÌÏÔÛÚˆ˙˘uÒ¡¿ƒ…»ÀÕÃœ”“÷⁄Ÿ‹—Á«";
+		    // Cadena de caracteres ASCII que reemplazar·n los originales.
+		    String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+		    String output = texto;
+		    for (int i=0; i<original.length(); i++) {
+		        // Reemplazamos los caracteres especiales.
+		        output = output.replace(original.charAt(i), ascii.charAt(i));
+		    }//for i
+		    return output;
 		}
 }

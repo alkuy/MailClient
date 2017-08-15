@@ -9,6 +9,9 @@ import javax.swing.JFrame;
 import logica.Correo;
 import logica.FachadaLog;
 import javax.swing.JTextArea;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
@@ -86,6 +89,7 @@ public class MuestraCorreo extends JFrame {
 		getContentPane().add(textcorreo);
 		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripta primero por Xor
 		texto = FL.Permutar(texto,principal.claveper, principal.clave);	// desencripta por permutacion	
+		
 		textcorreo.setText(texto);
 		
 		boton.aprete = "no";// vuelvo a valor original para nuevas consultas en buzon de salida o enviados
