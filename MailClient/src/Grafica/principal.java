@@ -1,6 +1,7 @@
 package Grafica;
 
 import logica.FachadaLog;
+import persistencia.Agenda;
 
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -58,6 +59,7 @@ public class principal extends JFrame {
 	private FrmMuestraSpam frmspam;
 	private FrmConfiguracion config;
 	private FrmMuestraEliminados frmeliminados;
+	private FrmAgenda frmagenda;
 	public static String clave = new String(); // variable static global utilizada como clave de encriptacion y desencriptacion
 	public static String claveper = new String();// variable static global utilizada como clave permutada
 	
@@ -129,6 +131,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(config);
+				cierraVentana(config.getFrmAgenda());
 				int i;
 				String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto"};
 				DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -191,6 +194,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(config);
+				cierraVentana(config.getFrmAgenda());
 			}
 		});
 		
@@ -226,6 +230,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				abreVentana(frmbandejaentrada);
 				cierraVentana(config);
+				cierraVentana(config.getFrmAgenda());
 				
 				}
 			
@@ -256,7 +261,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				abreVentana(frmborradores);
 				cierraVentana(config);
-				
+				cierraVentana(config.getFrmAgenda());
 			}
 		});
 		
@@ -284,7 +289,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				abreVentana(frmenviados);
 				cierraVentana(config);
-				
+				cierraVentana(config.getFrmAgenda());
 			}
 		});
 		
@@ -314,7 +319,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				abreVentana(frmbuzon);
 				cierraVentana(config);
-				
+				cierraVentana(config.getFrmAgenda());
 			}
 		});
 		
@@ -344,7 +349,7 @@ public class principal extends JFrame {
 				cierraVentana(frmeliminados);
 				abreVentana(frmspam);
 				cierraVentana(config);
-				
+				cierraVentana(config.getFrmAgenda());
 			}
 		});
 		
@@ -372,7 +377,7 @@ public class principal extends JFrame {
 				cierraVentana(frmbandejaentrada);
 				abreVentana(frmeliminados);
 				cierraVentana(config);
-				
+				cierraVentana(config.getFrmAgenda());
 			}
 		});
 		
@@ -434,6 +439,7 @@ public class principal extends JFrame {
 						cierraVentana(frmbuzon);
 						cierraVentana(frmspam);
 						cierraVentana(frmbandejaentrada);
+						cierraVentana(config.getFrmAgenda());
 					
 					}
 					public void mouseEntered(MouseEvent arg0) {

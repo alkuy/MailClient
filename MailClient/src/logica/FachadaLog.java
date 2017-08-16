@@ -85,6 +85,8 @@ public class FachadaLog {
 		correos.cargaCorreos(this.Devuelve_Ruta_Borradores());
 		correos.cargaCorreos(this.Devuelve_Ruta_Papelera());
 		correos.cargaCorreos(this.Devuelve_Ruta_Spam());
+		
+		this.cargaAgendaCliente();
 		}
 	
 	
@@ -497,7 +499,88 @@ public class FachadaLog {
    	 return configuracion.Permutar(texto, clave, clavePermut);
     }
 
+    /** Método que imprime los usuarios, es para pruebas.
+     */
+    public void impAgenda(){
+    	String[][] agenda = BD.GetAgenda();
+    	System.out.println("FLoc " + agenda.length);
+    	for(int i=0; i<agenda.length; i++){
+    		System.out.println("Nom usu: " + agenda[i][0]);
+    		System.out.println("Cuenta usu: " + agenda[i][1]);
+    	}
+    }
     
+    /** Método que obtiene el nombre y apellido del usuario de la cuenta asociada.
+     * @param cuenta
+     * @return Nombre+ +Apellido (concatenado)
+     */
+    public String getNomApeUsuario(String cuenta){
+    	String[][] agenda = BD.GetAgenda();
+    	for(int i=0; i<agenda.length; i++){
+    		if(cuenta.equals(agenda[i][1]))
+    			return agenda[i][0];
+    	}
+    	return null;
+    }
     
+    /** Método que retorna la existencia de la cuenta en la agenda.
+     * @param cuentaNom
+     * @param cuentaDom
+     * @return True si existe la cuenta. False si NO existe la cuenta.
+     */
+    public boolean existeCuentaAgenda(String cuentaNom, String cuentaDom){
+    	return Cuenta.getInstancia().getAgenda().existeUsu(cuentaNom, cuentaDom);
+    }
+    
+    /** Método que da de alta a un nuevo usuario y su cuenta en la agenda.
+     * @param usuario
+     * @param cuenta
+     */
+    public void altaNuevoUsu_Agenda(String usuario, String cuenta){
+    	String nom = usuario.substring(0, usuario.indexOf(" "));
+    	String ape = usuario.substring(usuario.indexOf(" ")+1);
+    	String cuentaNom = cuenta.substring(0, cuenta.indexOf("@"));
+    	String cuentaApe = cuenta.substring(cuenta.indexOf("@")+1);
+    	
+    	CuentaAgenda auxCuenta = new CuentaAgenda(cuentaNom, cuentaApe);
+    	
+    	Usuario usu = new Usuario((Cuenta.getInstancia().getAgenda().ultimoID()+1),nom,ape,auxCuenta,true);
+    	
+    	Cuenta.getInstancia().getAgenda().altaUsuAgenda(usu);
+    	usu.guardarUsuarioBD(usuario, cuenta);
+    }
+    
+    /** Método para cargar la agenda del cliente.
+     */
+    public void cargaAgendaCliente(){
+    	String[][] agenda = BD.GetAgendaCliente();
+    	for(int i=0; i<agenda.length; i++){
+    		String nom = agenda[i][0].substring(0, agenda[i][0].indexOf(" "));
+        	String ape = agenda[i][0].substring(agenda[i][0].indexOf(" ")+1);
+        	String cuentaNom = agenda[i][1].substring(0, agenda[i][1].indexOf("@"));
+        	String cuentaDom = agenda[i][1].substring(agenda[i][1].indexOf("@")+1);
+        	CuentaAgenda auxCuenta = new CuentaAgenda(cuentaNom, cuentaDom);
+    		
+    		Usuario usu = new Usuario((Cuenta.getInstancia().getAgenda().ultimoID()+1),nom,ape,auxCuenta,true);
+    		Cuenta.getInstancia().getAgenda().altaUsuAgenda(usu);
+    	}
+    }
+    
+    /** Método que retorna el modelo para la tabla de la agenda.
+     * @return DefaultTableModel
+     */
+    public DefaultTableModel DevUsuAgenda(){
+    	DefaultTableModel modelo;
+    	modelo = cuenta.getInstancia().getAgenda().DevUsuAgenda();
+    	return modelo;
+    }
+    
+    /** Método para borrar la cuenta de la agenda.
+     * @param usuario
+     * @param cuenta
+     */
+    public void borrarCuentaAgenda(String usuario, String cuenta){
+    	Cuenta.getInstancia().getAgenda().Borrar(usuario, cuenta);
+    }
 }
 

@@ -25,6 +25,7 @@ public class Configuracion {
 		private static String carpetaDominio = "c:\\Cuentas\\Dominios\\";
 		private static String carpetaAgenda = "c:\\Cuentas\\Agenda\\";
 		
+		private static String carpetaAgendaCliente;
 	  
 	  
 	  
@@ -174,6 +175,20 @@ public class Configuracion {
 	public static void setCarpetaSpam(String carpetaSpam) {
 		Configuracion.carpetaSpam = carpetaSpam;
 	}
+	
+	/** Carpeta agenda del cliente
+	 * @return Carpeta age
+	 */
+	public static String getCarpetaAgendaCliente() {
+		return carpetaAgendaCliente;
+	}
+	
+	/** Carpeta agenda del cliente
+	 * @param carpetaAgendaCliente
+	 */
+	public static void setCarpetaAgendaCliente(String carpetaAgendaCliente) {
+		Configuracion.carpetaAgendaCliente = carpetaAgendaCliente;
+	}
 
 	// crea la carpeta cuenta en el disco ubicada en C:\\Cuentas
 	public static void crearDirectorioCuenta(){
@@ -220,6 +235,7 @@ public class Configuracion {
 		Configuracion.setCarpetaPapelera(Configuracion.getCarpetaUsuario()+"\\Papelera\\");
 		Configuracion.setCarpetaSpam(Configuracion.getCarpetaUsuario()+"\\Spam\\");
 		Configuracion.setCarpetaConfiguracion(Configuracion.getCarpetaUsuario()+"\\Configuracion\\");
+		Configuracion.setCarpetaAgendaCliente(Configuracion.getCarpetaUsuario()+"\\Agenda\\");
 		
 	}
 	
@@ -249,6 +265,8 @@ public class Configuracion {
 		File spam = new File(Configuracion.getCarpetaUsuario()+"\\Spam\\"); 
 		spam.mkdir();
 		
+		File agendaCliente = new File(Configuracion.getCarpetaUsuario()+"\\Agenda\\");
+		agendaCliente.mkdir();
 		
 	}	
 	

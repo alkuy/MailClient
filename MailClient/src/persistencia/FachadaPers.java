@@ -494,4 +494,19 @@ public class FachadaPers {
 		return arch.leerCuenta(carpeta, nomcuenta);
 	}
 	
+	//
+	public void GuardaUsuariosAgendaCliente(String NomUsu, String CuentaUsu){
+		Agenda A = new Agenda(NomUsu, CuentaUsu);
+		Archivos Arch = new Archivos();
+		String CarpetaAgendaCliente = conf.getCarpetaAgendaCliente();
+		Arch.guardaAgenda(CarpetaAgendaCliente, A);
+	}
+	
+	public String[][] GetAgendaCliente(){
+		String[][] Agenda;
+		Archivos Arch = new Archivos();
+		Agenda = Arch.LeerAgenda(conf.getCarpetaAgendaCliente());
+		return Agenda;
+	}
+	
 }

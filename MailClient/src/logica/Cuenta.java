@@ -21,13 +21,14 @@ public class Cuenta {
   private String nom_us; 
   private String contraseña_cuenta;
   private String dominio;
-  
+  private static Usuarios agenda;
   
   private Cuenta(){};
 	
   public static Cuenta getInstancia() {
 	if(instancia == null){
 		instancia = new Cuenta();
+		agenda = new Usuarios();
 	}
 	return instancia;
 }
@@ -124,6 +125,13 @@ public class Cuenta {
 		}
 		
 		
+	}
+	
+	/** Método que rotorna la colección de usuarios (la agenda).
+	 * @return Usuarios (Agenda)
+	 */
+	public Usuarios getAgenda() {
+		return agenda;
 	}
 	
 }

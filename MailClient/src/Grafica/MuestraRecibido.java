@@ -17,9 +17,15 @@ import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MuestraRecibido extends JFrame {
 	
@@ -65,7 +71,34 @@ public class MuestraRecibido extends JFrame {
 		
 		
 		JLabel labeldestino = new JLabel(recibido.cuenta);
+		labeldestino.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				labeldestino.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Object [] opciones ={"Añadir a contactos","Cancelar"};
+				int eleccion = JOptionPane.showOptionDialog(rootPane,FachadaLog.getInstancia().getNomApeUsuario(recibido.cuenta)+"\n"+recibido.cuenta,"Añadir contacto a su agenda",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+				if (eleccion == JOptionPane.YES_OPTION){
+					String cuentaNom = recibido.cuenta.substring(0, recibido.cuenta.indexOf("@"));
+			    	String cuentaDom = recibido.cuenta.substring(recibido.cuenta.indexOf("@")+1);
+					if(!FachadaLog.getInstancia().existeCuentaAgenda(cuentaNom, cuentaDom))
+						FachadaLog.getInstancia().altaNuevoUsu_Agenda(FachadaLog.getInstancia().getNomApeUsuario(recibido.cuenta), recibido.cuenta);
+					else{
+						JOptionPane.showMessageDialog(null, "Cuenta existente en su agenda");
+					}
+				}
+			}
+		});
+		
+		//Se modifica la fuente del label para simular un link
+		labeldestino.setForeground(Color.BLUE);
 		labeldestino.setBounds(245, 32, 567, 16);
+		Font auxFont = labeldestino.getFont();
+		Map auxAtributos = auxFont.getAttributes();
+		auxAtributos.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+		labeldestino.setFont(auxFont.deriveFont(auxAtributos));
 		getContentPane().add(labeldestino);
 		
 		JLabel lblAsunto = new JLabel("Asunto:");

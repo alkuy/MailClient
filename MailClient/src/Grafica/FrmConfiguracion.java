@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import Conectividad.FachadaCon;
+import logica.Cuenta;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -16,6 +17,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmConfiguracion extends JInternalFrame {
 
@@ -24,6 +27,7 @@ public class FrmConfiguracion extends JInternalFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private FrmAgenda frmagenda;
 
 	/**
 	 * Create the frame.
@@ -37,10 +41,18 @@ public class FrmConfiguracion extends JInternalFrame {
       	setBounds(100, 100, 243, 300);
       	getContentPane().setLayout(null);
 		
-		
+		/*---BOTON AGENDA---*/
 		JButton btnagenda = new JButton("AGENDA");
+		btnagenda.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {				
+			}
+		});
 		btnagenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				frmagenda = new FrmAgenda();
+				principal.abreVentana(frmagenda);
+				dispose();
 			}
 		});
 		btnagenda.setBounds(47, 65, 143, 34);
@@ -65,5 +77,8 @@ public class FrmConfiguracion extends JInternalFrame {
 		});
 		btnNewButton.setBounds(47, 126, 143, 34);
 		getContentPane().add(btnNewButton);
+	}
+	public FrmAgenda getFrmAgenda(){
+		return frmagenda;
 	}
 }
