@@ -184,7 +184,7 @@ public class principal extends JFrame {
 		VentPrincipal.add(btnNuevoCorreo);		
 		btnNuevoCorreo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {				
-				Nuevo_Correo correo = new Nuevo_Correo();
+				Nuevo_Correo correo = new Nuevo_Correo("");
 				correo.setLocationRelativeTo(null);
 				correo.setVisible(true);
 				cierraVentana(frmenviados);

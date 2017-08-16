@@ -35,11 +35,13 @@ public class FrmAgenda extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JScrollPane scrlMCMuestraUsuarios;
-	private JTextField txtBuscar;	 
 	public MuestraRecibido muestra;
 	FachadaLog FL = new FachadaLog();
 	private JTable tblMuestraUsuarios;
+	private Nuevo_Correo nuevocorreo;
 	
+	/** Se crea el formulario
+	 */
 	public FrmAgenda() {
 		
 		
@@ -49,22 +51,16 @@ public class FrmAgenda extends JInternalFrame {
       	setBounds(92, 103, 355, 424);
       	getContentPane().setLayout(null);
       	
-      	txtBuscar = new JTextField();
-      	txtBuscar.setToolTipText("Ingrese dirección de correo o usuario a buscar");
-      	txtBuscar.setBounds(46, 11, 296, 20);
-      	getContentPane().add(txtBuscar);
-      	txtBuscar.setColumns(10);
-      	
       	scrlMCMuestraUsuarios = new JScrollPane(tblMuestraUsuarios);
       	scrlMCMuestraUsuarios.setEnabled(false);
-      	scrlMCMuestraUsuarios.setSize(332, 301);
-      	scrlMCMuestraUsuarios.setLocation(10, 57);
+      	scrlMCMuestraUsuarios.setSize(332, 347);
+      	scrlMCMuestraUsuarios.setLocation(10, 11);
 		//Agregamos el JScrollPane al contenedor
 		getContentPane().add(scrlMCMuestraUsuarios, BorderLayout.CENTER);
       	
-/* BOTON PARA ... */
+/* BOTON PARA ENVIAR CORREO A UNA CUENTA EN LA AGENDA */
 		
-		JButton btnEditar = new JButton("EDITAR");
+		JButton btnEditar = new JButton("ENVIAR CORREO");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -73,13 +69,16 @@ public class FrmAgenda extends JInternalFrame {
 					JOptionPane.showMessageDialog(new JPanel(), "Debe seleccionar primero el usuario que desea visualizar");
 				}else{
 					
-				principal.apareceLogo();
-			    dispose();				
+					nuevocorreo = new Nuevo_Correo(tblMuestraUsuarios.getValueAt(pos, 1).toString());
+					nuevocorreo.setLocationRelativeTo(null);
+					nuevocorreo.setVisible(true);
+					principal.apareceLogo();
+					dispose();				
 
 				}	
 			}
 		});
-		btnEditar.setBounds(253, 363, 89, 23);
+		btnEditar.setBounds(227, 363, 115, 23);
 		getContentPane().add(btnEditar);
 		
 		
@@ -105,7 +104,7 @@ public class FrmAgenda extends JInternalFrame {
 						SetTableAgenda();
 						scrlMCMuestraUsuarios = new JScrollPane(tblMuestraUsuarios);
 				      	scrlMCMuestraUsuarios.setEnabled(false);
-				      	scrlMCMuestraUsuarios.setSize(332, 301);
+				      	scrlMCMuestraUsuarios.setSize(332, 347);
 				      	scrlMCMuestraUsuarios.setLocation(10, 57);
 						//Agregamos el JScrollPane al contenedor
 						getContentPane().add(scrlMCMuestraUsuarios, BorderLayout.CENTER);
@@ -115,21 +114,7 @@ public class FrmAgenda extends JInternalFrame {
 		});
 		btnEliminar.setBounds(10, 363, 89, 23);
 		getContentPane().add(btnEliminar);
-      	
-      	/* Boton para ... */
-      	
-      	JButton btnBuscar = new JButton();
-      	btnBuscar.setToolTipText("buscar");
-      	btnBuscar.addActionListener(new ActionListener() {
-      		public void actionPerformed(ActionEvent arg0) {
-      		}
-      	});
-      	btnBuscar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-      	btnBuscar.setBounds(10, 11, 26, 20);
       	ImageIcon imagenbuscar = new ImageIcon(principal.class.getResource("/imagenes/lupa.jpg"));
-		Icon iconobuscar = new ImageIcon(imagenbuscar.getImage().getScaledInstance(btnBuscar.getWidth(),btnBuscar.getHeight(),Image.SCALE_DEFAULT));
-		btnBuscar.setIcon(iconobuscar);
-      	getContentPane().add(btnBuscar);
 		
 	}
 	

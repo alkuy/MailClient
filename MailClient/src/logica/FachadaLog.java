@@ -3,6 +3,7 @@ package logica;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.Iterator;
 
 import persistencia.FachadaPers;
@@ -581,6 +582,23 @@ public class FachadaLog {
      */
     public void borrarCuentaAgenda(String usuario, String cuenta){
     	Cuenta.getInstancia().getAgenda().Borrar(usuario, cuenta);
+    	BD.eliminarAgenda(configuracion.devRutaAgendaCliente(), "Agenda.txt");
+    	this.recargarAgenda();
+    }
+    
+    /** Método para recargar el archivo de agenda con los usuarios y cuentas en la memoria
+     */
+    public void recargarAgenda(){
+    	Enumeration<Usuario> eUsu =	Cuenta.getInstancia().getAgenda().getCollection().elements();
+    	Usuario auxUsu;
+    	while(eUsu.hasMoreElements()){
+    		auxUsu = eUsu.nextElement();
+    		Iterator<CuentaAgenda> iteCuenta = auxUsu.getCuentas().getCollection().iterator();
+    		while(iteCuenta.hasNext()){
+    			CuentaAgenda auxCuenta = iteCuenta.next();
+    			auxUsu.guardarUsuarioBD(auxUsu.getNombre()+" "+auxUsu.getApellido(), auxCuenta.getCuentaNom()+"@"+auxCuenta.getCuentaDom());
+    		}
+    	}
     }
 }
 

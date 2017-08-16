@@ -38,8 +38,9 @@ public class Nuevo_Correo extends JFrame {
 	
 	/**
 	 * Create the frame.
+	 * @param cuenta (String). Cuando no es vacío es porque se envía correo desde la agenda.
 	 */
-	public Nuevo_Correo() {
+	public Nuevo_Correo(String cuenta) {
 		
 		 setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 		 
@@ -61,6 +62,8 @@ public class Nuevo_Correo extends JFrame {
 		JTextArea textpara = new JTextArea();
 		textpara.setBounds(245, 29, 679, 22);
 		getContentPane().add(textpara);
+		if(!cuenta.isEmpty())
+			textpara.setText(cuenta);
 		
 		JLabel lblPara = new JLabel("Para:");
 		lblPara.setFont(new Font("Verdana", Font.BOLD, 13));

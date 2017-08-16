@@ -259,6 +259,20 @@ public class Archivos {
 				e.printStackTrace();
 			}	
 		}
+		
+		/**
+		 * Elimina el archivo agenda
+		 * @param directorio
+		 * @param archivo
+		 */
+		public void EliminarAgenda(String directorio, String archivo){
+			File f = new File(directorio+archivo);
+			try{
+				f.delete();
+			}catch(Exception e){
+				e.printStackTrace();
+			}	
+		}
 	
 		public void moverCorreos(String d_origen, String archivo, String d_destino){
 			archivo = archivo.replace(".","-"); //Para evitar problemas en el nombre del archivo

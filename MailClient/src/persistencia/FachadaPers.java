@@ -304,6 +304,13 @@ public class FachadaPers {
           	return conf.getCarpetaCuentas();
           	
           }
+         
+         /** Método que retorna la ruta del archivo agenda
+          * @return Ruta de agenda cliente (String)
+          */
+         public String devRutaAgendaCliente(){
+        	 return conf.getCarpetaAgendaCliente();
+         }
     
     /**
      * Metodo que gurda una cuenta en disco (tomando los datos de la cuenta instanciada en la capa logica) en el directorio indicado
@@ -414,6 +421,16 @@ public class FachadaPers {
 	public void eliminar(String directorio, String archivo){
 		Archivos arch = new Archivos();
 		arch.Eliminar(directorio, archivo);
+	}
+	
+	/**
+	 * Metodo que instancia la eliminacion del archivo agenda
+	 * @param directorio
+	 * @param archivo
+	 */
+	public void eliminarAgenda(String directorio, String archivo){
+		Archivos arch = new Archivos();
+		arch.EliminarAgenda(directorio, archivo);
 	}
 	
 	public void MoverdeCarpeta(String d_origen, String archivo, String d_destino){

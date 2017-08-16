@@ -82,6 +82,13 @@ public class Configuracion {
 		return FachPer.devRutaCuentas();
 	}
    
+   /** Método que retorna la ruta del archivo agenda
+    * @return Ruta de agenda cliente (String)
+    */
+   public String devRutaAgendaCliente(){
+	   return FachPer.devRutaAgendaCliente();
+   }
+   
    /**
     * Para guarda el ultimo enviar/recibir realizado y que solo traiga correos que no bajaron aun
     * @param destino

@@ -52,10 +52,8 @@ public class Usuarios {
 	public void imprimir(){
 		Enumeration<Usuario> auxUsus = hUsu.elements();
 		Usuario usu;
-		System.out.println("USUARIOS de agenda");
 		while(auxUsus.hasMoreElements()){
 			usu = auxUsus.nextElement();
-			System.out.println(usu.getNombre()+" "+usu.getApellido());
 			usu.getCuentas().imprimir();
 		}
 	}
@@ -103,7 +101,7 @@ public class Usuarios {
 		return modelo;
 	}
 	
-	/** Método que da de baja a un usuario con la cuenta especificada
+	/** Método que da de baja a un usuario con la cuenta especificada en la agenda
 	 * @param usu
 	 * @param cuenta
 	 */
@@ -112,12 +110,11 @@ public class Usuarios {
 		Usuario auxUsu;
 		while(eUsu.hasMoreElements()){
 			auxUsu = eUsu.nextElement();
-			System.out.println("USUARIOS "+auxUsu.getNombre());
 			if(auxUsu.getCuentas().Borrar(cuenta)){ //Si es TRUE es porque elimino la cuenta
 				String key;
 			}
 			if(!tieneCuentas(auxUsu)){
-				this.getCollection().remove(auxUsu);
+				hUsu.remove(String.valueOf(auxUsu.getId_usuario()));
 				break;
 			}
 		}
