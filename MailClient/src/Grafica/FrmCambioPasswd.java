@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 
+import Conectividad.FachadaCon;
+
 public class FrmCambioPasswd extends JFrame {
 	/**
 	 * 
@@ -28,6 +30,7 @@ public class FrmCambioPasswd extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmCambioPasswd() {
+		FachadaCon FC = FachadaCon.getInstancia();
 		getContentPane().setForeground(Color.BLACK);
 		setTitle("Cambio de contrase\u00F1a");
 		
@@ -73,10 +76,16 @@ public class FrmCambioPasswd extends JFrame {
 						        alerta3();
 					
 				                } else {
-					
-					               cambiocorrecto();
-					               dispose();
-					               principal.pri.setVisible(true);
+				                   if(FC.CambioPass(clave)){
+				                	   cambiocorrecto();
+				                	   dispose();
+				                	   principal.pri.setVisible(true);
+				                   }else{
+				                	   passwd.setText("");
+								       confirmpasswd.setText("");
+								       alerta4();
+				                   }
+				                   
 				                  }
 			}
 		});
@@ -124,6 +133,13 @@ public class FrmCambioPasswd extends JFrame {
 	public void alerta3(){
 		Object [] opciones ={"Aceptar"};
 		int eleccion = JOptionPane.showOptionDialog(rootPane,"Debe tener mínimo 6 caracteres","Atencion",JOptionPane.WARNING_MESSAGE,JOptionPane.WARNING_MESSAGE,null,opciones,"Aceptar");
+		
+	}
+	
+	/* Metodo de aviso de passwd que no coinciden*/
+	public void alerta4(){
+		Object [] opciones ={"Aceptar"};
+		int eleccion = JOptionPane.showOptionDialog(rootPane,"No se ha podido realizar el cambio de clave - Verifique la conexion","Atencion",JOptionPane.WARNING_MESSAGE,JOptionPane.WARNING_MESSAGE,null,opciones,"Aceptar");
 		
 	}
 	

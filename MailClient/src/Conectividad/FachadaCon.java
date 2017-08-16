@@ -48,4 +48,11 @@ public class FachadaCon {
 		ConSocket S = new ConSocket();
 		S.OldToServer();
 	}
+	
+	public boolean CambioPass(String Pass){
+		boolean realizado;
+		ConSocket S = new ConSocket();
+		realizado = S.CambioPassToServer(Pass);
+		return realizado;
+	}
 }
