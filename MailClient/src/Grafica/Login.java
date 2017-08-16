@@ -124,12 +124,27 @@ public class Login extends JFrame {
 					}
 					else if(Servidor.compareToIgnoreCase("Valido") == 0){
 						
+						
+						if(!textPasswd.getText().matches(".+[a-zA-Z].+")){
+							
+							FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
+							principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
+					        principal.pri.setLocationRelativeTo(null);
+							cambiopas = new FrmCambioPasswd();
+							cambiopas.setLocationRelativeTo(null);
+							cambiopas.setVisible(true);
+							dispose();
+							
+						} else {
+						
 						FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());	
 						principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
 						principal.pri.setLocationRelativeTo(null); 			
 						principal.pri.setVisible(true);
 						Status = "Ok";
 						dispose();
+						
+						}
 					}
 					else if(Servidor.compareToIgnoreCase("NoPass") == 0){
 						JOptionPane.showMessageDialog(null, "Usuario y/o Contraseña Incorrectos");
