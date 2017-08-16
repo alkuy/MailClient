@@ -32,12 +32,13 @@ public class Login extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField usuario;
-	private JTextField textPasswd;
+	private JPasswordField textPasswd;
+	private FrmCambioPasswd cambiopas;
 	String Status = "NotOk";
 	String Servidor;
 	FachadaCon FC = FachadaCon.getInstancia();
 	FachadaLog FL = new FachadaLog();
-	private JPasswordField passwordField;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -92,37 +93,49 @@ public class Login extends JFrame {
 							
 							if( FL.compara_passwd("c:\\Cuentas\\"+usuario.getText()+"-"+comboDominio.getSelectedItem().toString()+"\\Configuracion\\", usuario.getText(),comboDominio.getSelectedItem().toString(), textPasswd.getText())){
 							
-								FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
-							
-								principal pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
-								pri.setLocationRelativeTo(null); 			
-								pri.setVisible(true);
-								Status = "Ok";
-								dispose();
+								
+								if(!textPasswd.getText().matches(".+[a-zA-Z].+")){
+									
+									FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
+									principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
+							        principal.pri.setLocationRelativeTo(null);
+									cambiopas = new FrmCambioPasswd();
+									cambiopas.setLocationRelativeTo(null);
+									cambiopas.setVisible(true);
+									dispose();
+									
+								} else {
+								        FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
+								        principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
+								        principal.pri.setLocationRelativeTo(null); 			
+								        principal.pri.setVisible(true);
+								        Status = "Ok";
+								        dispose();
+								   }
 							
 							}else {
 								JOptionPane.showMessageDialog(null, "Usuario y/o Contraseña Incorrecta");
 							}
 							
 						}else {
-							JOptionPane.showMessageDialog(null, "Debe tener conexion a internet si es su primer conexion");
+							JOptionPane.showMessageDialog(null, "Debe tener conexion a internet si es su primer conexión");
 						}
 				
 					}
 					else if(Servidor.compareToIgnoreCase("Valido") == 0){
 						
 						FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());	
-						principal pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
-						pri.setLocationRelativeTo(null); 			
-						pri.setVisible(true);
+						principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
+						principal.pri.setLocationRelativeTo(null); 			
+						principal.pri.setVisible(true);
 						Status = "Ok";
 						dispose();
 					}
 					else if(Servidor.compareToIgnoreCase("NoPass") == 0){
-						JOptionPane.showMessageDialog(null, "Usuario o Contraseña Incorrectos");
+						JOptionPane.showMessageDialog(null, "Usuario y/o Contraseña Incorrectos");
 					}
 					else if(Servidor.compareToIgnoreCase("NoCuenta") == 0){
-						JOptionPane.showMessageDialog(null, "Cuenta no existe o no esta habilitada");
+						JOptionPane.showMessageDialog(null, "Cuenta no existe o no está habilitada");
 					}
 				}
 			else{

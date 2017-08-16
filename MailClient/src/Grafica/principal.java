@@ -39,7 +39,7 @@ public class principal extends JFrame {
 	/**
 	 * 
 	 */
-
+	public static principal pri;
 	private static JPanel VentPrincipal;
 	private static JLabel ImagenLogo = null;
 	private static JLabel lblCorreoPintituciones;
