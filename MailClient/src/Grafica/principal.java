@@ -50,10 +50,10 @@ public class principal extends JFrame {
 	private JButton btnsalida;
 	private JButton btnspam;
 	private JButton btnpapelera;
-	private FrmMuestraBandejaEntrada frmbandejaentrada;
-	private FrmMuestraEnviados frmenviados;
-	private FrmMuestraBorradores frmborradores;
-	private FrmMuestraBuzonSalida frmbuzon;
+	private static FrmMuestraBandejaEntrada frmbandejaentrada;
+	private static FrmMuestraEnviados frmenviados;
+	private static FrmMuestraBorradores frmborradores;
+	private static FrmMuestraBuzonSalida frmbuzon;
 	private FrmMuestraSpam frmspam;
 	private FrmConfiguracion config;
 	private FrmMuestraEliminados frmeliminados;
@@ -124,15 +124,15 @@ public class principal extends JFrame {
 				smtp = false;
 				pop = false;
 				
-				cierraVentana(frmenviados);
-				cierraVentana(frmborradores);
-				cierraVentana(frmbuzon);
-				cierraVentana(frmspam);
-				cierraVentana(frmeliminados);
-				cierraVentana(frmbandejaentrada);
-				cierraVentana(config);
-				cierraVentana(config.getFrmAgenda());
-				apareceLogo();
+//				cierraVentana(frmenviados);
+//				cierraVentana(frmborradores);
+//				cierraVentana(frmbuzon);
+//				cierraVentana(frmspam);
+//				cierraVentana(frmeliminados);
+//				cierraVentana(frmbandejaentrada);
+//				cierraVentana(config);
+//				cierraVentana(config.getFrmAgenda());
+//				apareceLogo();
 				int i;
 				String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto"};
 				DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -156,7 +156,8 @@ public class principal extends JFrame {
 						}
 						else if (cta){
 							smtp = FC.EnviaCorreo(T.getValueAt(i, 0).toString(), T.getValueAt(i, 1).toString(), T.getValueAt(i, 2).toString(), T.getValueAt(i, 3).toString(), T.getValueAt(i, 4).toString(), T.getValueAt(i, 5).toString());
-							FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
+							if (smtp)
+								FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Error al enviar correo, cuenta "+T.getValueAt(i, 3).toString()+" no existe");
@@ -169,13 +170,32 @@ public class principal extends JFrame {
 					}
 				}
 				pop = FC.RecibeCorreo();
-				
+				if ( T.getRowCount() == 0)
+					smtp = true;
 				if (!pop && !smtp)
 					JOptionPane.showMessageDialog(null, "Error al conectar con el Servidor");
 				else if (!pop)
 					JOptionPane.showMessageDialog(null, "Error al conectar con el servicio POP3 del Servidor");
 				else if (!smtp)
 					JOptionPane.showMessageDialog(null, "Error al conectar con el servicio SMTP del Servidor");
+				
+				if (frmbandejaentrada.isEnabled()){
+					cierraVentana(frmbandejaentrada);
+					frmbandejaentrada = new FrmMuestraBandejaEntrada();	
+					abreVentana(frmbandejaentrada);
+				}else if (frmenviados.isEnabled()){
+					cierraVentana(frmenviados);
+					frmenviados = new FrmMuestraEnviados();	
+					abreVentana(frmenviados);
+				}else if (frmbuzon.isEnabled()){
+					cierraVentana(frmbuzon);
+					frmbuzon = new FrmMuestraBuzonSalida();	
+					abreVentana(frmbuzon);
+				}else if(frmborradores.isEnabled()){
+					cierraVentana(frmborradores);
+					frmborradores = new FrmMuestraBorradores();	
+					abreVentana(frmborradores);
+				}
 			}
 		});
 		

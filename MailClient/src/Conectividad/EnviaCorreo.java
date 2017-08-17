@@ -177,7 +177,6 @@ public class EnviaCorreo {
 	         realizado = true;
 	         return realizado;
 	      }catch (MessagingException mex) {
-	         //mex.printStackTrace();
 	         return realizado;
 	      }
 	   }
