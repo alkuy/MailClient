@@ -161,6 +161,7 @@ public class principal extends JFrame {
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Error al enviar correo, cuenta "+T.getValueAt(i, 3).toString()+" no existe");
+							smtp = true;
 						}
 
 					
@@ -179,19 +180,19 @@ public class principal extends JFrame {
 				else if (!smtp)
 					JOptionPane.showMessageDialog(null, "Error al conectar con el servicio SMTP del Servidor");
 				
-				if (frmbandejaentrada.isEnabled()){
+				if (frmbandejaentrada != null && frmbandejaentrada.isEnabled()){
 					cierraVentana(frmbandejaentrada);
 					frmbandejaentrada = new FrmMuestraBandejaEntrada();	
 					abreVentana(frmbandejaentrada);
-				}else if (frmenviados.isEnabled()){
+				}else if (frmenviados != null && frmenviados.isEnabled()){
 					cierraVentana(frmenviados);
 					frmenviados = new FrmMuestraEnviados();	
 					abreVentana(frmenviados);
-				}else if (frmbuzon.isEnabled()){
+				}else if (frmbuzon != null && frmbuzon.isEnabled()){
 					cierraVentana(frmbuzon);
 					frmbuzon = new FrmMuestraBuzonSalida();	
 					abreVentana(frmbuzon);
-				}else if(frmborradores.isEnabled()){
+				}else if(frmborradores != null && frmborradores.isEnabled()){
 					cierraVentana(frmborradores);
 					frmborradores = new FrmMuestraBorradores();	
 					abreVentana(frmborradores);
