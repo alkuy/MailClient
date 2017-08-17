@@ -22,16 +22,20 @@ public class FachadaCon {
 	}
 	
 	//Envia el correo hacia el Servidor
-	public void EnviaCorreo(String NomUsu, String PassUsu, String MailUsu, String MailDest, String Asunto, String Texto) throws IOException, MessagingException, UserException, InterruptedException{
+	public boolean EnviaCorreo(String NomUsu, String PassUsu, String MailUsu, String MailDest, String Asunto, String Texto) throws IOException, MessagingException, UserException, InterruptedException{
+		boolean realizado;
 		ConSocket S = new ConSocket();
 		EnviaCorreo C = new EnviaCorreo(NomUsu, PassUsu, MailUsu, MailDest, Asunto, Texto);
 		//S.UsuToServer();
-		C.Enviar();	
+		realizado = C.Enviar();
+		return realizado;
 	}
 	
-	public void RecibeCorreo(){
+	public boolean RecibeCorreo(){
+		boolean realizado;
 		ConSocket S = new ConSocket();
-		S.UsuToServer();
+		realizado = S.UsuToServer();
+		return realizado;
 	}
 	
 	public void IniSocket(){

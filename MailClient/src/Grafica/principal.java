@@ -118,9 +118,11 @@ public class principal extends JFrame {
 				String [] Dominios = FL.GetDom();
 				String [] Cuentas = FL.GetCuentas();
 				String [] Dominio;
-				boolean Dom, cta;
+				boolean Dom, cta, smtp, pop;
 				Dom = false;
 				cta = false;
+				smtp = false;
+				pop = false;
 				
 				cierraVentana(frmenviados);
 				cierraVentana(frmborradores);
@@ -153,7 +155,7 @@ public class principal extends JFrame {
 							FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
 						}
 						else if (cta){
-							FC.EnviaCorreo(T.getValueAt(i, 0).toString(), T.getValueAt(i, 1).toString(), T.getValueAt(i, 2).toString(), T.getValueAt(i, 3).toString(), T.getValueAt(i, 4).toString(), T.getValueAt(i, 5).toString());
+							smtp = FC.EnviaCorreo(T.getValueAt(i, 0).toString(), T.getValueAt(i, 1).toString(), T.getValueAt(i, 2).toString(), T.getValueAt(i, 3).toString(), T.getValueAt(i, 4).toString(), T.getValueAt(i, 5).toString());
 							FL.CorreoEnviado(FL.Devuelve_Ruta_BuzonSalida(), T.getValueAt(i, 6).toString(), FL.Devuelve_Ruta_Enviados());
 						}
 						else {
@@ -163,11 +165,17 @@ public class principal extends JFrame {
 					
 					} catch (IOException | MessagingException | UserException | InterruptedException e) {
 						// TODO Bloque catch generado automáticamente
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 				}
-				FC.RecibeCorreo();
-
+				pop = FC.RecibeCorreo();
+				
+				if (!pop && !smtp)
+					JOptionPane.showMessageDialog(null, "Error al conectar con el Servidor");
+				else if (!pop)
+					JOptionPane.showMessageDialog(null, "Error al conectar con el servicio POP3 del Servidor");
+				else if (!smtp)
+					JOptionPane.showMessageDialog(null, "Error al conectar con el servicio SMTP del Servidor");
 			}
 		});
 		

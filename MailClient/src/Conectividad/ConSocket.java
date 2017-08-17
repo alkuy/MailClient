@@ -88,9 +88,10 @@ public class ConSocket {
 	}
 	
 	
-	public void UsuToServer(){
+	public boolean UsuToServer(){
 		String msg;
 		String Usu, Pass, Dom;
+		boolean realizado = false;
 		
 		try{
 			cliente = new Socket(ip, puerto);
@@ -117,9 +118,12 @@ public class ConSocket {
 			entrada.close();
 			salida.close();
 			cliente.close();
+			realizado = true;
+			return realizado;
 		}catch(Exception e){
-			System.out.println("Imposible loguearse al POP3 Server");
-		};
+			//System.out.println("Imposible loguearse al POP3 Server");
+			return realizado;
+		}
 	}
 	
 	public void OldToServer(){

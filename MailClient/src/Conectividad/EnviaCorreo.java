@@ -137,7 +137,8 @@ public class EnviaCorreo {
 
 
 
-	public void Enviar() {    
+	public boolean Enviar() {    
+		boolean realizado = false;
 	      // Aca estamos asumiendo que el email sale de Localhost lo cual para esta prueba es asi.
 	      String host = "localhost";
 
@@ -173,9 +174,11 @@ public class EnviaCorreo {
 	         t.connect(LOCALHOST, EMAIL_USER_ADDRESS, USER_PASSWORD);
 		     t.sendMessage(message, message.getAllRecipients());
 	         t.close();
-	         
+	         realizado = true;
+	         return realizado;
 	      }catch (MessagingException mex) {
-	         mex.printStackTrace();
+	         //mex.printStackTrace();
+	         return realizado;
 	      }
 	   }
 }
