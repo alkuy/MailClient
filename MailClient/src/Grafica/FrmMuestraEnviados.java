@@ -90,8 +90,7 @@ public class FrmMuestraEnviados extends JInternalFrame {
     			
     			
     			if (tblMuestraCorreos.getRowCount() == 0){ // si no hay coincidencia
-    				/*Quito todo para tener un refresh al instante*/
-    				//getContentPane().remove(scrlMCMostrarCorreos);
+    				
     				JOptionPane.showMessageDialog(new JPanel(), "El correo/s asocido/s a la cuenta ingresada no existe");
     			}else{
     			
@@ -182,6 +181,10 @@ public class FrmMuestraEnviados extends JInternalFrame {
 	
 }
 	
+	/** Crea un DefaultTableModel con los coreos Enviados
+	 * 
+	 */
+	
 	public void SetTable(){
 		String col[] = {"Destinatario","Asunto", "Clave","Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -220,6 +223,10 @@ public class FrmMuestraEnviados extends JInternalFrame {
 		
 	}
 	
+	
+	/** Crea un DefaultTableModel con los coreos que coinciden con la busqueda
+	 * 
+	 */
 	public void SetTableBusqueda(String cuentaBusqueda){
 		String col[] = {"Remitente","Asunto", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);

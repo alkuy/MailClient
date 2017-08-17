@@ -2,26 +2,21 @@ package Grafica;
 
 
 
-import javax.swing.Icon;
+
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
-import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.JScrollPane;
-import java.sql.SQLException;
 import java.awt.BorderLayout;
 import logica.FachadaLog;
 
@@ -114,7 +109,7 @@ public class FrmAgenda extends JInternalFrame {
 		});
 		btnEliminar.setBounds(10, 363, 89, 23);
 		getContentPane().add(btnEliminar);
-      	ImageIcon imagenbuscar = new ImageIcon(principal.class.getResource("/imagenes/lupa.jpg"));
+      	
 		
 	}
 	

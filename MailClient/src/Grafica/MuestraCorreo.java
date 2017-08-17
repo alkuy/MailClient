@@ -40,7 +40,7 @@ public class MuestraCorreo extends JFrame {
 		
 		Correo correo = new Correo();
 		
-		if(boton.aprete.equals("si") ){ // si quiero ver un correo de la bandej de enviados 
+		if(boton.aprete.equals("si") ){ // si quiero ver un correo de la bandeja de enviados 
 			correo = FL.DevuelveEnviado(String.valueOf(enviado.fecha));
 		  
 		} else { // si quiero ver un correo de la bandeja de salida

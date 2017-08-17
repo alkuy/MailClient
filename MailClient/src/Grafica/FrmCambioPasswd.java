@@ -23,7 +23,6 @@ public class FrmCambioPasswd extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPasswordField passwd;
 	private JPasswordField confirmpasswd;
-//	private Login log = new Login();
 	FachadaLog FL = new FachadaLog();
 	
 
@@ -57,27 +56,27 @@ public class FrmCambioPasswd extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
-				String clave = String.valueOf(passwd.getPassword());
+				String clave = String.valueOf(passwd.getPassword()); // cargamos un string desde un arrego de char
 				String confirmclave = String.valueOf(confirmpasswd.getPassword());
 				
-				if(!clave.matches(".*[a-zA-Z].*") || !clave.matches(".*[0-9].*")){
+				if(!clave.matches(".*[a-zA-Z].*") || !clave.matches(".*[0-9].*")){ // si no ingreso letras y numeros se avisa y se borrn los campos
 					
 					passwd.setText("");
 					confirmpasswd.setText("");
 					alerta1();
-				} else if (!clave.equals(confirmclave)){
+				} else if (!clave.equals(confirmclave)){ //si la clave y la verificacion no coinciden se avisa y borran los campos
 				
 					      passwd.setText("");
 					      confirmpasswd.setText("");
 					      alerta2();
 					
-				        } else if (clave.length()<6){
+				        } else if (clave.length()<6){ // si el largo de la clave es menor que 6 se avisa y borran los campos
 					
 				        	    passwd.setText("");
 						        confirmpasswd.setText("");
 						        alerta3();
 					
-				                } else {
+				                } else { // si introdujo bien la nueva clave se crea el archivo configuacion con los datos localmente y se envia al servidor la nueva clave
 				                   if(FC.CambioPass(Login.nombre,Login.dominio,Login.claveant,clave)){
 				                	   
 				                	   FL.Nueva_cuenta(Login.nombre,Login.dominio,clave);
@@ -86,7 +85,7 @@ public class FrmCambioPasswd extends JFrame {
 				                	   cambiocorrecto();
 				                	   dispose();
 				                	   principal.pri.setVisible(true);
-				                   }else{
+				                   }else{ // si ya no hay conexion con el servidor se avisa
 				                	   passwd.setText("");
 								       confirmpasswd.setText("");
 								       alerta4();
@@ -120,14 +119,19 @@ public class FrmCambioPasswd extends JFrame {
 	}
 	
 	
-	/* Metodo de aviso de passwd incorrecto*/
-	
+	/** Metodo de aviso de passwd incorrecto
+	 * 
+	 */	 
+
 	public void alerta1(){
 		Object [] opciones ={"Aceptar"};
 		int eleccion = JOptionPane.showOptionDialog(rootPane,"Debe introducir letras y numeros","Atencion",JOptionPane.WARNING_MESSAGE,JOptionPane.WARNING_MESSAGE,null,opciones,"Aceptar");
 		
 	}
-	/* Metodo de aviso de passwd que no coinciden*/
+	
+	/** Metodo de aviso de passwd que no coinciden
+	 * 
+	 */
 	public void alerta2(){
 		Object [] opciones ={"Aceptar"};
 		int eleccion = JOptionPane.showOptionDialog(rootPane,"Las claves ingresadas no coinciden","Atencion",JOptionPane.WARNING_MESSAGE,JOptionPane.WARNING_MESSAGE,null,opciones,"Aceptar");
@@ -135,21 +139,27 @@ public class FrmCambioPasswd extends JFrame {
 	}
 	
 	
-	/* Metodo de aviso de passwd que no coinciden*/
+	/** Metodo de aviso de passwd incorrecto
+	 * 
+	 */
 	public void alerta3(){
 		Object [] opciones ={"Aceptar"};
 		int eleccion = JOptionPane.showOptionDialog(rootPane,"Debe tener mínimo 6 caracteres","Atencion",JOptionPane.WARNING_MESSAGE,JOptionPane.WARNING_MESSAGE,null,opciones,"Aceptar");
 		
 	}
 	
-	/* Metodo de aviso de passwd que no coinciden*/
+	/** Metodo de aviso sin conexion al servidor
+	 * 
+	 */
 	public void alerta4(){
 		Object [] opciones ={"Aceptar"};
 		int eleccion = JOptionPane.showOptionDialog(rootPane,"No se ha podido realizar el cambio de clave - Verifique la conexion","Atencion",JOptionPane.WARNING_MESSAGE,JOptionPane.WARNING_MESSAGE,null,opciones,"Aceptar");
 		
 	}
 	
-	/* Metodo de aviso de cambio correcto*/
+	/** Metodo de aviso de cambio correcto
+	 * 
+	 */
 	public void cambiocorrecto(){
 		Object [] opciones ={"Aceptar"};
 		int eleccion = JOptionPane.showOptionDialog(rootPane,"Se ha cambiado la clave correctamente","Atencion",JOptionPane.WARNING_MESSAGE,JOptionPane.WARNING_MESSAGE,null,opciones,"Aceptar");

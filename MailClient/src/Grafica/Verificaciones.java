@@ -1,8 +1,6 @@
 package Grafica;
 import java.awt.Color;
-import java.sql.SQLException;
 import javax.swing.BorderFactory;
-import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -111,7 +109,11 @@ public class Verificaciones {
 	  }
   }
 
- // Metodo que verifica que la cuenta tenga un y solo un @ y que no tenga ñ
+ /** Metodo que verifica que la cuenta tenga un y solo un @ y que no tenga ñ
+  * 
+  * @param texto
+  * @return verdadero o falso
+  */
   
   public boolean verificaCuentaReceptor(String texto){
 	    char caracter = '@';
@@ -138,6 +140,26 @@ public class Verificaciones {
 			return false;
 		}
 		
-  }		
+  }	
+  
+  
+  /** Metodo para sustituir los caracteres especiales por comunes para no tener problemas en conectividad y que sean alterados
+   * 
+   * @param texto
+   * @return texto con caracteres especiales sustituidos
+   */
+  
+	public String tildes(String texto){
+		// Cadena de caracteres original a sustituir.
+	    String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
+	    // Cadena de caracteres ASCII que reemplazarán los originales.
+	    String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
+	    String output = texto;
+	    for (int i=0; i<original.length(); i++) {
+	        // Reemplazamos los caracteres especiales.
+	        output = output.replace(original.charAt(i), ascii.charAt(i));
+	    }//for i
+	    return output;
+	}
   
 }  

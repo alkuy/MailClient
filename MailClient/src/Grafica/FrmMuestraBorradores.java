@@ -40,7 +40,7 @@ public class FrmMuestraBorradores extends JInternalFrame {
 	 
 	public FrmMuestraBorradores() {
 		
-		SetTable();
+		SetTable(); // Cargo el set con los borradores
 		
 		
 		setTitle("Borradores");
@@ -96,7 +96,7 @@ public class FrmMuestraBorradores extends JInternalFrame {
 					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere eliminar");
 				}else{
 					Object [] opciones ={"Eliminar","Cancelar"};
-					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar permanentemente este correo?","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 					if (eleccion == JOptionPane.YES_OPTION){
 						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
 						FL.EliminarCorreoDefinitivo(FL.Devuelve_Ruta_Borradores(), fecha);
@@ -125,6 +125,10 @@ public class FrmMuestraBorradores extends JInternalFrame {
 				
 	}
 	
+	
+	/** Crea un DefaultTableModel con los coreos en borradores
+	 * 
+	 */	
 		
 	public void SetTable(){
 		String col[] = {"Destinatario","Asunto"};
@@ -160,10 +164,7 @@ public class FrmMuestraBorradores extends JInternalFrame {
 
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		/*Oculto columnas con Timestamp usada como clave del diccionario */
-	/*	TableColumn myTableColumn1 = tblMuestraCorreos.getColumnModel().getColumn(2);
-		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn1);*/
-		
+			
 		
 	}
 }

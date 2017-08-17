@@ -128,6 +128,10 @@ public class FrmMuestraEliminados extends JInternalFrame {
 		
 	}
 	
+	/** Crea un DefaultTableModel con los coreos eliminados de bandeja de entrada
+	 * 
+	 */
+	
 	public void SetTable(){
 		String col[] = {"Destinatario","Asunto", "Clave", "Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -162,9 +166,7 @@ public class FrmMuestraEliminados extends JInternalFrame {
 
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		/*Oculto columnas con Timestamp usada como clave del diccionario */
-	/*	TableColumn myTableColumn2 = tblMuestraCorreos.getColumnModel().getColumn(2);
-		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn2);*/
+
 		
       
 		

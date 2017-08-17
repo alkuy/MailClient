@@ -1,8 +1,6 @@
 package Grafica;
 
 import logica.FachadaLog;
-import persistencia.Agenda;
-
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -132,6 +130,7 @@ public class principal extends JFrame {
 				cierraVentana(frmbandejaentrada);
 				cierraVentana(config);
 				cierraVentana(config.getFrmAgenda());
+				apareceLogo();
 				int i;
 				String col[] = {"NomEmisor","PassEmisor", "CuentaEmisor", "CuentaDest", "Asunto", "Texto"};
 				DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -462,10 +461,6 @@ public class principal extends JFrame {
 	 */
 	public static void abreVentana(JInternalFrame panel){
 		VentPrincipal.add(panel);
-		/*BasicInternalFrameTitlePane titlePane =
-			      (BasicInternalFrameTitlePane) ((BasicInternalFrameUI) panel.getUI()).
-			      getNorthPane();*/
-		//panel.remove(titlePane);
 		panel.setVisible(true);
 		panel.toFront();
 				

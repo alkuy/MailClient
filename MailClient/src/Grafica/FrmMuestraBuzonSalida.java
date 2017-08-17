@@ -2,23 +2,14 @@ package Grafica;
 
 
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
-
 import logica.FachadaLog;
-
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -27,7 +18,6 @@ import java.sql.SQLException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 
 
@@ -95,7 +85,7 @@ public class FrmMuestraBuzonSalida extends JInternalFrame {
 					JOptionPane.showMessageDialog(new JPanel(), "Debe elegir el correo que quiere eliminar");
 				}else{
 					Object [] opciones ={"Eliminar","Cancelar"};
-					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
+					int eleccion = JOptionPane.showOptionDialog(rootPane,"Seguro desea eliminar permanentemente este correo","Atencion",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null,opciones,"Aceptar");
 					if (eleccion == JOptionPane.YES_OPTION){
 						fecha = (String) tblMuestraCorreos.getValueAt(pos, 2);
 						FL.EliminarCorreoDefinitivo(FL.Devuelve_Ruta_BuzonSalida(), fecha);
@@ -124,6 +114,10 @@ public class FrmMuestraBuzonSalida extends JInternalFrame {
       
 		
 	}
+	
+	/** Crea un DefaultTableModel con los coreos de buzon de salida
+	 * 
+	 */
 	
 	public void SetTable(){
 		String col[] = {"Destinatario","Asunto","Clave", "Fecha"};
@@ -159,9 +153,7 @@ public class FrmMuestraBuzonSalida extends JInternalFrame {
 
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		/*Oculto columnas con Timestamp usada como clave del diccionario */
-	/*	TableColumn myTableColumn2 = tblMuestraCorreos.getColumnModel().getColumn(2);
-		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn2);*/
+	
 		
 		
 	}

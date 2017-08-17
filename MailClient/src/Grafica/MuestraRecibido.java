@@ -53,11 +53,6 @@ public class MuestraRecibido extends JFrame {
 		
 		
 		Correo correo = FL.DevuelveRecibido(String.valueOf(recibido.fecha)); // busco el correo seleccionado segun la fecha que traigo del otro formulario or ser una variable static
-	/*	ArrayList<Correo> conversacion = new ArrayList<Correo>();
-		conversacion = FL.DevConveracionRecibidos(correo.getId_conversacion(),String.valueOf(recibido.fecha));// cargo aca solo lo correos de esa conversacion
-		
-		*/
-		
 		getContentPane().setBackground(SystemColor.activeCaption);
 		setTitle("Correo");
      	setIconImage(Toolkit.getDefaultToolkit().getImage(principal.class.getResource("/imagenes/icon1.jpg")));

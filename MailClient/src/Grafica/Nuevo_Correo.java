@@ -1,3 +1,7 @@
+
+
+
+
 package Grafica;
 
 
@@ -15,6 +19,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
@@ -57,9 +62,11 @@ public class Nuevo_Correo extends JFrame {
 				
 		getContentPane().setLayout(null);
 		
-		JTextArea textpara = new JTextArea();
-		textpara.setBounds(245, 29, 679, 22);
-		getContentPane().add(textpara);
+		JFormattedTextField textpara = new JFormattedTextField();
+	    textpara.setBounds(245, 27, 679, 25);
+	    getContentPane().add(textpara);
+		
+		
 		if(!cuenta.isEmpty())
 			textpara.setText(cuenta);
 		
@@ -68,8 +75,8 @@ public class Nuevo_Correo extends JFrame {
 		lblPara.setBounds(167, 32, 46, 14);
 		getContentPane().add(lblPara);
 		
-		JTextArea textasunto = new JTextArea();
-		textasunto.setBounds(245, 62, 679, 22);
+		JFormattedTextField textasunto = new JFormattedTextField();
+		textasunto.setBounds(245, 63, 679, 25);
 		getContentPane().add(textasunto);
 		
 		JLabel lblAsunto = new JLabel("Asunto:");
@@ -104,8 +111,8 @@ public class Nuevo_Correo extends JFrame {
 				
 				String fecha = timestamp.toString();
 				String texto = textcorreo.getText();
-				String asunto = verifica.remplazoCaracteres(textasunto.getText());
-				texto = tildes(texto);
+				String asunto = verifica.remplazoCaracteres(textasunto.getText());// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
+				texto = verifica.tildes(texto);
                 texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
 				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
 				texto = verifica.remplazoCaracteres(texto);// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
@@ -118,7 +125,7 @@ public class Nuevo_Correo extends JFrame {
 				/*Guardamos correo en archivo y memoria*/
 				FL.Guarda_Correo(FL.Devuelve_Ruta_BuzonSalida(),0,asunto,FL.Devuelve_us_cuenta(), FL.Devuelve_dom_cuenta(),nom_receptor, dom_receptor, texto, fecha);
 				
-				//Coidgo para Enviar el coreo, actualmente lo probmos aca pero va a ejecutarse en otra instancia
+				
 				NomUsu = FL.Devuelve_us_cuenta();
 				PassUsu = FL.Devuelve_pas_cuenta();
 				DomUsu = FL.Devuelve_dom_cuenta();
@@ -173,7 +180,9 @@ public class Nuevo_Correo extends JFrame {
 		getContentPane().add(btnguardar);
 	}
 		
-		/* Metodo para preguntar antes de cerrar*/
+		/** Metodo para preguntar antes de cerrar
+		 * 
+		 */
 		
 		public void cerrar(){
 			Object [] opciones ={"Cerrar","Cancelar"};
@@ -185,7 +194,9 @@ public class Nuevo_Correo extends JFrame {
 						
 		}
 		
-        /* Metodo de aviso luego de guardar un correo*/
+        /** Metodo de aviso luego de guardar un correo
+         * 
+         */
 		
 		public void guardado(){
 			Object [] opciones ={"Continuar","Salir"};
@@ -196,16 +207,7 @@ public class Nuevo_Correo extends JFrame {
 						
 		}
 		
-		public String tildes(String texto){
-			// Cadena de caracteres original a sustituir.
-		    String original = "·‡‰ÈËÎÌÏÔÛÚˆ˙˘uÒ¡¿ƒ…»ÀÕÃœ”“÷⁄Ÿ‹—Á«";
-		    // Cadena de caracteres ASCII que reemplazar·n los originales.
-		    String ascii = "aaaeeeiiiooouuunAAAEEEIIIOOOUUUNcC";
-		    String output = texto;
-		    for (int i=0; i<original.length(); i++) {
-		        // Reemplazamos los caracteres especiales.
-		        output = output.replace(original.charAt(i), ascii.charAt(i));
-		    }//for i
-		    return output;
-		}
+	
 }
+
+		

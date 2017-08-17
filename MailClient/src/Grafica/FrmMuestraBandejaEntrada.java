@@ -43,7 +43,6 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		
 		SetTableRecibidos();
 		setTitle("Bandeja de entrada");
-	 	//setFrameIcon(new ImageIcon(FrmMuestraBandejaEntrada.class.getResource("/Imagenes/icon1.jpg")));
 	 	setBorder(new EmptyBorder(0, 0, 0, 0));
       	setBounds(92, 103, 813, 424);
       	getContentPane().setLayout(null);
@@ -102,7 +101,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 						String correoSpam = tblMuestraCorreos.getValueAt(pos, 0).toString();
 						FL.EliminarCorreo(FL.Devuelve_Ruta_Recibidos(), fecha, FL.Devuelve_Ruta_Papelera());
 						
-						/*Quito todo para tener un refresh all instante*/
+						/*Quito todo para tener un refresh al instante*/
 						getContentPane().remove(scrlMCMostrarCorreos);
 						getContentPane().revalidate();
 						getContentPane().repaint();
@@ -131,7 +130,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
       		public void actionPerformed(ActionEvent arg0) {
       			
       						
-      		if(txtBuscar.getText().isEmpty()){ // si no puso nada en la barra de busqueda mustro todos los correos	
+      		if(txtBuscar.getText().isEmpty()){ // si no puso nada en la barra de busqueda muestro todos los correos	
       		
       			getContentPane().remove(scrlMCMostrarCorreos);
 				SetTableRecibidos();
@@ -150,8 +149,7 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 			
 			
 			if (tblMuestraCorreos.getRowCount() == 0){ // si no hay coincidencia
-				/*Quito todo para tener un refresh al instante*/
-				//getContentPane().remove(scrlMCMostrarCorreos);
+				
 				JOptionPane.showMessageDialog(new JPanel(), "El correo/s asocido/s a la cuenta ingresada no existe");
 			}else{
 			
@@ -216,6 +214,9 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		
 	}
 	
+	/** Crea un DefaultTableModel con los coreos recibidos
+	 * 
+	 */
 	
 	public void SetTableRecibidos(){
 		String col[] = {"Remitente","Asunto","Clave", "Fecha"};
@@ -252,6 +253,11 @@ public class FrmMuestraBandejaEntrada extends JInternalFrame {
 		
 			
 	}
+	
+	
+	/** Crea un DefaultTableModel con los coreos que coinciden con la busqueda
+	 * 
+	 */
 	
 	public void SetTableBusqueda(String cuentaBusqueda){
 		String col[] = {"Remitente","Asunto", "Fecha"};

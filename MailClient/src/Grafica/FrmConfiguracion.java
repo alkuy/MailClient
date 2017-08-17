@@ -2,21 +2,15 @@ package Grafica;
 
 
 
-import javax.swing.JFrame;
+
 import javax.swing.JInternalFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
-
 import Conectividad.FachadaCon;
-import logica.Cuenta;
-
-import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -63,9 +57,15 @@ public class FrmConfiguracion extends JInternalFrame {
 		lblSoloUnPaso.setBounds(57, 11, 143, 29);
 		getContentPane().add(lblSoloUnPaso);
 		
+		
+		/*---BOTON MANUAL DE USUARIO---*/
+		
 		JButton btnmanual = new JButton("MANUAL USUARIO");
 		btnmanual.setBounds(47, 96, 143, 34);
 		getContentPane().add(btnmanual);
+		
+		
+		/*---BOTON PARA RECIBIR LOS CORREOS ANTERIORES---*/
 		
 		JButton btnNewButton = new JButton("RECIBIR ANTERIORES");
 		btnNewButton.addActionListener(new ActionListener() {

@@ -10,9 +10,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
 import logica.FachadaLog;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -124,7 +122,9 @@ public class FrmMuestraSpam extends JInternalFrame {
 	}
       
 	
-	
+	/** Crea un DefaultTableModel con los coreos Spam
+	 * 
+	 */
 	public void SetTable(){
 		String col[] = {"Remitente","Asunto", "Clave","Fecha"};
 		DefaultTableModel modelo = new DefaultTableModel(col,0);
@@ -158,9 +158,6 @@ public class FrmMuestraSpam extends JInternalFrame {
 
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
-		/*Oculto columnas con Timestamp usada como clave del diccionario */
-	/*	TableColumn myTableColumn2 = tblMuestraCorreos.getColumnModel().getColumn(2);
-		tblMuestraCorreos.getColumnModel().removeColumn(myTableColumn2);*/
 		
       
 		

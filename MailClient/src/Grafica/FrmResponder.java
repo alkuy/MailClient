@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
@@ -85,10 +87,9 @@ public class FrmResponder extends JFrame {
 		lblPara.setBounds(167, 32, 46, 14);
 		getContentPane().add(lblPara);
 		
-		JTextArea textpara = new JTextArea();
-		textpara.setEditable(false);
-		textpara.setBounds(245, 29, 679, 22);
-		getContentPane().add(textpara);
+		JFormattedTextField textpara = new JFormattedTextField();
+	    textpara.setBounds(245, 27, 679, 25);
+	    getContentPane().add(textpara);
 		textpara.setText(muestra.destinatario);
 		
 		JLabel lblAsunto = new JLabel("Asunto:");
@@ -96,10 +97,10 @@ public class FrmResponder extends JFrame {
 		lblAsunto.setBounds(167, 70, 70, 14);
 		getContentPane().add(lblAsunto);
 		
-		JTextArea textasunto = new JTextArea();
-		textasunto.setEditable(false);
-		textasunto.setBounds(245, 62, 679, 22);
-		getContentPane().add(textasunto);
+		
+		JFormattedTextField textasunto = new JFormattedTextField();
+		textasunto.setBounds(245, 63, 679, 25);
+		getContentPane().add(textasunto);		
 		textasunto.setText("Re: "+muestra.asunto);
 	
 		
@@ -126,7 +127,8 @@ public class FrmResponder extends JFrame {
 				fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
 				fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
 				fecha = fecha.replace(":","-");
-				String texto = textcorreo.getText();// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
+				String texto = textcorreo.getText();
+				texto = verifica.tildes(texto);
 				String asunto = verifica.remplazoCaracteres(textasunto.getText());
 				texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
 				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
@@ -189,7 +191,9 @@ public class FrmResponder extends JFrame {
 		getContentPane().add(btnguardar);
 	}
 		
-		/* Metodo para preguntar antes de cerrar*/
+		/** Metodo para preguntar antes de cerrar
+		 * 
+		 */
 		
 		public void cerrar(){
 			Object [] opciones ={"Cerrar","Cancelar"};
@@ -201,7 +205,9 @@ public class FrmResponder extends JFrame {
 						
 		}
 		
-        /* Metodo de aviso luego de guardar un correo*/
+        /** Metodo de aviso luego de guardar un correo
+         * 
+         */
 		
 		public void guardado(){
 			Object [] opciones ={"Continuar","Salir"};
