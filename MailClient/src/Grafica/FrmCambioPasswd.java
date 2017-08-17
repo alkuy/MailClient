@@ -6,7 +6,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
+import logica.FachadaLog;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -23,6 +23,8 @@ public class FrmCambioPasswd extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPasswordField passwd;
 	private JPasswordField confirmpasswd;
+//	private Login log = new Login();
+	FachadaLog FL = new FachadaLog();
 	
 
 
@@ -76,7 +78,11 @@ public class FrmCambioPasswd extends JFrame {
 						        alerta3();
 					
 				                } else {
-				                   if(FC.CambioPass(clave)){
+				                   if(FC.CambioPass(Login.nombre,Login.dominio,Login.claveant,clave)){
+				                	   
+				                	   FL.Nueva_cuenta(Login.nombre,Login.dominio,clave);
+										principal.pri = new principal(Login.nombre+"@"+Login.dominio);
+								        principal.pri.setLocationRelativeTo(null);
 				                	   cambiocorrecto();
 				                	   dispose();
 				                	   principal.pri.setVisible(true);

@@ -219,6 +219,7 @@ public class FachadaLog {
 	}
 	
 	
+	
     public boolean Busca_cuenta(String archivo, String usuario, String dominio){
 		
 		String cuentabuscada = usuario+"-"+dominio;

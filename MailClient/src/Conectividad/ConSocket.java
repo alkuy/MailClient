@@ -150,7 +150,7 @@ public class ConSocket {
 		};
 	}
 	
-	public boolean CambioPassToServer(String NewPass){
+	public boolean CambioPassToServer(String nombre, String dominio, String oldPas, String NewPass){
 		String Usu, DomUsu, PassOld, msg;
 		boolean realizado = false;
 		
@@ -162,13 +162,13 @@ public class ConSocket {
 			msg = "Pass";
 			salida.writeUTF(msg);
 			
-			Usu = LN.Devuelve_us_cuenta();
+			Usu = nombre;
 			salida.writeUTF(Usu);
 			
-			DomUsu = LN.Devuelve_dom_cuenta();
+			DomUsu = dominio;
 			salida.writeUTF(DomUsu);
 			
-			PassOld = LN.Devuelve_pas_cuenta();
+			PassOld = oldPas;
 			salida.writeUTF(PassOld);
 			
 			salida.writeUTF(NewPass);

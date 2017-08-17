@@ -31,6 +31,9 @@ public class Login extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static String nombre = new String();
+	public static String dominio = new String();
+	public static String claveant = new String();
 	private JTextField usuario;
 	private JPasswordField textPasswd;
 	private FrmCambioPasswd cambiopas;
@@ -96,16 +99,19 @@ public class Login extends JFrame {
 								
 								if(!textPasswd.getText().matches(".+[a-zA-Z].+")){
 									
-									FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
-									principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
-							        principal.pri.setLocationRelativeTo(null);
-									cambiopas = new FrmCambioPasswd();
+									
+									nombre = usuario.getText();
+									dominio = comboDominio.getSelectedItem().toString();
+									claveant = textPasswd.getText();							        
+							        cambiopas = new FrmCambioPasswd();
 									cambiopas.setLocationRelativeTo(null);
 									cambiopas.setVisible(true);
 									dispose();
 									
 								} else {
-								        FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
+								        
+									    
+									    FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
 								        principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
 								        principal.pri.setLocationRelativeTo(null); 			
 								        principal.pri.setVisible(true);
@@ -127,9 +133,9 @@ public class Login extends JFrame {
 						
 						if(!textPasswd.getText().matches(".+[a-zA-Z].+")){
 							
-							FL.Nueva_cuenta(usuario.getText(),comboDominio.getSelectedItem().toString(),textPasswd.getText());
-							principal.pri = new principal(usuario.getText()+"@"+comboDominio.getSelectedItem().toString());
-					        principal.pri.setLocationRelativeTo(null);
+							nombre = usuario.getText();
+							dominio = comboDominio.getSelectedItem().toString();
+							claveant = textPasswd.getText();	
 							cambiopas = new FrmCambioPasswd();
 							cambiopas.setLocationRelativeTo(null);
 							cambiopas.setVisible(true);

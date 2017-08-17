@@ -17,8 +17,6 @@ import java.awt.Image;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
-import java.text.Normalizer;
-import java.util.regex.Pattern;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 
