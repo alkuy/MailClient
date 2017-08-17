@@ -183,19 +183,23 @@ public class principal extends JFrame {
 				
 				if (frmbandejaentrada != null && frmbandejaentrada.isEnabled()){
 					cierraVentana(frmbandejaentrada);
-					frmbandejaentrada = new FrmMuestraBandejaEntrada();	
+					frmbandejaentrada = new FrmMuestraBandejaEntrada();
+					desapareceLogo();
 					abreVentana(frmbandejaentrada);
 				}else if (frmenviados != null && frmenviados.isEnabled()){
 					cierraVentana(frmenviados);
-					frmenviados = new FrmMuestraEnviados();	
+					frmenviados = new FrmMuestraEnviados();
+					desapareceLogo();
 					abreVentana(frmenviados);
 				}else if (frmbuzon != null && frmbuzon.isEnabled()){
 					cierraVentana(frmbuzon);
 					frmbuzon = new FrmMuestraBuzonSalida();	
+					desapareceLogo();
 					abreVentana(frmbuzon);
 				}else if(frmborradores != null && frmborradores.isEnabled()){
 					cierraVentana(frmborradores);
-					frmborradores = new FrmMuestraBorradores();	
+					frmborradores = new FrmMuestraBorradores();
+					desapareceLogo();
 					abreVentana(frmborradores);
 				}
 			}
