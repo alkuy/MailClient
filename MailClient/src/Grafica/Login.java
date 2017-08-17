@@ -135,7 +135,9 @@ public class Login extends JFrame {
 							
 							nombre = usuario.getText();
 							dominio = comboDominio.getSelectedItem().toString();
-							claveant = textPasswd.getText();	
+							claveant = textPasswd.getText();
+							
+							System.out.println(claveant);
 							cambiopas = new FrmCambioPasswd();
 							cambiopas.setLocationRelativeTo(null);
 							cambiopas.setVisible(true);
