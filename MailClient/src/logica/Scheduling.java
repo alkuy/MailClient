@@ -52,6 +52,14 @@ public class Scheduling {
 				i--;
 			}		
 		}
+		for (i = 0; i < modelo.getRowCount(); i++){
+			if (Integer.valueOf(modelo.getValueAt(i, 6).toString()) == 0){
+				String Carga [] = {modelo.getValueAt(i, 0).toString(), modelo.getValueAt(i, 1).toString(), modelo.getValueAt(i, 2).toString(), modelo.getValueAt(i, 3).toString(), modelo.getValueAt(i, 4).toString(), modelo.getValueAt(i, 5).toString(), modelo.getValueAt(i, 6).toString(),  modelo.getValueAt(i, 7).toString()};
+				modeloOrdenado.addRow(Carga);
+				modelo.removeRow(i);
+				i--;
+			}		
+		}
 		
 		return modeloOrdenado;
 	}

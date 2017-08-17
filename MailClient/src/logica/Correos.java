@@ -416,7 +416,8 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		
 		if (match){
 			Prioridad = Pri[i][1];
-		}
+		}else
+			Prioridad = String.valueOf(0);
 		
 		
 		String carga [] = {NomEmisor, PassEmisor, CuentaEmisor, CuentaDest, asunto, Texto, Prioridad, fecha};	   
