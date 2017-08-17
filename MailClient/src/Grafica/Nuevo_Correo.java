@@ -176,7 +176,7 @@ public class Nuevo_Correo extends JFrame {
 		ImageIcon imagenguardar = new ImageIcon(principal.class.getResource("/imagenes/guardar.png"));
 		Icon iconoguardar = new ImageIcon(imagenguardar.getImage().getScaledInstance(btnguardar.getWidth(),btnguardar.getHeight(),Image.SCALE_DEFAULT));
 		btnguardar.setIcon(iconoguardar);
-		btnEnviar.setToolTipText("Guardar en borradores");
+		btnguardar.setToolTipText("Guardar en borradores");
 		getContentPane().add(btnguardar);
 	}
 		
