@@ -8,11 +8,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 import Conectividad.FachadaCon;
+
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 public class FrmConfiguracion extends JInternalFrame {
 
@@ -61,6 +64,15 @@ public class FrmConfiguracion extends JInternalFrame {
 		/*---BOTON MANUAL DE USUARIO---*/
 		
 		JButton btnmanual = new JButton("MANUAL USUARIO");
+		btnmanual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+			        Desktop.getDesktop().browse(new URL("http://edumail.webnode.com.uy/").toURI());
+			    } catch (Exception e) {
+			        e.printStackTrace();
+			    }
+			}
+		});
 		btnmanual.setBounds(47, 96, 143, 34);
 		getContentPane().add(btnmanual);
 		
