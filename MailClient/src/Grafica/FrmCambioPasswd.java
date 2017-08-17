@@ -77,7 +77,7 @@ public class FrmCambioPasswd extends JFrame {
 						        alerta3();
 					
 				                } else { // si introdujo bien la nueva clave se crea el archivo configuacion con los datos localmente y se envia al servidor la nueva clave
-				                   if(FC.CambioPass(Login.nombre,Login.dominio,Login.claveant,clave)){
+				                   if(FC.CambioPass(Login.nombre,Login.dominio,clave ,Login.claveant)){
 				                	   
 				                	   FL.Nueva_cuenta(Login.nombre,Login.dominio,clave);
 										principal.pri = new principal(Login.nombre+"@"+Login.dominio);

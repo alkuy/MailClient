@@ -90,7 +90,7 @@ public class ConSocket {
 	
 	public void UsuToServer(){
 		String msg;
-		String Usu, Pass;
+		String Usu, Pass, Dom;
 		
 		try{
 			cliente = new Socket(ip, puerto);
@@ -102,6 +102,9 @@ public class ConSocket {
 			
 			Usu = LN.Devuelve_us_cuenta();
 			salida.writeUTF(Usu);
+			
+			Dom = LN.Devuelve_dom_cuenta();
+			salida.writeUTF(Dom);
 			
 			msg = entrada.readUTF();
 			Pass = LN.Devuelve_pas_cuenta();
@@ -121,7 +124,7 @@ public class ConSocket {
 	
 	public void OldToServer(){
 		String msg;
-		String Usu, Pass;
+		String Usu, Pass, Dom;
 		
 		try{
 			cliente = new Socket(ip, puerto);
@@ -133,6 +136,9 @@ public class ConSocket {
 			
 			Usu = LN.Devuelve_us_cuenta();
 			salida.writeUTF(Usu);
+			
+			Dom = LN.Devuelve_dom_cuenta();
+			salida.writeUTF(Dom);
 			
 			msg = entrada.readUTF();
 			Pass = LN.Devuelve_pas_cuenta();

@@ -97,7 +97,7 @@ public class Login extends JFrame {
 							if( FL.compara_passwd("c:\\Cuentas\\"+usuario.getText()+"-"+comboDominio.getSelectedItem().toString()+"\\Configuracion\\", usuario.getText(),comboDominio.getSelectedItem().toString(), textPasswd.getText())){
 							
 								
-								if(!textPasswd.getText().matches(".+[a-zA-Z].+")){
+								if(!textPasswd.getText().matches("[a-zA-Z].+") && !textPasswd.getText().matches(".+[a-zA-Z].+")){
 									
 									
 									nombre = usuario.getText();
@@ -131,13 +131,12 @@ public class Login extends JFrame {
 					else if(Servidor.compareToIgnoreCase("Valido") == 0){
 						
 						
-						if(!textPasswd.getText().matches(".+[a-zA-Z].+")){
+						if(!textPasswd.getText().matches("[a-zA-Z].+") && !textPasswd.getText().matches(".+[a-zA-Z].+")){
 							
 							nombre = usuario.getText();
 							dominio = comboDominio.getSelectedItem().toString();
 							claveant = textPasswd.getText();
 							
-							System.out.println(claveant);
 							cambiopas = new FrmCambioPasswd();
 							cambiopas.setLocationRelativeTo(null);
 							cambiopas.setVisible(true);
