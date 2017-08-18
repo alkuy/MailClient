@@ -16,6 +16,8 @@ import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
@@ -85,8 +87,8 @@ public class Nuevo_Correo extends JFrame {
 		getContentPane().add(lblAsunto);
 		
 		JTextArea textcorreo = new JTextArea();
-		textcorreo.setBounds(10, 95, 914, 405);
-		textcorreo.setLineWrap(true);
+		//textcorreo.setBounds(10, 95, 914, 405);
+		//textcorreo.setLineWrap(true);
 		getContentPane().add(textcorreo);
 		
 		
@@ -98,6 +100,14 @@ public class Nuevo_Correo extends JFrame {
 		Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(logo.getWidth(),logo.getHeight(),Image.SCALE_DEFAULT));
 		logo.setIcon(icono);
 		getContentPane().add(logo);
+		
+		
+		
+		JScrollPane scroll = new JScrollPane(textcorreo);    
+        scroll.setBounds(10, 95, 914, 405);                                                   
+        getContentPane().add(scroll);                   
+        getContentPane().show(true); 
+		
 		
 		/* boton Enviar correo */
 		

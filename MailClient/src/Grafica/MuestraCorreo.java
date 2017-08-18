@@ -11,6 +11,8 @@ import logica.FachadaLog;
 import javax.swing.JTextArea;
 
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
@@ -82,7 +84,7 @@ public class MuestraCorreo extends JFrame {
 		
 		JTextArea textcorreo = new JTextArea();
 		textcorreo.setEditable(false);
-		textcorreo.setBounds(10, 95, 914, 405);
+		//textcorreo.setBounds(10, 95, 914, 405);
 		textcorreo.setLineWrap(true);
 		getContentPane().add(textcorreo);
 		String texto = FL.encriptaOdesencripta(correo.getTexto(), principal.clave); // desencripta primero por Xor
@@ -100,6 +102,12 @@ public class MuestraCorreo extends JFrame {
 		Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(logo.getWidth(),logo.getHeight(),Image.SCALE_DEFAULT));
 		logo.setIcon(icono);
 		getContentPane().add(logo);
+		
+		
+		JScrollPane scroll = new JScrollPane(textcorreo);    
+        scroll.setBounds(10, 95, 914, 405);                                                   
+        getContentPane().add(scroll);                   
+        getContentPane().show(true); 
 		
 		
 		/* BOTON PARA ELIMINAR EL CORREO */

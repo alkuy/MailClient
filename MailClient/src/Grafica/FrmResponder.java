@@ -12,11 +12,11 @@ import logica.FachadaLog;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import java.awt.Font;
 import java.awt.Image;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
-
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.awt.event.ActionEvent;
@@ -60,25 +60,29 @@ public class FrmResponder extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JTextArea textcorreo = new JTextArea();
-		textcorreo.setBounds(10, 95, 914, 405);
-		textcorreo.setLineWrap(true);
+		textcorreo.setBounds(1, 1, 912, 253);
+		//textcorreo.setBounds(10, 95, 914, 405);
+		//textcorreo.setLineWrap(true);
 		
-		textcorreo.append(System.getProperty("line.separator")); // Esto para el salto de línea
-		textcorreo.append(System.getProperty("line.separator"));
-		textcorreo.append(System.getProperty("line.separator"));
+		
+		
+		
+		textcorreo.append("\n"); // Esto para el salto de línea
+		textcorreo.append("\n");
+		textcorreo.append("\n");
 		textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
-		textcorreo.append(System.getProperty("line.separator"));
+	    textcorreo.append("\n");
 		textcorreo.append("EMISOR: "+muestra.destinatario);
-		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append("\n");
 		textcorreo.append("RECEPTOR: "+FL.Devuelve_us_cuenta()+"@"+FL.Devuelve_dom_cuenta());
-		textcorreo.append(System.getProperty("line.separator"));
+		textcorreo.append("\n");
 		textcorreo.append("ASUNTO: "+muestra.asunto);
-		textcorreo.append(System.getProperty("line.separator"));
-		textcorreo.append(System.getProperty("line.separator"));
-		String textAnterior = FL.encriptaOdesencripta(muestra.textoanterior, principal.clave); // desencripta primero por Xor
-		textAnterior = FL.Permutar(textAnterior,principal.claveper, principal.clave);	// desencripta por permutacion	
+		textcorreo.append("\n");
+		textcorreo.append("\n");
+		String textAnterior = muestra.textoanterior;
 		textcorreo.append(textAnterior);
-		textcorreo.setCaretPosition(0);
+		System.out.println(textAnterior);
+		//textcorreo.setCaretPosition(0);
 		getContentPane().add(textcorreo);
 				
 		
@@ -114,6 +118,13 @@ public class FrmResponder extends JFrame {
 		logo.setIcon(icono);
 		getContentPane().add(logo);
 		
+		
+		
+		JScrollPane scroll = new JScrollPane(textcorreo);    
+        scroll.setBounds(10, 95, 914, 405);                                                   
+        getContentPane().add(scroll);                   
+        getContentPane().show(true); 
+		
 		/* boton Enviar correo */
 		
 		JButton btnEnviar = new JButton();
@@ -124,16 +135,22 @@ public class FrmResponder extends JFrame {
 				Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
 				String fecha = timestamp.toString();
-				fecha = fecha.replace(".","-"); //Para evitar problemas en el nombre del archivo
-				fecha = fecha.replace(" ","-");	//Que no haya espacios e unifique todo al una barra
-				fecha = fecha.replace(":","-");
 				String texto = textcorreo.getText();
 				texto = verifica.tildes(texto);
+				System.out.println(texto);
 				String asunto = verifica.remplazoCaracteres(textasunto.getText());
 				texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
 				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
 				texto = verifica.remplazoCaracteres(texto);// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
+				System.out.println(texto);
 				
+				texto= FL.encriptaOdesencripta(texto, principal.clave); // desencripta primero por Xor
+				texto = FL.Permutar(texto,principal.claveper, principal.clave);	// desencripta por permutacion	
+				
+				System.out.println(texto);
+				
+				texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
+				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
 				String cuenta = textpara.getText();
 				int index = cuenta.indexOf("@");
 				String nom_receptor = cuenta.substring(0,index);//Para separar de la cuenta que ingreso el nombre de usuario del dominio

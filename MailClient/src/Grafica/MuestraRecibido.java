@@ -154,7 +154,7 @@ public class MuestraRecibido extends JFrame {
 		
 		destinatario = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
 		asunto = correo.getAsunto();
-		textoanterior = correo.getTexto();
+		textoanterior = texto;
 		id = correo.getId_conversacion();
 		
 		JButton btnResponder = new JButton("RESPONDER");
