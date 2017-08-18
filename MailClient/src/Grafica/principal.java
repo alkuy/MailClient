@@ -181,22 +181,22 @@ public class principal extends JFrame {
 				else if (!smtp)
 					JOptionPane.showMessageDialog(null, "Error al conectar con el servicio SMTP del Servidor");
 				
-				if (frmbandejaentrada != null && frmbandejaentrada.isEnabled()){
+				if (frmbandejaentrada != null && frmbandejaentrada.isVisible()){
 					cierraVentana(frmbandejaentrada);
 					frmbandejaentrada = new FrmMuestraBandejaEntrada();
 					desapareceLogo();
 					abreVentana(frmbandejaentrada);
-				}else if (frmenviados != null && frmenviados.isEnabled()){
+				}else if (frmenviados != null && frmenviados.isVisible()){
 					cierraVentana(frmenviados);
 					frmenviados = new FrmMuestraEnviados();
 					desapareceLogo();
 					abreVentana(frmenviados);
-				}else if (frmbuzon != null && frmbuzon.isEnabled()){
+				}else if (frmbuzon != null && frmbuzon.isVisible()){
 					cierraVentana(frmbuzon);
 					frmbuzon = new FrmMuestraBuzonSalida();	
 					desapareceLogo();
 					abreVentana(frmbuzon);
-				}else if(frmborradores != null && frmborradores.isEnabled()){
+				}else if(frmborradores != null && frmborradores.isVisible()){
 					cierraVentana(frmborradores);
 					frmborradores = new FrmMuestraBorradores();
 					desapareceLogo();
