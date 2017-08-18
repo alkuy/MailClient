@@ -37,7 +37,7 @@ public class ContinuarCorreoBorrador extends JFrame {
 	
 	
 	/**
-	 * Create the frame.
+	 *  Create the frame.
 	 */
 	public ContinuarCorreoBorrador() {
 		
