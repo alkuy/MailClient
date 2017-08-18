@@ -130,7 +130,7 @@ public class FrmResponder extends JFrame {
 		JButton btnEnviar = new JButton();
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(verifica.noVacioAsunto(textasunto, 50, 1)){
 				if (verifica.verificaCuentaReceptor(textpara.getText())){// aca verificamos si puso un y solo un @ en la cuenta de envio
 				Timestamp timestamp = new Timestamp(System.currentTimeMillis()); //Obtengo el tiempo exacto creacion de correo
 				
@@ -152,6 +152,7 @@ public class FrmResponder extends JFrame {
 				dispose();
 				principal.apareceLogo();
 				}
+			}
 			}
 		});
 		btnEnviar.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));

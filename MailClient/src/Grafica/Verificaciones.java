@@ -2,6 +2,7 @@ package Grafica;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -161,5 +162,28 @@ public class Verificaciones {
 	    }//for i
 	    return output;
 	}
+	
+	/**
+	 * Verificacion exclusiva para campo asunto
+	 * Ya que trabaja con un textfield diferente y da un 
+	 * mensaje mas especifico
+	 */
+	 public boolean noVacioAsunto(JComponent campo, int max, int min){
+		  	Border bordeROJO = BorderFactory.createLineBorder(Color.RED, 2);
+			Border bordeCOMUN = BorderFactory.createLineBorder(Color.BLACK, 1);
+			String texto = ((JFormattedTextField)campo).getText();
+				if(texto.length() > max){
+					campo.setBorder(bordeROJO);
+					JOptionPane.showMessageDialog(campo, "Caracteres máximos: "+max , null, JOptionPane.ERROR_MESSAGE);
+					return false;
+				}
+				if(texto.length() < min){
+					campo.setBorder(bordeROJO);
+					JOptionPane.showMessageDialog(campo, "El asunto no puede ser vacío" , null, JOptionPane.ERROR_MESSAGE);
+					return false;	
+				}
+			campo.setBorder(bordeCOMUN);
+			return true;
+			}
   
 }  
