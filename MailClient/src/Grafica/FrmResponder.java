@@ -81,8 +81,8 @@ public class FrmResponder extends JFrame {
 		textcorreo.append("\n");
 		String textAnterior = muestra.textoanterior;
 		textcorreo.append(textAnterior);
-		System.out.println(textAnterior);
-		//textcorreo.setCaretPosition(0);
+		
+		textcorreo.setCaretPosition(0);
 		getContentPane().add(textcorreo);
 				
 		
@@ -137,20 +137,11 @@ public class FrmResponder extends JFrame {
 				String fecha = timestamp.toString();
 				String texto = textcorreo.getText();
 				texto = verifica.tildes(texto);
-				System.out.println(texto);
 				String asunto = verifica.remplazoCaracteres(textasunto.getText());
 				texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
 				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
 				texto = verifica.remplazoCaracteres(texto);// para remplazar si pone comillas por comillas simples para no tener problemas con el GBD en el servidor
-				System.out.println(texto);
 				
-				texto= FL.encriptaOdesencripta(texto, principal.clave); // desencripta primero por Xor
-				texto = FL.Permutar(texto,principal.claveper, principal.clave);	// desencripta por permutacion	
-				
-				System.out.println(texto);
-				
-				texto = FL.Permutar(texto, principal.clave, principal.claveper);// encripta el texto del correo por permutacion con clave
-				texto = FL.encriptaOdesencripta(texto,principal.clave);// toma el texto encriptado por permutacion t lo encripta por Xor
 				String cuenta = textpara.getText();
 				int index = cuenta.indexOf("@");
 				String nom_receptor = cuenta.substring(0,index);//Para separar de la cuenta que ingreso el nombre de usuario del dominio
