@@ -70,7 +70,7 @@ public class FrmResponder extends JFrame {
 		textcorreo.append("\n"); // Esto para el salto de línea
 		textcorreo.append("\n");
 		textcorreo.append("\n");
-		textcorreo.append("-----------------------------------------------------------------------------------------------------------------");
+		textcorreo.append("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 	    textcorreo.append("\n");
 		textcorreo.append("EMISOR: "+muestra.destinatario);
 		textcorreo.append("\n");
