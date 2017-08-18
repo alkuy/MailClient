@@ -546,10 +546,12 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		String remitente = correo.getEmisor_nombre()+"@"+correo.getEmisor_dominio();
 		
 		if(remitente.equals(cuentaBusqueda)){
-		   String asunto = correo.getAsunto();
-		   String fecha = correo.getFecha();		
-		   String carga [] = {remitente, asunto, fecha};	   
-	       modelo.addRow(carga);
+			String asunto = correo.getAsunto();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
+			
+			String carga [] = {remitente, asunto, clave, fecha};	   
+			modelo.addRow(carga);
 		}
 		}
 	
@@ -579,12 +581,14 @@ public DefaultTableModel DevTablaBandejaSalida(){
 		String remitente = correo.getDestinatario()+"@"+correo.getDestinatario_dominio();
 		
 		if(remitente.equals(cuentaBusqueda)){
-		   String asunto = correo.getAsunto();
-		   String fecha = correo.getFecha();		
-		   String carga [] = {remitente, asunto, fecha};	   
-	       modelo.addRow(carga);
+			String asunto = correo.getAsunto();
+			String clave = correo.getFecha();
+			String fecha = clave.substring(0, 16);
+			
+			String carga [] = {remitente, asunto, clave, fecha};	   
+			modelo.addRow(carga);
 		}
-		}
+	}
 	
 	return modelo;
 	

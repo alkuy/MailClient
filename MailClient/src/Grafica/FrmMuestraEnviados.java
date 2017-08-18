@@ -237,6 +237,27 @@ public class FrmMuestraEnviados extends JInternalFrame {
 		}
 		
 		tblMuestraCorreos = new JTable(modelo);
+		JTableHeader header = tblMuestraCorreos.getTableHeader();
+		 header.setOpaque(false);
+		 header.setBackground(Color.DARK_GRAY);
+	     header.setForeground(Color.white);
+	     header.setFont(new Font("Consolas", Font.BOLD, 13));
+	    
+	    tblMuestraCorreos.setShowVerticalLines(false);
+	    tblMuestraCorreos.setFont(new Font("Century Gothic", Font.PLAIN, 12));
+		tblMuestraCorreos.setRowHeight(35);
+		
+		
+		tblMuestraCorreos.getColumnModel().getColumn(2).setMinWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setMaxWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(2).setWidth(0);
+		tblMuestraCorreos.getColumnModel().getColumn(0).setMinWidth(250);
+		tblMuestraCorreos.getColumnModel().getColumn(0).setMaxWidth(250);
+		tblMuestraCorreos.getColumnModel().getColumn(0).setWidth(250);
+		tblMuestraCorreos.getColumnModel().getColumn(3).setMinWidth(150);
+		tblMuestraCorreos.getColumnModel().getColumn(3).setMaxWidth(150);
+		tblMuestraCorreos.getColumnModel().getColumn(3).setWidth(150);
+		
 		tblMuestraCorreos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		
